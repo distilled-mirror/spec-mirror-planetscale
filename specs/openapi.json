@@ -309,6 +309,99 @@
         "description": "Delete the current payment method for an organization\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_payment_method`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_payment_method` |"
       }
     },
+    "/organizations/{organization}/billing/payment-method-setups": {
+      "post": {
+        "tags": [
+          "Billing payment method setup"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "update_payment_method",
+        "summary": "Create a billing payment method setup",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the billing payment method setup",
+            "schema": {
+              "$ref": "#/definitions/BillingPaymentMethodSetup"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "Create a hosted checkout session for adding or replacing an organization's payment method\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_payment_method`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_payment_method` |"
+      }
+    },
+    "/organizations/{organization}/billing/payment-method-setups/{id}": {
+      "get": {
+        "tags": [
+          "Billing payment method setup"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "get_payment_method_setup",
+        "summary": "Get a billing payment method setup",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "id",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Billing payment method setup ID from `update_payment_method`. Example: `pmsetup_1234`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the billing payment method setup",
+            "schema": {
+              "$ref": "#/definitions/BillingPaymentMethodSetup"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "Get the state of a billing payment method setup\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_payment_method`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_payment_method` |"
+      }
+    },
     "/organizations/{organization}/cluster-size-skus": {
       "get": {
         "tags": [
@@ -7752,6 +7845,451 @@
         "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |\n| Branch | `read_branch` |"
       }
     },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/read-only-replica-changes": {
+      "get": {
+        "tags": [
+          "api-read_only_replica_changes"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "list_read_only_replica_change_requests",
+        "summary": "Get read-only replica change requests",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          },
+          {
+            "name": "page",
+            "type": "integer",
+            "in": "query",
+            "default": 1,
+            "description": "If provided, specifies the page offset of returned results"
+          },
+          {
+            "name": "per_page",
+            "type": "integer",
+            "in": "query",
+            "default": 25,
+            "description": "If provided, specifies the number of returned results"
+          },
+          {
+            "name": "period",
+            "type": "string",
+            "enum": [
+              "15m",
+              "1h",
+              "3h",
+              "6h",
+              "12h",
+              "1d",
+              "2d",
+              "7d",
+              "8d"
+            ],
+            "in": "query",
+            "description": "Filter change requests by named period"
+          },
+          {
+            "name": "completed_at",
+            "type": "string",
+            "in": "query",
+            "description": "Filter change requests completed between two ISO 8601 timestamps"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns read-only replica change requests",
+            "schema": {
+              "$ref": "#/definitions/PaginatedPostgresReadOnlyReplicaChangeRequest"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |\n| Branch | `read_branch` |"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/read-only-replicas": {
+      "get": {
+        "tags": [
+          "Read-only replicas"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "list_read_only_replicas",
+        "summary": "List read-only replicas",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns read-only replicas",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PostgresReadOnlyReplica"
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |\n| Branch | `read_branch` |"
+      },
+      "post": {
+        "tags": [
+          "Read-only replicas"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "create_read_only_replica",
+        "summary": "Create a read-only replica",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The read-only replica name"
+                },
+                "region": {
+                  "type": "string",
+                  "description": "The region slug for the read-only replica"
+                },
+                "replicas": {
+                  "type": "integer",
+                  "description": "The number of instances serving reads. Defaults to 1."
+                },
+                "cluster_size": {
+                  "type": "string",
+                  "description": "The cluster size SKU name. Defaults to the primary cluster size."
+                }
+              },
+              "required": [
+                "name",
+                "region"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the new read-only replica",
+            "schema": {
+              "$ref": "#/definitions/PostgresReadOnlyReplica"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_databases` |\n| Database | `write_database` |"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/read-only-replicas/{read_only_replica}": {
+      "get": {
+        "tags": [
+          "Read-only replicas"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "get_read_only_replica",
+        "summary": "Get a read-only replica",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          },
+          {
+            "name": "read_only_replica",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the read-only replica"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the read-only replica",
+            "schema": {
+              "$ref": "#/definitions/PostgresReadOnlyReplica"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |\n| Branch | `read_branch` |"
+      },
+      "patch": {
+        "tags": [
+          "Read-only replicas"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "update_read_only_replica",
+        "summary": "Update a read-only replica",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          },
+          {
+            "name": "read_only_replica",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the read-only replica"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "replicas": {
+                  "type": "integer",
+                  "description": "The number of instances serving reads"
+                },
+                "cluster_size": {
+                  "type": "string",
+                  "description": "The cluster size SKU name"
+                },
+                "parameters": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "description": "Configuration parameters nested by namespace (e.g., {\"pgconf\": {\"max_connections\": \"300\"}}). Values must be greater than or equal to the primary's."
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated read-only replica",
+            "schema": {
+              "$ref": "#/definitions/PostgresReadOnlyReplica"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_databases` |\n| Database | `write_database` |"
+      },
+      "delete": {
+        "tags": [
+          "Read-only replicas"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "delete_read_only_replica",
+        "summary": "Delete a read-only replica",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          },
+          {
+            "name": "read_only_replica",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the read-only replica"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deletes the read-only replica",
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_databases` |\n| Database | `write_database` |"
+      }
+    },
     "/organizations/{organization}/databases/{database}/branches/{branch}/resizes": {
       "delete": {
         "tags": [
@@ -14539,6 +15077,467 @@
         "description": "Delete a service token from the organization.\n### Authorization\nA service token   must have at least one of the following access   in order to use this API endpoint:\n\n**Service Token Accesses**\n `delete_service_tokens`\n\n"
       }
     },
+    "/organizations/{organization}/sso": {
+      "get": {
+        "tags": [
+          "Organization SSO"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "get_organization_sso",
+        "summary": "Get organization SSO status",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns organization SSO status",
+            "schema": {
+              "$ref": "#/definitions/OrganizationSsoSerializer"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "Get SSO add-on status, identity provider connection state, directory sync, and verified domains\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `manage_sso`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `manage_sso` |"
+      },
+      "post": {
+        "tags": [
+          "Organization SSO"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "enable_organization_sso",
+        "summary": "Enable organization SSO",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns organization SSO status and a domain verification URL",
+            "schema": {
+              "$ref": "#/definitions/OrganizationSsoSerializer"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "Enable the SSO add-on and return a URL for verifying an email domain\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `manage_sso`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `manage_sso` |"
+      },
+      "delete": {
+        "tags": [
+          "Organization SSO"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "disable_organization_sso",
+        "summary": "Disable organization SSO",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns organization SSO status after disabling SSO",
+            "schema": {
+              "$ref": "#/definitions/OrganizationSsoSerializer"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "Disable SSO and directory sync for the organization\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `manage_sso`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `manage_sso` |"
+      }
+    },
+    "/organizations/{organization}/sso/configure": {
+      "post": {
+        "tags": [
+          "Organization SSO"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "configure_organization_sso",
+        "summary": "Open the SSO configuration portal",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Identity provider setup URL",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "portal_url": {
+                  "type": "string",
+                  "description": "URL to open for configuring the identity provider"
+                }
+              },
+              "required": [
+                "portal_url"
+              ]
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "Return a URL for configuring the identity provider. Requires at least one verified domain.\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `manage_sso`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `manage_sso` |"
+      }
+    },
+    "/organizations/{organization}/sso/directory": {
+      "post": {
+        "tags": [
+          "Organization SSO"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "enable_organization_sso_directory",
+        "summary": "Open the directory sync portal",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Directory sync setup URL",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "portal_url": {
+                  "type": "string",
+                  "description": "URL to open for configuring directory sync"
+                }
+              },
+              "required": [
+                "portal_url"
+              ]
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "Return a URL for configuring directory sync. Requires SSO to be enabled.\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `manage_sso`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `manage_sso` |"
+      },
+      "delete": {
+        "tags": [
+          "Organization SSO"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "disable_organization_sso_directory",
+        "summary": "Disable directory sync",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns organization SSO status after disabling directory sync",
+            "schema": {
+              "$ref": "#/definitions/OrganizationSsoSerializer"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "Disable directory sync for the organization. Non-admin directory members are removed.\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `manage_sso`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `manage_sso` |"
+      }
+    },
+    "/organizations/{organization}/sso/domains": {
+      "get": {
+        "tags": [
+          "Organization SSO domains"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "list_organization_sso_domains",
+        "summary": "List organization SSO domains",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns SSO domains",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OrganizationDomain"
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "List email domains registered for organization SSO\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `manage_sso`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `manage_sso` |"
+      },
+      "post": {
+        "tags": [
+          "Organization SSO domains"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "create_organization_sso_domain",
+        "summary": "Start SSO domain verification",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Domain verification URL",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "portal_url": {
+                  "type": "string",
+                  "description": "URL to open for verifying an email domain"
+                }
+              },
+              "required": [
+                "portal_url"
+              ]
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "Enable SSO if needed and return a URL for verifying an email domain\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `manage_sso`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `manage_sso` |"
+      }
+    },
+    "/organizations/{organization}/sso/domains/{id}": {
+      "get": {
+        "tags": [
+          "Organization SSO domains"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "get_organization_sso_domain",
+        "summary": "Get an SSO domain",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "id",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The public ID of the organization domain"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the SSO domain",
+            "schema": {
+              "$ref": "#/definitions/OrganizationDomain"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "Get a registered SSO email domain and its verification state\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `manage_sso`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `manage_sso` |"
+      },
+      "delete": {
+        "tags": [
+          "Organization SSO domains"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "delete_organization_sso_domain",
+        "summary": "Delete an SSO domain",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "id",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The public ID of the organization domain"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The domain was deleted",
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "Delete a verified or pending SSO domain\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `manage_sso`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `manage_sso` |"
+      }
+    },
     "/organizations/{organization}/teams": {
       "get": {
         "tags": [
@@ -16587,6 +17586,170 @@
         "data"
       ]
     },
+    "OrganizationSsoSerializer": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "OrganizationSSO"
+          ],
+          "description": "The resource type"
+        },
+        "id": {
+          "type": "string",
+          "description": "The organization ID"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the SSO add-on is enabled for the organization"
+        },
+        "configured": {
+          "type": "boolean",
+          "description": "Whether an identity provider connection is active"
+        },
+        "directory": {
+          "type": "boolean",
+          "description": "Whether directory sync is enabled"
+        },
+        "has_verified_domain": {
+          "type": "boolean",
+          "description": "Whether the organization has at least one verified email domain"
+        },
+        "domains": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "OrganizationDomain"
+                ],
+                "description": "The resource type"
+              },
+              "id": {
+                "type": "string",
+                "description": "The public ID of the organization domain"
+              },
+              "domain": {
+                "type": "string",
+                "description": "The domain name"
+              },
+              "state": {
+                "type": "string",
+                "enum": [
+                  "pending",
+                  "verified",
+                  "failed"
+                ],
+                "description": "The verification state of the domain"
+              },
+              "verified_at": {
+                "type": "string",
+                "description": "When the domain was verified",
+                "x-nullable": true
+              },
+              "failure_reason": {
+                "type": "string",
+                "description": "The reason domain verification failed",
+                "x-nullable": true
+              },
+              "created_at": {
+                "type": "string",
+                "description": "When the domain was created"
+              },
+              "updated_at": {
+                "type": "string",
+                "description": "When the domain was last updated"
+              }
+            },
+            "required": [
+              "type",
+              "id",
+              "domain",
+              "state",
+              "verified_at",
+              "failure_reason",
+              "created_at",
+              "updated_at"
+            ]
+          }
+        },
+        "domain_verification_url": {
+          "type": "string",
+          "description": "URL to open for verifying an email domain, returned when SSO is enabled",
+          "x-nullable": true
+        }
+      },
+      "required": [
+        "type",
+        "id",
+        "enabled",
+        "configured",
+        "directory",
+        "has_verified_domain",
+        "domains",
+        "domain_verification_url"
+      ]
+    },
+    "OrganizationDomain": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "OrganizationDomain"
+          ],
+          "description": "The resource type"
+        },
+        "id": {
+          "type": "string",
+          "description": "The public ID of the organization domain"
+        },
+        "domain": {
+          "type": "string",
+          "description": "The domain name"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "verified",
+            "failed"
+          ],
+          "description": "The verification state of the domain"
+        },
+        "verified_at": {
+          "type": "string",
+          "description": "When the domain was verified",
+          "x-nullable": true
+        },
+        "failure_reason": {
+          "type": "string",
+          "description": "The reason domain verification failed",
+          "x-nullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "description": "When the domain was created"
+        },
+        "updated_at": {
+          "type": "string",
+          "description": "When the domain was last updated"
+        }
+      },
+      "required": [
+        "type",
+        "id",
+        "domain",
+        "state",
+        "verified_at",
+        "failure_reason",
+        "created_at",
+        "updated_at"
+      ]
+    },
     "Invoice": {
       "type": "object",
       "properties": {
@@ -16881,6 +18044,67 @@
         "exp_month",
         "exp_year",
         "name"
+      ]
+    },
+    "BillingPaymentMethodSetup": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "BillingPaymentMethodSetup"
+          ],
+          "description": "The resource type"
+        },
+        "id": {
+          "type": "string",
+          "description": "The billing payment method setup ID"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "completed",
+            "failed",
+            "expired"
+          ],
+          "description": "The setup state"
+        },
+        "checkout_url": {
+          "type": "string",
+          "description": "The hosted checkout URL while the setup is pending",
+          "x-nullable": true
+        },
+        "error": {
+          "type": "string",
+          "description": "The failure message when the setup failed",
+          "x-nullable": true
+        },
+        "expires_at": {
+          "type": "string",
+          "description": "When the pending setup expires",
+          "x-nullable": true
+        },
+        "completed_at": {
+          "type": "string",
+          "description": "When the setup completed",
+          "x-nullable": true
+        },
+        "failed_at": {
+          "type": "string",
+          "description": "When the setup failed",
+          "x-nullable": true
+        }
+      },
+      "required": [
+        "type",
+        "id",
+        "state",
+        "checkout_url",
+        "error",
+        "expires_at",
+        "completed_at",
+        "failed_at"
       ]
     },
     "DatabaseWebhook": {
@@ -23884,6 +25108,517 @@
               "display_name",
               "location",
               "slug"
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "current_page",
+        "per_page",
+        "next_page",
+        "next_page_url",
+        "prev_page",
+        "prev_page_url",
+        "data"
+      ]
+    },
+    "PostgresReadOnlyReplica": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the read-only replica"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the read-only replica"
+        },
+        "state": {
+          "type": "string",
+          "description": "The state of the read-only replica: pending, ready, or deleting"
+        },
+        "replicas": {
+          "type": "integer",
+          "description": "The number of instances serving reads in this read-only replica"
+        },
+        "cluster_name": {
+          "type": "string",
+          "description": "The SKU representing the cluster size of the read-only replica"
+        },
+        "cluster_display_name": {
+          "type": "string",
+          "description": "The SKU representing the cluster size of the read-only replica, for display"
+        },
+        "access_host_url": {
+          "type": "string",
+          "description": "The database connection host for the read-only replica"
+        },
+        "private_access_host_url": {
+          "type": "string",
+          "description": "The private database connection host for the read-only replica"
+        },
+        "private_connection_service_name": {
+          "type": "string",
+          "description": "The service name to set up private connectivity for the read-only replica",
+          "x-nullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "description": "When the read-only replica was created"
+        },
+        "updated_at": {
+          "type": "string",
+          "description": "When the read-only replica was last updated"
+        },
+        "ready_at": {
+          "type": "string",
+          "description": "When the read-only replica was ready to serve queries",
+          "x-nullable": true
+        },
+        "ready": {
+          "type": "boolean",
+          "description": "Whether or not the read-only replica is ready to serve queries"
+        },
+        "actor": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The ID of the actor"
+            },
+            "display_name": {
+              "type": "string",
+              "description": "The name of the actor"
+            },
+            "avatar_url": {
+              "type": "string",
+              "description": "The URL of the actor's avatar"
+            }
+          },
+          "required": [
+            "id",
+            "display_name",
+            "avatar_url"
+          ]
+        },
+        "region": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The ID of the region"
+            },
+            "provider": {
+              "type": "string",
+              "description": "Provider for the region (ex. AWS)"
+            },
+            "enabled": {
+              "type": "boolean",
+              "description": "Whether or not the region is currently active"
+            },
+            "public_ip_addresses": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array",
+              "description": "Public IP addresses for the region"
+            },
+            "display_name": {
+              "type": "string",
+              "description": "Name of the region"
+            },
+            "location": {
+              "type": "string",
+              "description": "Location of the region"
+            },
+            "slug": {
+              "type": "string",
+              "description": "The slug of the region"
+            },
+            "current_default": {
+              "type": "boolean",
+              "description": "True if the region is the default for new branch creation"
+            },
+            "mysql_supported": {
+              "type": "boolean",
+              "description": "Whether the region supports MySQL/Vitess databases"
+            },
+            "postgresql_supported": {
+              "type": "boolean",
+              "description": "Whether the region supports PostgreSQL databases"
+            }
+          },
+          "required": [
+            "id",
+            "provider",
+            "enabled",
+            "public_ip_addresses",
+            "display_name",
+            "location",
+            "slug",
+            "current_default",
+            "mysql_supported",
+            "postgresql_supported"
+          ]
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The ID of the parameter"
+              },
+              "namespace": {
+                "type": "string",
+                "enum": [
+                  "pgconf"
+                ],
+                "description": "The namespace of the parameter"
+              },
+              "name": {
+                "type": "string",
+                "description": "The name of the parameter"
+              },
+              "display_name": {
+                "type": "string",
+                "description": "The display name of the parameter"
+              },
+              "category": {
+                "type": "string",
+                "description": "The category of the parameter"
+              },
+              "description": {
+                "type": "string",
+                "description": "The description of the parameter"
+              },
+              "immutable": {
+                "type": "boolean",
+                "description": "Whether the parameter can be changed"
+              },
+              "parameter_type": {
+                "type": "string",
+                "enum": [
+                  "integer",
+                  "time"
+                ],
+                "description": "The type of the parameter"
+              },
+              "default_value": {
+                "type": "string",
+                "description": "The default value of the parameter, which is the primary's current value"
+              },
+              "disabled_reason": {
+                "type": "string",
+                "description": "Why the parameter cannot be changed",
+                "x-nullable": true
+              },
+              "value": {
+                "type": "string",
+                "description": "The configured value of the parameter"
+              },
+              "required": {
+                "type": "boolean",
+                "description": "Whether the parameter is required"
+              },
+              "created_at": {
+                "type": "string",
+                "description": "When the parameter was created",
+                "x-nullable": true
+              },
+              "updated_at": {
+                "type": "string",
+                "description": "When the parameter was last updated",
+                "x-nullable": true
+              },
+              "restart": {
+                "type": "boolean",
+                "description": "True if processes require a server restart on change"
+              },
+              "max": {
+                "type": "number",
+                "description": "The maximum value of the parameter"
+              },
+              "min": {
+                "type": "number",
+                "description": "The minimum value of the parameter, floored at the primary's current value"
+              },
+              "url": {
+                "type": "string",
+                "description": "The URL of the parameter"
+              },
+              "options": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "description": "Valid options for the parameter value"
+              },
+              "units": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "description": "Display units for the parameter value"
+              },
+              "actor": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The ID of the actor"
+                  },
+                  "display_name": {
+                    "type": "string",
+                    "description": "The name of the actor"
+                  },
+                  "avatar_url": {
+                    "type": "string",
+                    "description": "The URL of the actor's avatar"
+                  }
+                },
+                "required": [
+                  "id",
+                  "display_name",
+                  "avatar_url"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "namespace",
+              "name",
+              "display_name",
+              "category",
+              "description",
+              "immutable",
+              "parameter_type",
+              "default_value",
+              "value",
+              "required",
+              "created_at",
+              "updated_at",
+              "restart",
+              "max",
+              "min",
+              "url",
+              "options",
+              "units",
+              "actor"
+            ]
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "state",
+        "replicas",
+        "cluster_name",
+        "cluster_display_name",
+        "access_host_url",
+        "private_access_host_url",
+        "private_connection_service_name",
+        "created_at",
+        "updated_at",
+        "ready_at",
+        "ready",
+        "actor",
+        "region",
+        "parameters"
+      ]
+    },
+    "PaginatedPostgresReadOnlyReplicaChangeRequest": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The response type. Always \"list\" for paginated responses."
+        },
+        "current_page": {
+          "type": "integer",
+          "description": "The current page number"
+        },
+        "per_page": {
+          "type": "integer",
+          "description": "The maximum number of results per page"
+        },
+        "next_page": {
+          "type": "integer",
+          "description": "The next page number, or null when this is the last page",
+          "x-nullable": true
+        },
+        "next_page_url": {
+          "type": "string",
+          "description": "The next page of results, or null when this is the last page",
+          "x-nullable": true
+        },
+        "prev_page": {
+          "type": "integer",
+          "description": "The previous page number, or null when this is the first page",
+          "x-nullable": true
+        },
+        "prev_page_url": {
+          "type": "string",
+          "description": "The previous page of results, or null when this is the first page",
+          "x-nullable": true
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The ID of the read-only replica change request"
+              },
+              "state": {
+                "type": "string",
+                "enum": [
+                  "pending",
+                  "resizing",
+                  "canceled",
+                  "completed"
+                ],
+                "description": "The state of the change request"
+              },
+              "cluster_name": {
+                "type": "string",
+                "description": "The new cluster size SKU"
+              },
+              "cluster_display_name": {
+                "type": "string",
+                "description": "The new cluster size for display"
+              },
+              "cluster_rank": {
+                "type": "integer",
+                "description": "The new cluster size sort order"
+              },
+              "replicas": {
+                "type": "integer",
+                "description": "The new instance count"
+              },
+              "parameters": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "The new parameters"
+              },
+              "previous_cluster_name": {
+                "type": "string",
+                "description": "The previous cluster size SKU"
+              },
+              "previous_cluster_display_name": {
+                "type": "string",
+                "description": "The previous cluster size for display"
+              },
+              "previous_cluster_rank": {
+                "type": "integer",
+                "description": "The previous cluster size sort order"
+              },
+              "previous_replicas": {
+                "type": "integer",
+                "description": "The previous instance count"
+              },
+              "previous_parameters": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "The previous parameters"
+              },
+              "started_at": {
+                "type": "string",
+                "description": "When the change started",
+                "x-nullable": true
+              },
+              "completed_at": {
+                "type": "string",
+                "description": "When the change completed",
+                "x-nullable": true
+              },
+              "created_at": {
+                "type": "string",
+                "description": "When the change request was created"
+              },
+              "updated_at": {
+                "type": "string",
+                "description": "When the change request was last updated"
+              },
+              "actor": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The ID of the actor"
+                  },
+                  "display_name": {
+                    "type": "string",
+                    "description": "The name of the actor"
+                  },
+                  "avatar_url": {
+                    "type": "string",
+                    "description": "The URL of the actor's avatar"
+                  }
+                },
+                "required": [
+                  "id",
+                  "display_name",
+                  "avatar_url"
+                ]
+              },
+              "replica": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The ID for the resource"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "The name for the resource"
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "description": "When the resource was created"
+                  },
+                  "updated_at": {
+                    "type": "string",
+                    "description": "When the resource was last updated"
+                  },
+                  "deleted_at": {
+                    "type": "string",
+                    "description": "When the resource was deleted, if deleted",
+                    "x-nullable": true
+                  }
+                },
+                "required": [
+                  "id",
+                  "name",
+                  "created_at",
+                  "updated_at",
+                  "deleted_at"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "state",
+              "cluster_name",
+              "cluster_display_name",
+              "cluster_rank",
+              "replicas",
+              "parameters",
+              "previous_cluster_name",
+              "previous_cluster_display_name",
+              "previous_cluster_rank",
+              "previous_replicas",
+              "previous_parameters",
+              "started_at",
+              "completed_at",
+              "created_at",
+              "updated_at",
+              "actor",
+              "replica"
             ]
           }
         }
@@ -34060,6 +35795,10 @@
     {
       "name": "AuthAttemptExports",
       "description": "            Resources for creating and downloading organization auth attempt exports.\n"
+    },
+    {
+      "name": "Billing payment method setup",
+      "description": "            Resources for adding an organization's payment method through hosted checkout.\n"
     },
     {
       "name": "Billing payment method",
