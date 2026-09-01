@@ -35829,7 +35829,7 @@
     "oauth2": {
       "type": "oauth2",
       "flow": "accessCode",
-      "authorizationUrl": "https://auth.planetscale.com/oauth/authorize",
+      "authorizationUrl": "https://app.planetscale.com/oauth/authorize",
       "tokenUrl": "https://auth.planetscale.com/oauth/token",
       "scopes": {
         "email": "Read user email",
