@@ -12111,6 +12111,10 @@
                         "has_enough": {
                           "type": "boolean",
                           "description": "Whether this shard has enough remaining storage for the deployment"
+                        },
+                        "blocked_by_in_flight": {
+                          "type": "boolean",
+                          "description": "Whether this shard lacks storage only because a competing in-flight deployment is still copying"
                         }
                       }
                     }
