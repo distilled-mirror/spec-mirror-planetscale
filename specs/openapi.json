@@ -17065,6 +17065,10 @@
                 "type": "boolean",
                 "description": "Whether or not the password is for a read replica"
               },
+              "read_only_region": {
+                "type": "boolean",
+                "description": "Whether or not the password is scoped to a read-only region"
+              },
               "renewable": {
                 "type": "boolean",
                 "description": "Whether or not the password can be renewed"
@@ -17123,6 +17127,7 @@
               "username",
               "plain_text",
               "replica",
+              "read_only_region",
               "renewable",
               "database_branch"
             ]
@@ -17502,6 +17507,10 @@
                       "type": "boolean",
                       "description": "Whether or not the password is for a read replica"
                     },
+                    "read_only_region": {
+                      "type": "boolean",
+                      "description": "Whether or not the password is scoped to a read-only region"
+                    },
                     "renewable": {
                       "type": "boolean",
                       "description": "Whether or not the password can be renewed"
@@ -17560,6 +17569,7 @@
                     "username",
                     "plain_text",
                     "replica",
+                    "read_only_region",
                     "renewable",
                     "database_branch"
                   ]
@@ -18159,6 +18169,7 @@
               "branch.anomaly",
               "branch.out_of_memory",
               "branch.primary_promoted",
+              "branch.primary_switchover_imminent",
               "branch.schema_recommendation",
               "branch.sleeping",
               "branch.start_maintenance",
@@ -18280,6 +18291,7 @@
                     "branch.anomaly",
                     "branch.out_of_memory",
                     "branch.primary_promoted",
+                    "branch.primary_switchover_imminent",
                     "branch.schema_recommendation",
                     "branch.sleeping",
                     "branch.start_maintenance",
@@ -31687,6 +31699,10 @@
           "type": "boolean",
           "description": "Whether or not the password is for a read replica"
         },
+        "read_only_region": {
+          "type": "boolean",
+          "description": "Whether or not the password is scoped to a read-only region"
+        },
         "renewable": {
           "type": "boolean",
           "description": "Whether or not the password can be renewed"
@@ -31745,6 +31761,7 @@
         "username",
         "plain_text",
         "replica",
+        "read_only_region",
         "renewable",
         "database_branch"
       ]
@@ -31973,6 +31990,10 @@
                 "type": "boolean",
                 "description": "Whether or not the password is for a read replica"
               },
+              "read_only_region": {
+                "type": "boolean",
+                "description": "Whether or not the password is scoped to a read-only region"
+              },
               "renewable": {
                 "type": "boolean",
                 "description": "Whether or not the password can be renewed"
@@ -32031,6 +32052,7 @@
               "username",
               "plain_text",
               "replica",
+              "read_only_region",
               "renewable",
               "database_branch"
             ]
