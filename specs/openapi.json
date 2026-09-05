@@ -1401,6 +1401,20 @@
                   },
                   "description": "For MySQL backup restores, per-keyspace cluster sizes. Each entry is { \"keyspace_name\": \"main\", \"cluster_size\": \"PS_40\" }. When provided, each restored keyspace must have a size here or via cluster_size."
                 },
+                "configuration_profile_sizes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "For Neki backup restores, per-configuration-profile cluster size and replica count. Each entry is { \"name\": \"default\", \"cluster_size\": \"PS_40\", \"replicas\": 2 }. Omitted profiles inherit the source size and replica count."
+                },
+                "router_sizes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "For Neki backup restores, per-router size and replica count. Each entry is { \"name\": \"default\", \"router_size\": \"NKR_20\", \"replicas_per_cell\": 1 }. Omitted routers inherit the source size and replica count."
+                },
                 "storage": {
                   "type": "object",
                   "properties": {
@@ -13019,6 +13033,10 @@
                   "type": "string",
                   "description": "The URL the webhook will send events to"
                 },
+                "authorization_header": {
+                  "type": "string",
+                  "description": "The value to send in the Authorization header"
+                },
                 "enabled": {
                   "type": "boolean",
                   "description": "Whether the webhook should be enabled"
@@ -13157,6 +13175,10 @@
                 "url": {
                   "type": "string",
                   "description": "The URL the webhook will send events to"
+                },
+                "authorization_header": {
+                  "type": "string",
+                  "description": "The value to send in the Authorization header"
                 },
                 "enabled": {
                   "type": "boolean",
@@ -18140,6 +18162,10 @@
           "type": "string",
           "description": "The secret used to sign the webhook payloads"
         },
+        "authorization_header_configured": {
+          "type": "boolean",
+          "description": "Whether the webhook sends an Authorization header"
+        },
         "enabled": {
           "type": "boolean",
           "description": "Whether the webhook is enabled"
@@ -18201,6 +18227,7 @@
         "id",
         "url",
         "secret",
+        "authorization_header_configured",
         "enabled",
         "last_sent_result",
         "last_sent_success",
@@ -18261,6 +18288,10 @@
               "secret": {
                 "type": "string",
                 "description": "The secret used to sign the webhook payloads"
+              },
+              "authorization_header_configured": {
+                "type": "boolean",
+                "description": "Whether the webhook sends an Authorization header"
               },
               "enabled": {
                 "type": "boolean",
@@ -18323,6 +18354,7 @@
               "id",
               "url",
               "secret",
+              "authorization_header_configured",
               "enabled",
               "last_sent_result",
               "last_sent_success",
