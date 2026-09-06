@@ -29033,6 +29033,10 @@
           "type": "integer",
           "description": "The keyspace shard limit for the organization"
         },
+        "neki_router_replicas_per_cell_limit": {
+          "type": "integer",
+          "description": "The Neki router replica limit per cell for the organization"
+        },
         "has_card": {
           "type": "boolean",
           "description": "Whether or not the organization has a payment method on file"
@@ -29059,6 +29063,7 @@
         "idp_managed_roles",
         "invoice_budget_amount",
         "keyspace_shard_limit",
+        "neki_router_replicas_per_cell_limit",
         "has_card",
         "payment_info_required"
       ]
@@ -29178,6 +29183,10 @@
                 "type": "integer",
                 "description": "The keyspace shard limit for the organization"
               },
+              "neki_router_replicas_per_cell_limit": {
+                "type": "integer",
+                "description": "The Neki router replica limit per cell for the organization"
+              },
               "has_card": {
                 "type": "boolean",
                 "description": "Whether or not the organization has a payment method on file"
@@ -29204,6 +29213,7 @@
               "idp_managed_roles",
               "invoice_budget_amount",
               "keyspace_shard_limit",
+              "neki_router_replicas_per_cell_limit",
               "has_card",
               "payment_info_required"
             ]
