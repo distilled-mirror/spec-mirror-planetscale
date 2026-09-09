@@ -1401,20 +1401,6 @@
                   },
                   "description": "For MySQL backup restores, per-keyspace cluster sizes. Each entry is { \"keyspace_name\": \"main\", \"cluster_size\": \"PS_40\" }. When provided, each restored keyspace must have a size here or via cluster_size."
                 },
-                "configuration_profile_sizes": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "description": "For Neki backup restores, per-configuration-profile cluster size and replica count. Each entry is { \"name\": \"default\", \"cluster_size\": \"PS_40\", \"replicas\": 2 }. Omitted profiles inherit the source size and replica count."
-                },
-                "router_sizes": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "description": "For Neki backup restores, per-router size and replica count. Each entry is { \"name\": \"default\", \"router_size\": \"NKR_20\", \"replicas_per_cell\": 1 }. Omitted routers inherit the source size and replica count."
-                },
                 "storage": {
                   "type": "object",
                   "properties": {
@@ -5479,6 +5465,82 @@
           }
         },
         "description": "\n### Authorization\nA service token   must have at least one of the following access   in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_production_branch_vschema`, `write_branch_vschema`\n\n"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/logs/signatures": {
+      "post": {
+        "tags": [
+          "Branch log signatures"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "create_branch_log_signature",
+        "summary": "Create a log signature",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a log signature",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "sig": {
+                  "type": "string",
+                  "description": "The signature token"
+                },
+                "exp": {
+                  "type": "string",
+                  "description": "The expiration timestamp"
+                },
+                "url": {
+                  "type": "string",
+                  "description": "The signed branch logs query URL"
+                }
+              },
+              "required": [
+                "sig",
+                "exp",
+                "url"
+              ]
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "        Creates a signed token that can be used to access branch logs.\n\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |\n| Branch | `read_branch` |"
       }
     },
     "/organizations/{organization}/databases/{database}/branches/{branch}/maintenance": {
@@ -28796,11 +28858,6 @@
           "description": "The default vtgate rate for the cluster SKU",
           "x-nullable": true
         },
-        "default_neki_router": {
-          "type": "string",
-          "description": "The recommended Neki router size for the cluster SKU",
-          "x-nullable": true
-        },
         "replica_rate": {
           "type": "number",
           "description": "The replica rate for the cluster SKU",
@@ -29033,10 +29090,6 @@
           "type": "integer",
           "description": "The keyspace shard limit for the organization"
         },
-        "neki_router_replicas_per_cell_limit": {
-          "type": "integer",
-          "description": "The Neki router replica limit per cell for the organization"
-        },
         "has_card": {
           "type": "boolean",
           "description": "Whether or not the organization has a payment method on file"
@@ -29063,7 +29116,6 @@
         "idp_managed_roles",
         "invoice_budget_amount",
         "keyspace_shard_limit",
-        "neki_router_replicas_per_cell_limit",
         "has_card",
         "payment_info_required"
       ]
@@ -29183,10 +29235,6 @@
                 "type": "integer",
                 "description": "The keyspace shard limit for the organization"
               },
-              "neki_router_replicas_per_cell_limit": {
-                "type": "integer",
-                "description": "The Neki router replica limit per cell for the organization"
-              },
               "has_card": {
                 "type": "boolean",
                 "description": "Whether or not the organization has a payment method on file"
@@ -29213,7 +29261,6 @@
               "idp_managed_roles",
               "invoice_budget_amount",
               "keyspace_shard_limit",
-              "neki_router_replicas_per_cell_limit",
               "has_card",
               "payment_info_required"
             ]
