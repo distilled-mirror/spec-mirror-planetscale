@@ -5871,38 +5871,7 @@
           "200": {
             "description": "Returns time-series metrics",
             "schema": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "description": "The metrics response type"
-                },
-                "start_date": {
-                  "type": "string",
-                  "description": "The start of the time range"
-                },
-                "end_date": {
-                  "type": "string",
-                  "description": "The end of the time range"
-                },
-                "interval": {
-                  "type": "integer",
-                  "description": "The step interval in seconds between data points"
-                },
-                "series": {
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array"
-                }
-              },
-              "required": [
-                "type",
-                "start_date",
-                "end_date",
-                "interval",
-                "series"
-              ]
+              "$ref": "#/definitions/MetricSeries"
             },
             "headers": {}
           },
@@ -5925,7 +5894,7 @@
             "description": "Metrics service unavailable"
           }
         },
-        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |\n| Branch | `read_branch` |"
+        "description": "Retrieve time-series metrics for a database branch.\n\n```sh\ncurl --get \\\n  --header \"Authorization: $PLANETSCALE_SERVICE_TOKEN\" \\\n  --data-urlencode \"metrics=queries\" \\\n  --data-urlencode \"period=15m\" \\\n  \"https://api.planetscale.com/v1/organizations/acme/databases/app-db/branches/main/metrics\"\n```\n\nEach series contains its metric name, display label, identifying labels, and sampled `[Unix timestamp, value]` points:\n\n```json\n{\n  \"type\": \"MetricSeries\",\n  \"start_date\": \"2026-09-09T17:00:00Z\",\n  \"end_date\": \"2026-09-09T17:15:00Z\",\n  \"interval\": 60,\n  \"series\": [\n    {\n      \"type\": \"TimeSeries\",\n      \"metric\": \"queries\",\n      \"label\": \"Queries\",\n      \"labels\": { \"tablet_type\": \"primary\" },\n      \"points\": [[1788973200, 42.0]]\n    }\n  ]\n}\n```\n\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |\n| Branch | `read_branch` |"
       }
     },
     "/organizations/{organization}/databases/{database}/branches/{branch}/metrics/instant": {
@@ -6355,38 +6324,7 @@
           "200": {
             "description": "Returns time-series metrics for SQL queries",
             "schema": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "description": "The metrics response type"
-                },
-                "start_date": {
-                  "type": "string",
-                  "description": "The start of the time range"
-                },
-                "end_date": {
-                  "type": "string",
-                  "description": "The end of the time range"
-                },
-                "interval": {
-                  "type": "integer",
-                  "description": "The step interval in seconds between data points"
-                },
-                "series": {
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array"
-                }
-              },
-              "required": [
-                "type",
-                "start_date",
-                "end_date",
-                "interval",
-                "series"
-              ]
+              "$ref": "#/definitions/MetricSeries"
             },
             "headers": {}
           },
@@ -6586,38 +6524,7 @@
           "200": {
             "description": "Returns time-series tablet metrics",
             "schema": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "description": "The metrics response type"
-                },
-                "start_date": {
-                  "type": "string",
-                  "description": "The start of the time range"
-                },
-                "end_date": {
-                  "type": "string",
-                  "description": "The end of the time range"
-                },
-                "interval": {
-                  "type": "integer",
-                  "description": "The step interval in seconds between data points"
-                },
-                "series": {
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array"
-                }
-              },
-              "required": [
-                "type",
-                "start_date",
-                "end_date",
-                "interval",
-                "series"
-              ]
+              "$ref": "#/definitions/MetricSeries"
             },
             "headers": {}
           },
@@ -6978,38 +6885,7 @@
           "200": {
             "description": "Returns time-series metrics grouped by query tags",
             "schema": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "description": "The metrics response type"
-                },
-                "start_date": {
-                  "type": "string",
-                  "description": "The start of the time range"
-                },
-                "end_date": {
-                  "type": "string",
-                  "description": "The end of the time range"
-                },
-                "interval": {
-                  "type": "integer",
-                  "description": "The step interval in seconds between data points"
-                },
-                "series": {
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array"
-                }
-              },
-              "required": [
-                "type",
-                "start_date",
-                "end_date",
-                "interval",
-                "series"
-              ]
+              "$ref": "#/definitions/MetricSeries"
             },
             "headers": {}
           },
@@ -29850,6 +29726,76 @@
         "data"
       ]
     },
+    "MetricSeries": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The metrics response type"
+        },
+        "start_date": {
+          "type": "string",
+          "description": "The start of the time range for the metric series"
+        },
+        "end_date": {
+          "type": "string",
+          "description": "The end of the time range for the metric series"
+        },
+        "interval": {
+          "type": "integer",
+          "description": "The step interval in seconds between data points"
+        },
+        "series": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "The time-series response type"
+              },
+              "metric": {
+                "type": "string",
+                "description": "The name of the metric"
+              },
+              "label": {
+                "type": "string",
+                "description": "A human-readable label for the time series"
+              },
+              "labels": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Key/value labels, also known as tags, identifying the time series"
+              },
+              "points": {
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "type": "array",
+                "description": "Sampled data points as [Unix timestamp, value] pairs"
+              }
+            },
+            "required": [
+              "type",
+              "metric",
+              "label",
+              "labels",
+              "points"
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "start_date",
+        "end_date",
+        "interval",
+        "series"
+      ]
+    },
     "PaginatedBranchMaintenanceWindow": {
       "type": "object",
       "properties": {
@@ -32263,6 +32209,28 @@
           ],
           "description": "Controls when node TTL drains are allowed"
         },
+        "disk_autoscaling": {
+          "type": "object",
+          "properties": {
+            "strategy": {
+              "type": "string",
+              "enum": [
+                "grow",
+                "disable",
+                "shrink"
+              ],
+              "description": "The disk autoscaling strategy"
+            },
+            "storage_limit_bytes": {
+              "type": "integer",
+              "description": "The maximum size in bytes disks may autoscale to"
+            }
+          },
+          "required": [
+            "strategy",
+            "storage_limit_bytes"
+          ]
+        },
         "replication_durability_constraints": {
           "type": "object",
           "properties": {
@@ -32300,6 +32268,24 @@
             "vplayer_batching"
           ]
         },
+        "throttler": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Whether the keyspace throttler is enabled"
+            },
+            "threshold": {
+              "type": "number",
+              "description": "Replication lag in seconds that trips the throttler",
+              "x-nullable": true
+            }
+          },
+          "required": [
+            "enabled",
+            "threshold"
+          ]
+        },
         "mysqld_options": {
           "type": "object",
           "additionalProperties": true,
@@ -32333,8 +32319,10 @@
         "imported",
         "vector_pool_allocation",
         "node_ttl_strategy",
+        "disk_autoscaling",
         "replication_durability_constraints",
         "vreplication_flags",
+        "throttler",
         "mysqld_options",
         "vttablet_options"
       ]
@@ -32469,6 +32457,28 @@
                 ],
                 "description": "Controls when node TTL drains are allowed"
               },
+              "disk_autoscaling": {
+                "type": "object",
+                "properties": {
+                  "strategy": {
+                    "type": "string",
+                    "enum": [
+                      "grow",
+                      "disable",
+                      "shrink"
+                    ],
+                    "description": "The disk autoscaling strategy"
+                  },
+                  "storage_limit_bytes": {
+                    "type": "integer",
+                    "description": "The maximum size in bytes disks may autoscale to"
+                  }
+                },
+                "required": [
+                  "strategy",
+                  "storage_limit_bytes"
+                ]
+              },
               "replication_durability_constraints": {
                 "type": "object",
                 "properties": {
@@ -32506,6 +32516,24 @@
                   "vplayer_batching"
                 ]
               },
+              "throttler": {
+                "type": "object",
+                "properties": {
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Whether the keyspace throttler is enabled"
+                  },
+                  "threshold": {
+                    "type": "number",
+                    "description": "Replication lag in seconds that trips the throttler",
+                    "x-nullable": true
+                  }
+                },
+                "required": [
+                  "enabled",
+                  "threshold"
+                ]
+              },
               "mysqld_options": {
                 "type": "object",
                 "additionalProperties": true,
@@ -32539,8 +32567,10 @@
               "imported",
               "vector_pool_allocation",
               "node_ttl_strategy",
+              "disk_autoscaling",
               "replication_durability_constraints",
               "vreplication_flags",
+              "throttler",
               "mysqld_options",
               "vttablet_options"
             ]
