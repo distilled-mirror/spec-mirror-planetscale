@@ -22134,7 +22134,7 @@
               },
               "storage_shrinking": {
                 "type": "boolean",
-                "description": "Whether storage shrinking is enabled when autoscaling is enabled"
+                "description": "Deprecated, storage shrinking is part of storage autoscaling."
               },
               "storage_type": {
                 "type": "string",
@@ -22169,7 +22169,7 @@
               },
               "previous_storage_shrinking": {
                 "type": "boolean",
-                "description": "Whether storage shrinking was previously enabled"
+                "description": "Deprecated, storage shrinking is part of storage autoscaling."
               },
               "previous_storage_type": {
                 "type": "string",
@@ -22360,7 +22360,7 @@
         },
         "storage_shrinking": {
           "type": "boolean",
-          "description": "Whether storage shrinking is enabled when autoscaling is enabled"
+          "description": "Deprecated, storage shrinking is part of storage autoscaling."
         },
         "storage_type": {
           "type": "string",
@@ -22395,7 +22395,7 @@
         },
         "previous_storage_shrinking": {
           "type": "boolean",
-          "description": "Whether storage shrinking was previously enabled"
+          "description": "Deprecated, storage shrinking is part of storage autoscaling."
         },
         "previous_storage_type": {
           "type": "string",
