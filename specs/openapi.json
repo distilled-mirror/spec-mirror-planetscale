@@ -3794,6 +3794,13 @@
                   "type": "string",
                   "description": "The new cluster size for the shard configuration profile"
                 },
+                "extensions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Extensions to enable. This replaces the current set; omit it to leave them unchanged."
+                },
                 "replicas": {
                   "type": "integer",
                   "description": "The new number of replicas for the shard configuration profile"
