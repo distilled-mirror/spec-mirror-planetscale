@@ -7250,6 +7250,11 @@
                     }
                   }
                 },
+                "max_rollout": {
+                  "type": "integer",
+                  "description": "The maximum number of shards rolled out in parallel, from 1 to 32. Set to null to use the infrastructure default of 1.",
+                  "x-nullable": true
+                },
                 "throttler": {
                   "type": "object",
                   "properties": {
@@ -8508,7 +8513,8 @@
                     },
                     "deleted_at": {
                       "type": "string",
-                      "description": "When the resource was deleted, if deleted"
+                      "description": "When the resource was deleted, if deleted",
+                      "x-nullable": true
                     }
                   },
                   "required": [
@@ -9138,7 +9144,8 @@
                     },
                     "deleted_at": {
                       "type": "string",
-                      "description": "When the resource was deleted, if deleted"
+                      "description": "When the resource was deleted, if deleted",
+                      "x-nullable": true
                     }
                   },
                   "required": [
@@ -10748,6 +10755,31 @@
                 "cluster_size": {
                   "type": "string",
                   "description": "The cluster size SKU name. Defaults to the primary cluster size."
+                },
+                "storage": {
+                  "type": "object",
+                  "properties": {
+                    "minimum_storage_bytes": {
+                      "type": "integer",
+                      "description": "The minimum storage size in bytes."
+                    },
+                    "maximum_storage_bytes": {
+                      "type": "integer",
+                      "description": "The maximum storage size in bytes for autoscaling."
+                    },
+                    "storage_autoscaling": {
+                      "type": "boolean",
+                      "description": "Whether storage autoscaling is enabled."
+                    },
+                    "storage_iops": {
+                      "type": "integer",
+                      "description": "The storage IOPS."
+                    },
+                    "storage_throughput_mibs": {
+                      "type": "integer",
+                      "description": "The storage throughput in MiB/s."
+                    }
+                  }
                 }
               },
               "required": [
@@ -10900,6 +10932,31 @@
                   "type": "object",
                   "additionalProperties": true,
                   "description": "Configuration parameters nested by namespace (e.g., {\"pgconf\": {\"max_connections\": \"300\"}}). Values must be greater than or equal to the primary's."
+                },
+                "storage": {
+                  "type": "object",
+                  "properties": {
+                    "minimum_storage_bytes": {
+                      "type": "integer",
+                      "description": "The minimum storage size in bytes."
+                    },
+                    "maximum_storage_bytes": {
+                      "type": "integer",
+                      "description": "The maximum storage size in bytes for autoscaling."
+                    },
+                    "storage_autoscaling": {
+                      "type": "boolean",
+                      "description": "Whether storage autoscaling is enabled."
+                    },
+                    "storage_iops": {
+                      "type": "integer",
+                      "description": "The storage IOPS."
+                    },
+                    "storage_throughput_mibs": {
+                      "type": "integer",
+                      "description": "The storage throughput in MiB/s."
+                    }
+                  }
                 }
               }
             }
@@ -11642,6 +11699,18 @@
             "type": "string",
             "in": "query",
             "description": "Return connection details for this bouncer"
+          },
+          {
+            "name": "router",
+            "type": "string",
+            "in": "query",
+            "description": "Return connection details for this Neki router group"
+          },
+          {
+            "name": "shard",
+            "type": "string",
+            "in": "query",
+            "description": "Return libpq options that pin this Neki shard"
           }
         ],
         "responses": {
@@ -24190,6 +24259,11 @@
                   "storage_limit_bytes"
                 ]
               },
+              "max_rollout": {
+                "type": "integer",
+                "description": "The maximum number of shards rolled out in parallel. Null uses the infrastructure default of 1. Effective concurrency is capped at 32.",
+                "x-nullable": true
+              },
               "replication_durability_constraints": {
                 "type": "object",
                 "properties": {
@@ -24279,6 +24353,7 @@
               "vector_pool_allocation",
               "node_ttl_strategy",
               "disk_autoscaling",
+              "max_rollout",
               "replication_durability_constraints",
               "vreplication_flags",
               "throttler",
@@ -24414,6 +24489,11 @@
             "storage_limit_bytes"
           ]
         },
+        "max_rollout": {
+          "type": "integer",
+          "description": "The maximum number of shards rolled out in parallel. Null uses the infrastructure default of 1. Effective concurrency is capped at 32.",
+          "x-nullable": true
+        },
         "replication_durability_constraints": {
           "type": "object",
           "properties": {
@@ -24503,6 +24583,7 @@
         "vector_pool_allocation",
         "node_ttl_strategy",
         "disk_autoscaling",
+        "max_rollout",
         "replication_durability_constraints",
         "vreplication_flags",
         "throttler",
@@ -33801,6 +33882,43 @@
                 "additionalProperties": true,
                 "description": "The new parameters"
               },
+              "minimum_storage_bytes": {
+                "type": "integer",
+                "description": "The new minimum storage size in bytes",
+                "x-nullable": true
+              },
+              "maximum_storage_bytes": {
+                "type": "integer",
+                "description": "The new maximum storage size in bytes",
+                "x-nullable": true
+              },
+              "storage_autoscaling": {
+                "type": "boolean",
+                "description": "Whether storage autoscaling is enabled",
+                "x-nullable": true
+              },
+              "storage_type": {
+                "type": "string",
+                "enum": [
+                  "gp3",
+                  "io2",
+                  "pd_ssd",
+                  "hyperdisk_balanced",
+                  "premium_v2_lrs"
+                ],
+                "description": "The new storage type",
+                "x-nullable": true
+              },
+              "storage_iops": {
+                "type": "integer",
+                "description": "The new storage IOPS",
+                "x-nullable": true
+              },
+              "storage_throughput_mibs": {
+                "type": "integer",
+                "description": "The new storage throughput in MiB/s",
+                "x-nullable": true
+              },
               "previous_cluster_name": {
                 "type": "string",
                 "description": "The previous cluster size SKU"
@@ -33821,6 +33939,36 @@
                 "type": "object",
                 "additionalProperties": true,
                 "description": "The previous parameters"
+              },
+              "previous_minimum_storage_bytes": {
+                "type": "integer",
+                "description": "The previous minimum storage size in bytes",
+                "x-nullable": true
+              },
+              "previous_maximum_storage_bytes": {
+                "type": "integer",
+                "description": "The previous maximum storage size in bytes",
+                "x-nullable": true
+              },
+              "previous_storage_autoscaling": {
+                "type": "boolean",
+                "description": "Whether storage autoscaling was previously enabled",
+                "x-nullable": true
+              },
+              "previous_storage_type": {
+                "type": "string",
+                "description": "The previous storage type",
+                "x-nullable": true
+              },
+              "previous_storage_iops": {
+                "type": "integer",
+                "description": "The previous storage IOPS",
+                "x-nullable": true
+              },
+              "previous_storage_throughput_mibs": {
+                "type": "integer",
+                "description": "The previous storage throughput in MiB/s",
+                "x-nullable": true
               },
               "started_at": {
                 "type": "string",
@@ -33904,11 +34052,23 @@
               "cluster_rank",
               "replicas",
               "parameters",
+              "minimum_storage_bytes",
+              "maximum_storage_bytes",
+              "storage_autoscaling",
+              "storage_type",
+              "storage_iops",
+              "storage_throughput_mibs",
               "previous_cluster_name",
               "previous_cluster_display_name",
               "previous_cluster_rank",
               "previous_replicas",
               "previous_parameters",
+              "previous_minimum_storage_bytes",
+              "previous_maximum_storage_bytes",
+              "previous_storage_autoscaling",
+              "previous_storage_type",
+              "previous_storage_iops",
+              "previous_storage_throughput_mibs",
               "started_at",
               "completed_at",
               "created_at",
@@ -33968,6 +34128,43 @@
         "private_connection_service_name": {
           "type": "string",
           "description": "The service name to set up private connectivity for the read-only replica",
+          "x-nullable": true
+        },
+        "minimum_storage_bytes": {
+          "type": "integer",
+          "description": "The minimum storage size in bytes",
+          "x-nullable": true
+        },
+        "maximum_storage_bytes": {
+          "type": "integer",
+          "description": "The maximum storage size in bytes",
+          "x-nullable": true
+        },
+        "storage_autoscaling": {
+          "type": "boolean",
+          "description": "Whether storage autoscaling is enabled",
+          "x-nullable": true
+        },
+        "storage_type": {
+          "type": "string",
+          "enum": [
+            "gp3",
+            "io2",
+            "pd_ssd",
+            "hyperdisk_balanced",
+            "premium_v2_lrs"
+          ],
+          "description": "The storage type",
+          "x-nullable": true
+        },
+        "storage_iops": {
+          "type": "integer",
+          "description": "The storage IOPS",
+          "x-nullable": true
+        },
+        "storage_throughput_mibs": {
+          "type": "integer",
+          "description": "The storage throughput in MiB/s",
           "x-nullable": true
         },
         "created_at": {
@@ -34233,6 +34430,12 @@
         "access_host_url",
         "private_access_host_url",
         "private_connection_service_name",
+        "minimum_storage_bytes",
+        "maximum_storage_bytes",
+        "storage_autoscaling",
+        "storage_type",
+        "storage_iops",
+        "storage_throughput_mibs",
         "created_at",
         "updated_at",
         "ready_at",
