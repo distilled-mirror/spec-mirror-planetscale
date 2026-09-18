@@ -448,6 +448,12 @@
             "type": "string",
             "in": "query",
             "description": "The database name to resolve rates for. When specified, database-level custom rates take precedence over organization rates."
+          },
+          {
+            "name": "external",
+            "type": "boolean",
+            "in": "query",
+            "description": "When true, list cluster sizes for external keyspaces. Defaults to false."
           }
         ],
         "responses": {
@@ -34167,6 +34173,11 @@
           "description": "The storage throughput in MiB/s",
           "x-nullable": true
         },
+        "volume_modifications_blocked_until": {
+          "type": "string",
+          "description": "When volume modifications will be allowed again",
+          "x-nullable": true
+        },
         "created_at": {
           "type": "string",
           "description": "When the read-only replica was created"
@@ -34436,6 +34447,7 @@
         "storage_type",
         "storage_iops",
         "storage_throughput_mibs",
+        "volume_modifications_blocked_until",
         "created_at",
         "updated_at",
         "ready_at",
