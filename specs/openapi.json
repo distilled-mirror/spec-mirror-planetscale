@@ -30662,6 +30662,10 @@
           "type": "boolean",
           "description": "Whether or not the cluster SKU is Metal"
         },
+        "external": {
+          "type": "boolean",
+          "description": "Whether or not the cluster SKU is for an external keyspace"
+        },
         "enabled": {
           "type": "boolean",
           "description": "Whether or not the cluster SKU is enabled for the organization"
@@ -30725,6 +30729,7 @@
         "storage",
         "ram",
         "metal",
+        "external",
         "enabled",
         "provider",
         "default_vtgate",
