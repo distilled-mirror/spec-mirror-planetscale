@@ -23450,17 +23450,19 @@
           ],
           "description": "How the extension is loaded"
         },
+        "requirements": {
+          "type": "object",
+          "properties": {
+            "postgres_image_version": {
+              "type": "string",
+              "description": "The Postgres image version required to use the extension",
+              "x-nullable": true
+            }
+          }
+        },
         "url": {
           "type": "string",
           "description": "The URL of the extension"
-        },
-        "available": {
-          "type": "boolean",
-          "description": "Whether the extension is available on the current cluster image"
-        },
-        "unavailable_reason": {
-          "type": "string",
-          "description": "The reason the extension is unavailable (e.g., 'container_upgrade_required')"
         },
         "parameters": {
           "type": "array",
@@ -23616,9 +23618,8 @@
         "description",
         "internal",
         "loader",
+        "requirements",
         "url",
-        "available",
-        "unavailable_reason",
         "parameters"
       ]
     },
@@ -28724,6 +28725,16 @@
             ]
           }
         },
+        "requirements": {
+          "type": "object",
+          "properties": {
+            "postgres_image_version": {
+              "type": "string",
+              "description": "The Postgres image version required to use the extension",
+              "x-nullable": true
+            }
+          }
+        },
         "url": {
           "type": "string",
           "description": "The URL of the extension"
@@ -28735,6 +28746,7 @@
         "description",
         "internal",
         "parameters",
+        "requirements",
         "url"
       ]
     },
