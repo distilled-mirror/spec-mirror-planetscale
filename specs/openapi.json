@@ -4247,97 +4247,6 @@
         "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |\n| Branch | `read_branch` |"
       }
     },
-    "/organizations/{organization}/databases/{database}/branches/{branch}/configuration-profiles/{configuration_profile}/extensions/{extension}": {
-      "patch": {
-        "tags": [
-          "api-neki_shard_configuration_profile_extensions"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "operationId": "update_shard_configuration_profile_extension",
-        "summary": "Enable or disable an extension for a Neki shard configuration profile",
-        "parameters": [
-          {
-            "name": "organization",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Organization name slug from `list_organizations`. Example: `acme`."
-          },
-          {
-            "name": "database",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Database name slug from `list_databases`. Example: `app-db`."
-          },
-          {
-            "name": "branch",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Branch name from `list_branches`. Example: `main`."
-          },
-          {
-            "name": "configuration_profile",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Name from `list_shard_configuration_profiles`."
-          },
-          {
-            "name": "extension",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "The name of the extension"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "enabled": {
-                  "type": "boolean",
-                  "description": "Whether the extension should be enabled"
-                }
-              },
-              "required": [
-                "enabled"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns the updated extension",
-            "schema": {
-              "$ref": "#/definitions/NekiExtensionDefinition"
-            },
-            "headers": {}
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Shard configuration profile or extension not found",
-            "headers": {}
-          },
-          "422": {
-            "description": "Extension cannot be enabled or disabled"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_databases` |\n| Database | `write_database` |"
-      }
-    },
     "/organizations/{organization}/databases/{database}/branches/{branch}/configuration-profiles/{configuration_profile}/maintenance": {
       "post": {
         "tags": [
@@ -23316,9 +23225,9 @@
               "subject_type": {
                 "type": "string",
                 "enum": [
-                  "table",
-                  "vschema",
-                  "routing_rules"
+                  "table_error",
+                  "vschema_error",
+                  "routing_rules_error"
                 ],
                 "description": "The subject for the errors"
               },
@@ -23328,11 +23237,13 @@
               },
               "table_name": {
                 "type": "string",
-                "description": "The table with the error"
+                "description": "The table with the error",
+                "x-nullable": true
               },
               "error_description": {
                 "type": "string",
-                "description": "A description for the error that occurred"
+                "description": "A description for the error that occurred",
+                "x-nullable": true
               },
               "docs_url": {
                 "type": "string",
@@ -23340,53 +23251,64 @@
               },
               "column_name": {
                 "type": "string",
-                "description": "The column in a table relevant to the error"
+                "description": "The column in a table relevant to the error",
+                "x-nullable": true
               },
               "foreign_key_column_names": {
                 "items": {
                   "type": "string"
                 },
                 "type": "array",
-                "description": "A list of invalid foreign key columns in a table"
+                "description": "A list of invalid foreign key columns in a table",
+                "x-nullable": true
               },
               "auto_increment_column_names": {
                 "items": {
                   "type": "string"
                 },
                 "type": "array",
-                "description": "A list of invalid auto-incremented columns"
+                "description": "A list of invalid auto-incremented columns",
+                "x-nullable": true
               },
               "charset_name": {
                 "type": "string",
-                "description": "The charset of the schema"
+                "description": "The charset of the schema",
+                "x-nullable": true
               },
               "engine_name": {
                 "type": "string",
-                "description": "The engine of the schema"
+                "description": "The engine of the schema",
+                "x-nullable": true
               },
               "vindex_name": {
                 "type": "string",
-                "description": "The name of the vindex for the schema"
+                "description": "The name of the vindex for the schema",
+                "x-nullable": true
               },
               "json_path": {
                 "type": "string",
-                "description": "The path for an invalid JSON column"
+                "description": "The path for an invalid JSON column",
+                "x-nullable": true
               },
               "check_constraint_name": {
                 "type": "string",
-                "description": "The name of the invalid check constraint"
+                "description": "The name of the invalid check constraint",
+                "x-nullable": true
               },
               "enum_value": {
                 "type": "string",
-                "description": "The name of the invalid enum value"
+                "description": "The name of the invalid enum value",
+                "x-nullable": true
               },
               "partitioning_type": {
                 "type": "string",
-                "description": "The name of the invalid partitioning type"
+                "description": "The name of the invalid partitioning type",
+                "x-nullable": true
               },
               "partition_name": {
                 "type": "string",
-                "description": "The name of the invalid partition in the schema"
+                "description": "The name of the invalid partition in the schema",
+                "x-nullable": true
               }
             },
             "required": [
@@ -23469,10 +23391,6 @@
           "items": {
             "type": "object",
             "properties": {
-              "id": {
-                "type": "string",
-                "description": "The ID of the parameter"
-              },
               "name": {
                 "type": "string",
                 "description": "The name of the parameter"
@@ -23588,7 +23506,6 @@
               }
             },
             "required": [
-              "id",
               "name",
               "display_name",
               "namespace",
@@ -23626,10 +23543,6 @@
     "PostgresClusterParameter": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of the parameter"
-        },
         "name": {
           "type": "string",
           "description": "The name of the parameter"
@@ -23745,7 +23658,6 @@
         }
       },
       "required": [
-        "id",
         "name",
         "display_name",
         "namespace",
@@ -23858,11 +23770,13 @@
               },
               "vtgate_max_count": {
                 "type": "integer",
-                "description": "The maximum number of vtgates in an availability zone when autoscaling is enabled"
+                "description": "The maximum number of vtgates in an availability zone when autoscaling is enabled",
+                "x-nullable": true
               },
               "previous_vtgate_max_count": {
                 "type": "integer",
-                "description": "The previous maximum number of vtgates in the availability zone when autoscaling is enabled"
+                "description": "The previous maximum number of vtgates in the availability zone when autoscaling is enabled",
+                "x-nullable": true
               },
               "vtgate_autoscaling": {
                 "type": "boolean",
@@ -23874,11 +23788,13 @@
               },
               "vtgate_target_cpu_utilization": {
                 "type": "number",
-                "description": "The target CPU utilization for the vtgate cluster"
+                "description": "The target CPU utilization for the vtgate cluster",
+                "x-nullable": true
               },
               "previous_vtgate_target_cpu_utilization": {
                 "type": "number",
-                "description": "The previous target CPU utilization for the vtgate cluster"
+                "description": "The previous target CPU utilization for the vtgate cluster",
+                "x-nullable": true
               },
               "vtgate_name": {
                 "type": "string",
@@ -24010,11 +23926,13 @@
         },
         "vtgate_max_count": {
           "type": "integer",
-          "description": "The maximum number of vtgates in an availability zone when autoscaling is enabled"
+          "description": "The maximum number of vtgates in an availability zone when autoscaling is enabled",
+          "x-nullable": true
         },
         "previous_vtgate_max_count": {
           "type": "integer",
-          "description": "The previous maximum number of vtgates in the availability zone when autoscaling is enabled"
+          "description": "The previous maximum number of vtgates in the availability zone when autoscaling is enabled",
+          "x-nullable": true
         },
         "vtgate_autoscaling": {
           "type": "boolean",
@@ -24026,11 +23944,13 @@
         },
         "vtgate_target_cpu_utilization": {
           "type": "number",
-          "description": "The target CPU utilization for the vtgate cluster"
+          "description": "The target CPU utilization for the vtgate cluster",
+          "x-nullable": true
         },
         "previous_vtgate_target_cpu_utilization": {
           "type": "number",
-          "description": "The previous target CPU utilization for the vtgate cluster"
+          "description": "The previous target CPU utilization for the vtgate cluster",
+          "x-nullable": true
         },
         "vtgate_name": {
           "type": "string",
@@ -27203,6 +27123,11 @@
     "NekiParameter": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the parameter",
+          "x-nullable": true
+        },
         "name": {
           "type": "string",
           "description": "The name of the parameter"
@@ -27251,11 +27176,13 @@
         },
         "default_value": {
           "type": "string",
-          "description": "The default value of the parameter"
+          "description": "The default value of the parameter",
+          "x-nullable": true
         },
         "value": {
           "type": "string",
-          "description": "The configured value of the parameter"
+          "description": "The configured value of the parameter",
+          "x-nullable": true
         },
         "required": {
           "type": "boolean",
@@ -27327,6 +27254,7 @@
         }
       },
       "required": [
+        "id",
         "name",
         "display_name",
         "namespace",
@@ -28583,6 +28511,11 @@
           "items": {
             "type": "object",
             "properties": {
+              "id": {
+                "type": "string",
+                "description": "The ID of the parameter",
+                "x-nullable": true
+              },
               "name": {
                 "type": "string",
                 "description": "The name of the parameter"
@@ -28631,11 +28564,13 @@
               },
               "default_value": {
                 "type": "string",
-                "description": "The default value of the parameter"
+                "description": "The default value of the parameter",
+                "x-nullable": true
               },
               "value": {
                 "type": "string",
-                "description": "The configured value of the parameter"
+                "description": "The configured value of the parameter",
+                "x-nullable": true
               },
               "required": {
                 "type": "boolean",
@@ -28707,6 +28642,7 @@
               }
             },
             "required": [
+              "id",
               "name",
               "display_name",
               "namespace",
@@ -31959,11 +31895,13 @@
         },
         "current_page": {
           "type": "integer",
-          "description": "The current page number"
+          "description": "The current page number",
+          "x-nullable": true
         },
         "per_page": {
           "type": "integer",
-          "description": "The maximum number of results per page"
+          "description": "The maximum number of results per page",
+          "x-nullable": true
         },
         "next_page": {
           "type": "integer",
@@ -32042,11 +31980,10 @@
               },
               "table_keyspaces": {
                 "items": {
-                  "type": "object",
-                  "additionalProperties": true
+                  "type": "string"
                 },
                 "type": "array",
-                "description": "Mapping of tables to their keyspaces"
+                "description": "Keyspaces or schemas accessed by the query"
               },
               "index_usages": {
                 "items": {
@@ -32109,7 +32046,7 @@
                 "description": "Average rows affected per query"
               },
               "sum_total_duration_millis": {
-                "type": "integer",
+                "type": "number",
                 "description": "Total duration in milliseconds across all executions"
               },
               "sum_total_duration_percent": {
@@ -32117,7 +32054,7 @@
                 "description": "Percentage of total query time"
               },
               "sum_cpu_duration_millis": {
-                "type": "integer",
+                "type": "number",
                 "description": "Total CPU duration in milliseconds"
               },
               "sum_cpu_duration_percent": {
@@ -32125,7 +32062,7 @@
                 "description": "Percentage of total CPU time"
               },
               "sum_io_duration_millis": {
-                "type": "integer",
+                "type": "number",
                 "description": "Total IO duration in milliseconds"
               },
               "sum_io_duration_percent": {
@@ -32267,12 +32204,8 @@
       },
       "required": [
         "type",
-        "current_page",
-        "per_page",
         "next_page",
-        "next_page_url",
         "prev_page",
-        "prev_page_url",
         "data"
       ]
     },
@@ -32285,11 +32218,13 @@
         },
         "current_page": {
           "type": "integer",
-          "description": "The current page number"
+          "description": "The current page number",
+          "x-nullable": true
         },
         "per_page": {
           "type": "integer",
-          "description": "The maximum number of results per page"
+          "description": "The maximum number of results per page",
+          "x-nullable": true
         },
         "next_page": {
           "type": "integer",
@@ -32443,12 +32378,8 @@
       },
       "required": [
         "type",
-        "current_page",
-        "per_page",
         "next_page",
-        "next_page_url",
         "prev_page",
-        "prev_page_url",
         "data"
       ]
     },
@@ -32507,11 +32438,10 @@
         },
         "table_keyspaces": {
           "items": {
-            "type": "object",
-            "additionalProperties": true
+            "type": "string"
           },
           "type": "array",
-          "description": "Mapping of tables to their keyspaces"
+          "description": "Keyspaces or schemas accessed by the query"
         },
         "index_usages": {
           "items": {
@@ -32574,7 +32504,7 @@
           "description": "Average rows affected per query"
         },
         "sum_total_duration_millis": {
-          "type": "integer",
+          "type": "number",
           "description": "Total duration in milliseconds across all executions"
         },
         "sum_total_duration_percent": {
@@ -32582,7 +32512,7 @@
           "description": "Percentage of total query time"
         },
         "sum_cpu_duration_millis": {
-          "type": "integer",
+          "type": "number",
           "description": "Total CPU duration in milliseconds"
         },
         "sum_cpu_duration_percent": {
@@ -32590,7 +32520,7 @@
           "description": "Percentage of total CPU time"
         },
         "sum_io_duration_millis": {
-          "type": "integer",
+          "type": "number",
           "description": "Total IO duration in milliseconds"
         },
         "sum_io_duration_percent": {
@@ -32863,11 +32793,13 @@
         },
         "current_page": {
           "type": "integer",
-          "description": "The current page number"
+          "description": "The current page number",
+          "x-nullable": true
         },
         "per_page": {
           "type": "integer",
-          "description": "The maximum number of results per page"
+          "description": "The maximum number of results per page",
+          "x-nullable": true
         },
         "next_page": {
           "type": "integer",
@@ -32937,12 +32869,8 @@
       },
       "required": [
         "type",
-        "current_page",
-        "per_page",
         "next_page",
-        "next_page_url",
         "prev_page",
-        "prev_page_url",
         "data"
       ]
     },
@@ -32955,11 +32883,13 @@
         },
         "current_page": {
           "type": "integer",
-          "description": "The current page number"
+          "description": "The current page number",
+          "x-nullable": true
         },
         "per_page": {
           "type": "integer",
-          "description": "The maximum number of results per page"
+          "description": "The maximum number of results per page",
+          "x-nullable": true
         },
         "next_page": {
           "type": "integer",
@@ -33049,12 +32979,8 @@
       },
       "required": [
         "type",
-        "current_page",
-        "per_page",
         "next_page",
-        "next_page_url",
         "prev_page",
-        "prev_page_url",
         "data"
       ]
     },
@@ -33067,11 +32993,13 @@
         },
         "current_page": {
           "type": "integer",
-          "description": "The current page number"
+          "description": "The current page number",
+          "x-nullable": true
         },
         "per_page": {
           "type": "integer",
-          "description": "The maximum number of results per page"
+          "description": "The maximum number of results per page",
+          "x-nullable": true
         },
         "next_page": {
           "type": "integer",
@@ -33127,11 +33055,10 @@
               },
               "table_keyspaces": {
                 "items": {
-                  "type": "object",
-                  "additionalProperties": true
+                  "type": "string"
                 },
                 "type": "array",
-                "description": "Mapping of tables to their keyspaces"
+                "description": "Keyspaces or schemas accessed by the query"
               },
               "index_usages": {
                 "items": {
@@ -33194,7 +33121,7 @@
                 "description": "Average rows affected per query"
               },
               "sum_total_duration_millis": {
-                "type": "integer",
+                "type": "number",
                 "description": "Total duration in milliseconds across all executions"
               },
               "sum_total_duration_percent": {
@@ -33202,7 +33129,7 @@
                 "description": "Percentage of total query time"
               },
               "sum_cpu_duration_millis": {
-                "type": "integer",
+                "type": "number",
                 "description": "Total CPU duration in milliseconds"
               },
               "sum_cpu_duration_percent": {
@@ -33210,7 +33137,7 @@
                 "description": "Percentage of total CPU time"
               },
               "sum_io_duration_millis": {
-                "type": "integer",
+                "type": "number",
                 "description": "Total IO duration in milliseconds"
               },
               "sum_io_duration_percent": {
@@ -33346,12 +33273,8 @@
       },
       "required": [
         "type",
-        "current_page",
-        "per_page",
         "next_page",
-        "next_page_url",
         "prev_page",
-        "prev_page_url",
         "data"
       ]
     },
@@ -40179,11 +40102,13 @@
               },
               "last_sent_result": {
                 "type": "string",
-                "description": "The last result sent by the webhook"
+                "description": "The last result sent by the webhook",
+                "x-nullable": true
               },
               "last_sent_success": {
                 "type": "boolean",
-                "description": "Whether the last sent was successful"
+                "description": "Whether the last sent was successful",
+                "x-nullable": true
               },
               "last_sent_at": {
                 "type": "string",
@@ -40282,11 +40207,13 @@
         },
         "last_sent_result": {
           "type": "string",
-          "description": "The last result sent by the webhook"
+          "description": "The last result sent by the webhook",
+          "x-nullable": true
         },
         "last_sent_success": {
           "type": "boolean",
-          "description": "Whether the last sent was successful"
+          "description": "Whether the last sent was successful",
+          "x-nullable": true
         },
         "last_sent_at": {
           "type": "string",
