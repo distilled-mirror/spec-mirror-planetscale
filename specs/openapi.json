@@ -543,7 +543,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_database`, `delete_database`, `write_database`, `read_branch`, `delete_branch`, `create_branch`, `promote_branches`, `demote_branches`, `delete_production_branch`, `connect_branch`, `connect_production_branch`, `connect_production_read_only_branch`, `delete_branch_password`, `delete_production_branch_password`, `delete_production_read_only_branch_password`, `read_deploy_request`, `create_deploy_request`, `approve_deploy_request`, `read_comment`, `create_comment`, `restore_backup`, `restore_production_branch_backup`, `read_backups`, `write_backups`, `delete_backups`, `delete_production_branch_backups`, `write_branch_vschema`, `write_production_branch_vschema`, `read_workflow`, `write_workflow`, `delete_workflow`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |"
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_database`, `delete_database`, `write_database`, `read_branch`, `delete_branch`, `create_branch`, `promote_branches`, `demote_branches`, `delete_production_branch`, `connect_branch`, `connect_production_branch`, `connect_production_read_only_branch`, `delete_branch_password`, `delete_production_branch_password`, `delete_production_read_only_branch_password`, `read_deploy_request`, `create_deploy_request`, `approve_deploy_request`, `read_comment`, `create_comment`, `restore_backup`, `restore_production_branch_backup`, `read_backups`, `write_backups`, `delete_backups`, `delete_production_branch_backups`, `write_branch_vschema`, `write_production_branch_vschema`, `write_branch_topology`, `write_production_branch_topology`, `read_workflow`, `write_workflow`, `delete_workflow`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |"
       },
       "post": {
         "tags": [
@@ -689,7 +689,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_database`, `delete_database`, `write_database`, `read_branch`, `delete_branch`, `create_branch`, `promote_branches`, `demote_branches`, `delete_production_branch`, `connect_branch`, `connect_production_branch`, `connect_production_read_only_branch`, `delete_branch_password`, `delete_production_branch_password`, `delete_production_read_only_branch_password`, `read_deploy_request`, `create_deploy_request`, `approve_deploy_request`, `read_comment`, `create_comment`, `restore_backup`, `restore_production_branch_backup`, `read_backups`, `write_backups`, `delete_backups`, `delete_production_branch_backups`, `write_branch_vschema`, `write_production_branch_vschema`, `read_workflow`, `write_workflow`, `delete_workflow`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_database`, `delete_database`, `write_database`, `read_branch`, `delete_branch`, `create_branch`, `promote_branches`, `demote_branches`, `delete_production_branch`, `connect_branch`, `connect_production_branch`, `connect_production_read_only_branch`, `delete_branch_password`, `delete_production_branch_password`, `delete_production_read_only_branch_password`, `read_deploy_request`, `create_deploy_request`, `approve_deploy_request`, `read_comment`, `create_comment`, `restore_backup`, `restore_production_branch_backup`, `read_backups`, `write_backups`, `delete_backups`, `delete_production_branch_backups`, `write_branch_vschema`, `write_production_branch_vschema`, `write_branch_topology`, `write_production_branch_topology`, `read_workflow`, `write_workflow`, `delete_workflow`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
       },
       "patch": {
         "tags": [
@@ -5612,6 +5612,396 @@
           }
         },
         "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_databases`, `read_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/insights/agent/runs": {
+      "get": {
+        "tags": [
+          "InsightsAgentRuns"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "list_insights_agent_runs",
+        "summary": "List Insights agent runs",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          },
+          {
+            "name": "page",
+            "type": "integer",
+            "in": "query",
+            "default": 1,
+            "description": "If provided, specifies the page offset of returned results"
+          },
+          {
+            "name": "per_page",
+            "type": "integer",
+            "in": "query",
+            "default": 25,
+            "description": "If provided, specifies the number of returned results"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns Insights agent runs",
+            "schema": {
+              "$ref": "#/definitions/PaginatedInsightsAgentRun"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_databases`, `read_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
+      },
+      "post": {
+        "tags": [
+          "InsightsAgentRuns"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "create_insights_agent_run",
+        "summary": "Create an Insights agent run",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "review_slow_queries",
+                    "implement_schema_recommendation"
+                  ],
+                  "description": "The work the Insights agent should perform"
+                },
+                "query_patterns_attributes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "The slow query patterns to review"
+                },
+                "schema_numbers": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "The schema recommendation numbers to implement"
+                }
+              },
+              "required": [
+                "type"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the created Insights agent run",
+            "schema": {
+              "$ref": "#/definitions/InsightsAgentRun"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_databases`, `write_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_databases` |\n| Database | `write_database` |"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/insights/agent/runs/{id}": {
+      "get": {
+        "tags": [
+          "InsightsAgentRuns"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "get_insights_agent_run",
+        "summary": "Get an Insights agent run",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          },
+          {
+            "name": "id",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The Insights agent run ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an Insights agent run",
+            "schema": {
+              "$ref": "#/definitions/InsightsAgentRun"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_databases`, `read_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/insights/agent/schedules": {
+      "get": {
+        "tags": [
+          "Insights Agent schedules"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "list_insights_agent_schedules",
+        "summary": "List Insights Agent schedules",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns Insights Agent schedules",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/InsightsAgentSchedule"
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_databases`, `read_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/insights/agent/schedules/{run_type}": {
+      "patch": {
+        "tags": [
+          "Insights Agent schedules"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "update_insights_agent_schedule",
+        "summary": "Update an Insights Agent schedule",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          },
+          {
+            "name": "run_type",
+            "type": "string",
+            "enum": [
+              "review_slow_queries",
+              "implement_schema_recommendation"
+            ],
+            "in": "path",
+            "required": true,
+            "description": "The scheduled run type"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "description": "Whether the schedule is enabled"
+                },
+                "frequency_unit": {
+                  "type": "string",
+                  "enum": [
+                    "day",
+                    "week",
+                    "month"
+                  ],
+                  "description": "The cadence unit"
+                },
+                "schedule_time": {
+                  "type": "string",
+                  "description": "The local time of day in HH:MM format"
+                },
+                "time_zone": {
+                  "type": "string",
+                  "description": "The IANA time zone"
+                },
+                "day_of_week": {
+                  "type": "integer",
+                  "description": "The weekday for weekly schedules"
+                },
+                "day_of_month": {
+                  "type": "integer",
+                  "description": "The day of month for monthly schedules"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated Insights Agent schedule",
+            "schema": {
+              "$ref": "#/definitions/InsightsAgentSchedule"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_databases` |\n| Database | `write_database` |"
       }
     },
     "/organizations/{organization}/databases/{database}/branches/{branch}/insights/anomalies": {
@@ -16777,7 +17167,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "List read-only regions for the database's default branch\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_database`, `delete_database`, `write_database`, `read_branch`, `delete_branch`, `create_branch`, `promote_branches`, `demote_branches`, `delete_production_branch`, `connect_branch`, `connect_production_branch`, `connect_production_read_only_branch`, `delete_branch_password`, `delete_production_branch_password`, `delete_production_read_only_branch_password`, `read_deploy_request`, `create_deploy_request`, `approve_deploy_request`, `read_comment`, `create_comment`, `restore_backup`, `restore_production_branch_backup`, `read_backups`, `write_backups`, `delete_backups`, `delete_production_branch_backups`, `write_branch_vschema`, `write_production_branch_vschema`, `read_workflow`, `write_workflow`, `delete_workflow`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |"
+        "description": "List read-only regions for the database's default branch\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_database`, `delete_database`, `write_database`, `read_branch`, `delete_branch`, `create_branch`, `promote_branches`, `demote_branches`, `delete_production_branch`, `connect_branch`, `connect_production_branch`, `connect_production_read_only_branch`, `delete_branch_password`, `delete_production_branch_password`, `delete_production_read_only_branch_password`, `read_deploy_request`, `create_deploy_request`, `approve_deploy_request`, `read_comment`, `create_comment`, `restore_backup`, `restore_production_branch_backup`, `read_backups`, `write_backups`, `delete_backups`, `delete_production_branch_backups`, `write_branch_vschema`, `write_production_branch_vschema`, `write_branch_topology`, `write_production_branch_topology`, `read_workflow`, `write_workflow`, `delete_workflow`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |"
       }
     },
     "/organizations/{organization}/databases/{database}/regions": {
@@ -16841,7 +17231,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_database`, `delete_database`, `write_database`, `read_branch`, `delete_branch`, `create_branch`, `promote_branches`, `demote_branches`, `delete_production_branch`, `connect_branch`, `connect_production_branch`, `connect_production_read_only_branch`, `delete_branch_password`, `delete_production_branch_password`, `delete_production_read_only_branch_password`, `read_deploy_request`, `create_deploy_request`, `approve_deploy_request`, `read_comment`, `create_comment`, `restore_backup`, `restore_production_branch_backup`, `read_backups`, `write_backups`, `delete_backups`, `delete_production_branch_backups`, `write_branch_vschema`, `write_production_branch_vschema`, `read_workflow`, `write_workflow`, `delete_workflow`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_database`, `delete_database`, `write_database`, `read_branch`, `delete_branch`, `create_branch`, `promote_branches`, `demote_branches`, `delete_production_branch`, `connect_branch`, `connect_production_branch`, `connect_production_read_only_branch`, `delete_branch_password`, `delete_production_branch_password`, `delete_production_read_only_branch_password`, `read_deploy_request`, `create_deploy_request`, `approve_deploy_request`, `read_comment`, `create_comment`, `restore_backup`, `restore_production_branch_backup`, `read_backups`, `write_backups`, `delete_backups`, `delete_production_branch_backups`, `write_branch_vschema`, `write_production_branch_vschema`, `write_branch_topology`, `write_production_branch_topology`, `read_workflow`, `write_workflow`, `delete_workflow`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
       }
     },
     "/organizations/{organization}/databases/{database}/schema-recommendations": {
@@ -17619,7 +18009,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n"
+        "description": "\n### Authorization\nA   OAuth token must have at least one of the following   scopes in order to use this API endpoint:\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_workflows` |\n| Database | `read_workflows` |"
       },
       "post": {
         "tags": [
@@ -17719,7 +18109,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n"
+        "description": "\n### Authorization\nA   OAuth token must have at least one of the following   scopes in order to use this API endpoint:\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_workflows` |\n| Database | `write_workflows` |"
       }
     },
     "/organizations/{organization}/databases/{database}/workflows/{number}": {
@@ -17776,7 +18166,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n"
+        "description": "\n### Authorization\nA   OAuth token must have at least one of the following   scopes in order to use this API endpoint:\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_workflows` |\n| Database | `read_workflows` |"
       },
       "delete": {
         "tags": [
@@ -17831,7 +18221,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n"
+        "description": "\n### Authorization\nA   OAuth token must have at least one of the following   scopes in order to use this API endpoint:\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_workflows` |\n| Database | `write_workflows` |"
       }
     },
     "/organizations/{organization}/databases/{database}/workflows/{number}/complete": {
@@ -17888,7 +18278,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n"
+        "description": "\n### Authorization\nA   OAuth token must have at least one of the following   scopes in order to use this API endpoint:\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_workflows` |\n| Database | `write_workflows` |"
       }
     },
     "/organizations/{organization}/databases/{database}/workflows/{number}/cutover": {
@@ -17945,7 +18335,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n"
+        "description": "\n### Authorization\nA   OAuth token must have at least one of the following   scopes in order to use this API endpoint:\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_workflows` |\n| Database | `write_workflows` |"
       }
     },
     "/organizations/{organization}/databases/{database}/workflows/{number}/retry": {
@@ -18002,7 +18392,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n"
+        "description": "\n### Authorization\nA   OAuth token must have at least one of the following   scopes in order to use this API endpoint:\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_workflows` |\n| Database | `write_workflows` |"
       }
     },
     "/organizations/{organization}/databases/{database}/workflows/{number}/reverse-cutover": {
@@ -18059,7 +18449,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n"
+        "description": "\n### Authorization\nA   OAuth token must have at least one of the following   scopes in order to use this API endpoint:\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_workflows` |\n| Database | `write_workflows` |"
       }
     },
     "/organizations/{organization}/databases/{database}/workflows/{number}/reverse-traffic": {
@@ -18116,7 +18506,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n"
+        "description": "\n### Authorization\nA   OAuth token must have at least one of the following   scopes in order to use this API endpoint:\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_workflows` |\n| Database | `write_workflows` |"
       }
     },
     "/organizations/{organization}/databases/{database}/workflows/{number}/switch-primaries": {
@@ -18173,7 +18563,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n"
+        "description": "\n### Authorization\nA   OAuth token must have at least one of the following   scopes in order to use this API endpoint:\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_workflows` |\n| Database | `write_workflows` |"
       }
     },
     "/organizations/{organization}/databases/{database}/workflows/{number}/switch-replicas": {
@@ -18230,7 +18620,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n"
+        "description": "\n### Authorization\nA   OAuth token must have at least one of the following   scopes in order to use this API endpoint:\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_workflows` |\n| Database | `write_workflows` |"
       }
     },
     "/organizations/{organization}/databases/{database}/workflows/{number}/verify-data": {
@@ -18287,7 +18677,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n"
+        "description": "\n### Authorization\nA   OAuth token must have at least one of the following   scopes in order to use this API endpoint:\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_workflows` |\n| Database | `write_workflows` |"
       }
     },
     "/organizations/{organization}/invoices": {
@@ -26404,6 +26794,415 @@
         "configurations"
       ]
     },
+    "PaginatedInsightsAgentRun": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The response type. Always \"list\" for paginated responses."
+        },
+        "current_page": {
+          "type": "integer",
+          "description": "The current page number"
+        },
+        "per_page": {
+          "type": "integer",
+          "description": "The maximum number of results per page"
+        },
+        "next_page": {
+          "type": "integer",
+          "description": "The next page number, or null when this is the last page",
+          "x-nullable": true
+        },
+        "next_page_url": {
+          "type": "string",
+          "description": "The next page of results, or null when this is the last page",
+          "x-nullable": true
+        },
+        "prev_page": {
+          "type": "integer",
+          "description": "The previous page number, or null when this is the first page",
+          "x-nullable": true
+        },
+        "prev_page_url": {
+          "type": "string",
+          "description": "The previous page of results, or null when this is the first page",
+          "x-nullable": true
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The Insights agent run ID"
+              },
+              "number": {
+                "type": "integer",
+                "description": "The number of the Insights agent run"
+              },
+              "scheduled": {
+                "type": "boolean",
+                "description": "Whether the run was started by a schedule"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "review_slow_queries",
+                  "implement_schema_recommendation"
+                ],
+                "description": "The work performed by the run"
+              },
+              "state": {
+                "type": "string",
+                "enum": [
+                  "queued",
+                  "running",
+                  "succeeded",
+                  "failed",
+                  "cancelled"
+                ],
+                "description": "The run state"
+              },
+              "repository": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "The repository snapshot and analyzed commit"
+              },
+              "agent": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "The agent execution snapshot",
+                "x-nullable": true
+              },
+              "schedule_id": {
+                "type": "string",
+                "description": "The schedule that created the run",
+                "x-nullable": true
+              },
+              "scheduled_for": {
+                "type": "string",
+                "description": "The schedule occurrence claimed by the run",
+                "x-nullable": true
+              },
+              "selected_targets": {
+                "items": {
+                  "type": "object",
+                  "additionalProperties": true
+                },
+                "type": "array",
+                "description": "The query patterns or schema recommendations selected for the run"
+              },
+              "outcome": {
+                "type": "string",
+                "description": "The run outcome",
+                "x-nullable": true
+              },
+              "title": {
+                "type": "string",
+                "description": "The agent result title",
+                "x-nullable": true
+              },
+              "summary": {
+                "type": "string",
+                "description": "The agent result summary",
+                "x-nullable": true
+              },
+              "pull_request_url": {
+                "type": "string",
+                "description": "The pull request created by the run",
+                "x-nullable": true
+              },
+              "failure_message": {
+                "type": "string",
+                "description": "The run failure",
+                "x-nullable": true
+              },
+              "execution_duration_ms": {
+                "type": "number",
+                "description": "The run execution duration in milliseconds",
+                "x-nullable": true
+              },
+              "cost": {
+                "type": "string",
+                "description": "How much this run cost, as a stringified decimal to preserve precision",
+                "x-nullable": true
+              },
+              "failure_phase": {
+                "type": "string",
+                "description": "The phase where the run failed",
+                "x-nullable": true
+              },
+              "started_at": {
+                "type": "string",
+                "description": "When execution started",
+                "x-nullable": true
+              },
+              "finished_at": {
+                "type": "string",
+                "description": "When execution finished",
+                "x-nullable": true
+              },
+              "created_at": {
+                "type": "string",
+                "description": "When the run was created"
+              },
+              "updated_at": {
+                "type": "string",
+                "description": "When the run was last updated"
+              }
+            },
+            "required": [
+              "id",
+              "number",
+              "scheduled",
+              "type",
+              "state",
+              "repository",
+              "agent",
+              "schedule_id",
+              "scheduled_for",
+              "selected_targets",
+              "outcome",
+              "title",
+              "summary",
+              "pull_request_url",
+              "failure_message",
+              "execution_duration_ms",
+              "cost",
+              "failure_phase",
+              "started_at",
+              "finished_at",
+              "created_at",
+              "updated_at"
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "current_page",
+        "per_page",
+        "next_page",
+        "next_page_url",
+        "prev_page",
+        "prev_page_url",
+        "data"
+      ]
+    },
+    "InsightsAgentRun": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The Insights agent run ID"
+        },
+        "number": {
+          "type": "integer",
+          "description": "The number of the Insights agent run"
+        },
+        "scheduled": {
+          "type": "boolean",
+          "description": "Whether the run was started by a schedule"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "review_slow_queries",
+            "implement_schema_recommendation"
+          ],
+          "description": "The work performed by the run"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "queued",
+            "running",
+            "succeeded",
+            "failed",
+            "cancelled"
+          ],
+          "description": "The run state"
+        },
+        "repository": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "The repository snapshot and analyzed commit"
+        },
+        "agent": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "The agent execution snapshot",
+          "x-nullable": true
+        },
+        "schedule_id": {
+          "type": "string",
+          "description": "The schedule that created the run",
+          "x-nullable": true
+        },
+        "scheduled_for": {
+          "type": "string",
+          "description": "The schedule occurrence claimed by the run",
+          "x-nullable": true
+        },
+        "selected_targets": {
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "type": "array",
+          "description": "The query patterns or schema recommendations selected for the run"
+        },
+        "outcome": {
+          "type": "string",
+          "description": "The run outcome",
+          "x-nullable": true
+        },
+        "title": {
+          "type": "string",
+          "description": "The agent result title",
+          "x-nullable": true
+        },
+        "summary": {
+          "type": "string",
+          "description": "The agent result summary",
+          "x-nullable": true
+        },
+        "pull_request_url": {
+          "type": "string",
+          "description": "The pull request created by the run",
+          "x-nullable": true
+        },
+        "failure_message": {
+          "type": "string",
+          "description": "The run failure",
+          "x-nullable": true
+        },
+        "execution_duration_ms": {
+          "type": "number",
+          "description": "The run execution duration in milliseconds",
+          "x-nullable": true
+        },
+        "cost": {
+          "type": "string",
+          "description": "How much this run cost, as a stringified decimal to preserve precision",
+          "x-nullable": true
+        },
+        "failure_phase": {
+          "type": "string",
+          "description": "The phase where the run failed",
+          "x-nullable": true
+        },
+        "started_at": {
+          "type": "string",
+          "description": "When execution started",
+          "x-nullable": true
+        },
+        "finished_at": {
+          "type": "string",
+          "description": "When execution finished",
+          "x-nullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "description": "When the run was created"
+        },
+        "updated_at": {
+          "type": "string",
+          "description": "When the run was last updated"
+        }
+      },
+      "required": [
+        "id",
+        "number",
+        "scheduled",
+        "type",
+        "state",
+        "repository",
+        "agent",
+        "schedule_id",
+        "scheduled_for",
+        "selected_targets",
+        "outcome",
+        "title",
+        "summary",
+        "pull_request_url",
+        "failure_message",
+        "execution_duration_ms",
+        "cost",
+        "failure_phase",
+        "started_at",
+        "finished_at",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    "InsightsAgentSchedule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The schedule ID",
+          "x-nullable": true
+        },
+        "run_type": {
+          "type": "string",
+          "enum": [
+            "review_slow_queries",
+            "implement_schema_recommendation"
+          ],
+          "description": "The scheduled run type"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the schedule is enabled"
+        },
+        "frequency_unit": {
+          "type": "string",
+          "enum": [
+            "day",
+            "week",
+            "month"
+          ],
+          "description": "The cadence unit"
+        },
+        "schedule_time": {
+          "type": "string",
+          "description": "The local time of day in HH:MM format"
+        },
+        "time_zone": {
+          "type": "string",
+          "description": "The IANA time zone"
+        },
+        "day_of_week": {
+          "type": "integer",
+          "description": "The weekday for weekly schedules",
+          "x-nullable": true
+        },
+        "day_of_month": {
+          "type": "integer",
+          "description": "The day of month for monthly schedules",
+          "x-nullable": true
+        },
+        "next_run_at": {
+          "type": "string",
+          "description": "When the schedule will run next",
+          "x-nullable": true
+        }
+      },
+      "required": [
+        "id",
+        "run_type",
+        "enabled",
+        "frequency_unit",
+        "schedule_time",
+        "time_zone",
+        "day_of_week",
+        "day_of_month",
+        "next_run_at"
+      ]
+    },
     "PaginatedKeyspaceResizeRequest": {
       "type": "object",
       "properties": {
@@ -27215,7 +28014,7 @@
             "type": "string"
           },
           "type": "array",
-          "description": "Valid options for the parameter value",
+          "description": "Valid options for the parameter value. Null represents an unset value",
           "x-nullable": true
         },
         "units": {
@@ -28603,7 +29402,7 @@
                   "type": "string"
                 },
                 "type": "array",
-                "description": "Valid options for the parameter value",
+                "description": "Valid options for the parameter value. Null represents an unset value",
                 "x-nullable": true
               },
               "units": {
@@ -42245,6 +43044,14 @@
       "description": "            Resources for managing databases within an organization.\n"
     },
     {
+      "name": "InsightsAgentRuns",
+      "description": "          Resources for running and viewing Insights agent analyses.\n"
+    },
+    {
+      "name": "Insights Agent schedules",
+      "description": "Resources for managing Insights Agent schedules."
+    },
+    {
       "name": "Keyspace config changes",
       "description": "          Resources for managing keyspace-level configuration change requests.\n"
     },
@@ -42397,6 +43204,7 @@
         "branch:delete_branch": "Delete a database branch",
         "branch:manage_passwords": "Read, write, and delete branch passwords",
         "branch:manage_read_only_passwords": "Read, write, and delete read only branch passwords",
+        "branch:manage_topology": "Manage shard primaries and tablet serving for this branch",
         "branch:read_backups": "Read backups",
         "branch:read_branch": "Read a database branch",
         "branch:restore_backups": "Restore this branch's backups to new branches",
@@ -42411,8 +43219,10 @@
         "database:delete_production_branches": "Delete a production database branch",
         "database:demote_branches": "Demote production database branches",
         "database:deploy_deploy_requests": "Deploy deploy requests in a database",
+        "database:manage_branch_topologies": "Manage shard primaries and tablet serving for development branches in a database",
         "database:manage_passwords": "Read, write, and delete database branch passwords",
         "database:manage_production_branch_passwords": "Read, write, and delete production branch passwords",
+        "database:manage_production_branch_topologies": "Manage shard primaries and tablet serving for production branches in a database",
         "database:manage_production_read_only_passwords": "Read, write, and delete production read only branch passwords in an organization",
         "database:manage_read_only_passwords": "Read, write, and delete read only branch passwords in an organization",
         "database:promote_branches": "Promote database branches",
@@ -42422,6 +43232,7 @@
         "database:read_database": "Read database information",
         "database:read_deploy_requests": "Read deploy requests in a database",
         "database:read_members": "Read members",
+        "database:read_workflows": "Read database workflows",
         "database:restore_backups": "Restore backups to new branches",
         "database:restore_production_branch_backups": "Restore production branch backups to new branches",
         "database:write_backups": "Create and update backups",
@@ -42430,6 +43241,7 @@
         "database:write_database": "Write database",
         "database:write_deploy_requests": "Create and update deploy requests in a database",
         "database:write_members": "Write members",
+        "database:write_workflows": "Create and manage database workflows",
         "organization:approve_deploy_requests": "Approve deploy requests in an organization",
         "organization:create_databases": "Create organization databases",
         "organization:delete_backups": "Delete backups in an organization",
@@ -42440,8 +43252,10 @@
         "organization:delete_production_branch_backups": "Delete production backups in an organization",
         "organization:delete_production_branches": "Delete a production branch in an organization",
         "organization:deploy_deploy_requests": "Deploy deploy requests in an organization",
+        "organization:manage_branch_topologies": "Manage shard primaries and tablet serving for development branches in an organization",
         "organization:manage_passwords": "Read, write, and delete branch passwords in an organization",
         "organization:manage_production_branch_passwords": "Read, write, and delete production branch passwords in an organization",
+        "organization:manage_production_branch_topologies": "Manage shard primaries and tablet serving for production branches in an organization",
         "organization:manage_production_read_only_passwords": "Read, write, and delete production read only branch passwords in an organization",
         "organization:manage_read_only_passwords": "Read, write, and delete read only branch passwords in an organization",
         "organization:manage_sso": "Enable, configure, and disable organization SSO",
@@ -42456,6 +43270,7 @@
         "organization:read_members": "Read members in an organization",
         "organization:read_organization": "Read organization",
         "organization:read_payment_method": "Read organization payment method",
+        "organization:read_workflows": "Read workflows in an organization",
         "organization:restore_backups": "Restore backups to new branches in an organization",
         "organization:restore_production_branch_backups": "Restore production branch backups to new branches in an organization",
         "organization:write_backups": "Create and update backups in an organization",
@@ -42466,6 +43281,7 @@
         "organization:write_members": "Write members in an organization",
         "organization:write_organization": "Write organization",
         "organization:write_payment_method": "Update and delete the organization payment method",
+        "organization:write_workflows": "Create and manage workflows in an organization",
         "user:read_organizations": "Read a user's organizations",
         "user:read_user": "Read user",
         "user:write_user": "Write user"
