@@ -54,6 +54,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -96,6 +102,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -159,6 +171,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -221,6 +239,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -264,6 +288,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -301,6 +331,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -344,6 +380,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -394,6 +436,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -476,6 +524,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -538,6 +592,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -635,6 +695,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -684,6 +750,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -790,6 +862,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -834,6 +912,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -898,6 +982,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -1009,6 +1099,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -1065,6 +1161,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -1183,6 +1285,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -1234,6 +1342,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -1326,6 +1440,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -1477,6 +1597,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -1533,6 +1659,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -1606,6 +1738,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -1664,6 +1802,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -1721,6 +1865,12 @@
           "404": {
             "description": "Admin not found",
             "headers": {}
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -1799,6 +1949,9 @@
           "422": {
             "description": "Unprocessable Content"
           },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -1858,6 +2011,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -1951,6 +2110,12 @@
             "description": "Admin not found",
             "headers": {}
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -2013,6 +2178,12 @@
             "description": "Admin or change request not found",
             "headers": {}
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -2072,6 +2243,12 @@
           "404": {
             "description": "Admin or change request not found",
             "headers": {}
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -2133,6 +2310,12 @@
           "404": {
             "description": "Admin not found",
             "headers": {}
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -2255,6 +2438,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -2342,6 +2531,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -2405,6 +2600,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -2481,6 +2682,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -2539,6 +2746,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -2611,6 +2824,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -2681,6 +2900,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -2762,6 +2987,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -2826,6 +3057,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -2884,6 +3121,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -2962,6 +3205,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -3051,6 +3300,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -3109,6 +3364,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -3180,6 +3441,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -3291,6 +3558,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -3354,6 +3627,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -3425,6 +3704,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -3484,6 +3769,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -3600,6 +3891,9 @@
           "422": {
             "description": "Unprocessable Content"
           },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -3677,6 +3971,9 @@
           "422": {
             "description": "Invalid configuration profile names"
           },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -3741,6 +4038,12 @@
           "404": {
             "description": "Shard configuration profile not found",
             "headers": {}
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -3874,6 +4177,9 @@
           "422": {
             "description": "Unprocessable Content"
           },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -3936,6 +4242,9 @@
           },
           "422": {
             "description": "Unprocessable Content"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -4036,6 +4345,12 @@
             "description": "Shard configuration profile not found",
             "headers": {}
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -4105,6 +4420,12 @@
             "description": "Shard configuration profile or change request not found",
             "headers": {}
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -4171,6 +4492,12 @@
           "404": {
             "description": "Shard configuration profile or change request not found",
             "headers": {}
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -4240,6 +4567,12 @@
             "description": "Shard configuration profile not found",
             "headers": {}
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -4301,6 +4634,12 @@
           "404": {
             "description": "Shard configuration profile not found",
             "headers": {}
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -4369,6 +4708,12 @@
           "404": {
             "description": "Shard configuration profile not found",
             "headers": {}
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -4455,6 +4800,12 @@
             "description": "Shard configuration profile not found",
             "headers": {}
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -4533,6 +4884,9 @@
           },
           "422": {
             "description": "Shard could not be created"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -4622,6 +4976,9 @@
           "422": {
             "description": "Invalid shard IDs"
           },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -4694,6 +5051,9 @@
           },
           "422": {
             "description": "Shards could not be removed"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -4796,6 +5156,9 @@
           "422": {
             "description": "Shards could not be created"
           },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -4867,6 +5230,12 @@
           "404": {
             "description": "Shard configuration profile or shard not found",
             "headers": {}
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -4954,6 +5323,9 @@
           "422": {
             "description": "Unprocessable Content"
           },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -5024,6 +5396,9 @@
           "422": {
             "description": "Shard could not be removed"
           },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -5080,6 +5455,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -5156,6 +5537,9 @@
           "422": {
             "description": "Unprocessable Content"
           },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -5210,6 +5594,12 @@
           "404": {
             "description": "Default shard configuration profile not found",
             "headers": {}
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -5286,6 +5676,9 @@
           "422": {
             "description": "Default shard configuration profile could not be updated"
           },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -5342,6 +5735,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -5402,6 +5801,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -5607,6 +6012,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -5677,6 +6088,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -5767,6 +6184,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -5831,6 +6254,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -5890,6 +6319,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -5997,6 +6432,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -6097,6 +6538,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -6160,6 +6607,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -6301,6 +6754,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -6408,6 +6867,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -6471,6 +6936,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -6615,6 +7086,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -6828,6 +7305,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -6959,6 +7442,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -7073,6 +7562,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -7176,6 +7671,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -7260,6 +7761,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -7330,6 +7837,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -7415,6 +7928,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -7478,6 +7997,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -7594,6 +8119,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -7652,6 +8183,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -7737,6 +8274,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -7820,6 +8363,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -7878,6 +8427,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -7949,6 +8504,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -8059,6 +8620,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -8131,6 +8698,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -8222,6 +8795,9 @@
           "422": {
             "description": "Unprocessable Content"
           },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -8298,6 +8874,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -8367,6 +8949,9 @@
           },
           "422": {
             "description": "Unprocessable Content"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -8686,6 +9271,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           },
@@ -8897,6 +9488,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           },
@@ -8953,6 +9550,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -9147,6 +9750,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -9200,6 +9809,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -9346,6 +9961,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -9528,6 +10149,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           },
@@ -9709,6 +10336,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -9827,6 +10460,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -9892,6 +10531,12 @@
             "description": "Change request not found",
             "headers": {}
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -9955,6 +10600,9 @@
           "422": {
             "description": "Change request cannot be canceled"
           },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -10014,6 +10662,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -10104,6 +10758,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -10188,7 +10848,7 @@
           "201": {
             "description": "Returns the new credentials",
             "schema": {
-              "$ref": "#/definitions/DatabaseBranchPassword"
+              "$ref": "#/definitions/DatabaseBranchPasswordWithSecret"
             },
             "headers": {}
           },
@@ -10203,6 +10863,9 @@
           },
           "422": {
             "description": "Unprocessable Content"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -10267,6 +10930,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -10350,6 +11019,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -10409,6 +11084,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -10460,7 +11141,7 @@
           "200": {
             "description": "Returns the renewed password",
             "schema": {
-              "$ref": "#/definitions/DatabaseBranchPassword"
+              "$ref": "#/definitions/DatabaseBranchPasswordWithSecret"
             },
             "headers": {}
           },
@@ -10472,6 +11153,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -10529,6 +11216,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -10606,6 +11299,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -10660,6 +11359,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -10725,6 +11430,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -10783,6 +11494,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -10847,6 +11564,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -10942,6 +11665,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -11001,6 +11730,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -11111,6 +11846,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -11174,6 +11915,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -11284,6 +12031,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -11343,6 +12096,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -11396,6 +12155,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -11465,6 +12230,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -11554,6 +12325,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -11617,6 +12394,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -11700,6 +12483,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -11808,6 +12597,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -11865,6 +12660,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -11909,26 +12710,7 @@
           "200": {
             "description": "Returns the new credentials",
             "schema": {
-              "type": "object",
-              "properties": {
-                "username": {
-                  "type": "string",
-                  "description": "The database user name"
-                },
-                "password": {
-                  "type": "string",
-                  "description": "The plaintext password"
-                },
-                "access_host_url": {
-                  "type": "string",
-                  "description": "The database connection host"
-                }
-              },
-              "required": [
-                "username",
-                "password",
-                "access_host_url"
-              ]
+              "$ref": "#/definitions/PostgresRole"
             },
             "headers": {}
           },
@@ -11940,6 +12722,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -12035,6 +12823,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -12118,6 +12912,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -12182,6 +12982,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -12260,6 +13066,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -12323,6 +13135,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -12388,6 +13206,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -12448,6 +13272,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -12507,6 +13337,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -12590,6 +13426,9 @@
           "422": {
             "description": "Unprocessable Content"
           },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -12654,6 +13493,12 @@
           "404": {
             "description": "Router not found",
             "headers": {}
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -12755,6 +13600,9 @@
           "422": {
             "description": "Unprocessable Content"
           },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -12817,6 +13665,9 @@
           },
           "422": {
             "description": "Unprocessable Content"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -12917,6 +13768,12 @@
             "description": "Router not found",
             "headers": {}
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -12986,6 +13843,12 @@
             "description": "Router or change request not found",
             "headers": {}
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -13052,6 +13915,12 @@
           "404": {
             "description": "Router or change request not found",
             "headers": {}
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -13121,6 +13990,12 @@
             "description": "Router not found",
             "headers": {}
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -13177,6 +14052,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -13249,6 +14130,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -13303,6 +14190,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -13403,6 +14296,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -13473,6 +14372,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -13557,6 +14462,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -13608,6 +14519,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -13674,6 +14591,12 @@
             "description": "Shard not found",
             "headers": {}
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -13733,6 +14656,12 @@
           "404": {
             "description": "Shard not found",
             "headers": {}
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -13794,6 +14723,12 @@
             "description": "Shard not found",
             "headers": {}
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -13853,6 +14788,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -13918,6 +14859,12 @@
           "404": {
             "description": "Sidecar not found",
             "headers": {}
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -13998,6 +14945,9 @@
           },
           "422": {
             "description": "Unprocessable Content"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -14098,6 +15048,12 @@
             "description": "Sidecar not found",
             "headers": {}
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -14167,6 +15123,12 @@
             "description": "Sidecar or change request not found",
             "headers": {}
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -14233,6 +15195,12 @@
           "404": {
             "description": "Sidecar or change request not found",
             "headers": {}
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -14301,6 +15269,12 @@
           "404": {
             "description": "Sidecar not found",
             "headers": {}
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -14372,6 +15346,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -14447,6 +15427,9 @@
           "422": {
             "description": "unprocessable: the branch cannot accept a switchover right now"
           },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -14510,6 +15493,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -14610,6 +15599,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -14715,6 +15710,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -14811,6 +15812,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -14879,6 +15886,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -14942,6 +15955,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -15054,6 +16073,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -15112,6 +16137,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -15178,7 +16209,10 @@
             "description": "Not Found"
           },
           "422": {
-            "description": "Unprocessable Entity - Invalid parameters or validation errors"
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -15260,7 +16294,10 @@
             "description": "Not Found"
           },
           "422": {
-            "description": "Unprocessable Entity - Invalid parameters or validation errors"
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -15320,7 +16357,10 @@
             "description": "Not Found"
           },
           "422": {
-            "description": "Unprocessable Entity - Invalid parameters or validation errors"
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -15406,7 +16446,10 @@
             "description": "Not Found"
           },
           "422": {
-            "description": "Unprocessable Entity - Invalid parameters or validation errors"
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -15461,7 +16504,10 @@
             "description": "Not Found"
           },
           "422": {
-            "description": "Unprocessable Entity - Invalid parameters or validation errors"
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -15526,6 +16572,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -15621,6 +16673,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -15702,6 +16760,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -15758,6 +16822,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -15830,6 +16900,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -15886,6 +16962,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -15957,6 +17039,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -16027,6 +17115,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -16084,6 +17178,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -16140,6 +17240,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -16211,6 +17317,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -16268,6 +17380,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -16324,6 +17442,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -16396,6 +17520,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -16452,6 +17582,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -16523,6 +17659,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -16600,6 +17742,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -16656,6 +17804,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -16775,6 +17929,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -16831,6 +17991,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -16907,6 +18073,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -16971,6 +18143,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -17027,6 +18205,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -17099,6 +18283,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -17163,6 +18353,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -17226,6 +18422,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -17301,6 +18503,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -17357,6 +18565,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -17428,6 +18642,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -17477,6 +18697,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -17546,6 +18772,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -17609,6 +18841,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -17689,6 +18927,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -17745,6 +18989,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -17829,6 +19079,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -17880,6 +19136,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -17934,6 +19196,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -18004,6 +19272,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -18105,6 +19379,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -18162,6 +19442,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -18216,6 +19502,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -18274,6 +19566,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -18330,6 +19628,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -18388,6 +19692,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -18444,6 +19754,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -18502,6 +19818,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -18558,6 +19880,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -18616,6 +19944,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -18672,6 +20006,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -18730,6 +20070,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -18779,6 +20125,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -18844,6 +20196,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -18907,6 +20265,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -18956,6 +20320,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -19021,6 +20391,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -19077,6 +20453,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -19135,6 +20517,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -19184,6 +20572,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -19249,6 +20643,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -19306,6 +20706,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -19357,6 +20763,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -19450,6 +20862,9 @@
           "422": {
             "description": "Unprocessable Entity"
           },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -19507,6 +20922,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -19563,6 +20984,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -19622,6 +21049,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -19672,6 +21105,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -19717,6 +21156,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -19760,6 +21205,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -19801,6 +21252,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -19841,6 +21298,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -19894,6 +21357,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -19946,6 +21415,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -19986,6 +21461,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -20032,6 +21513,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -20083,6 +21570,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -20133,6 +21626,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -20177,6 +21676,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -20245,7 +21750,10 @@
             "description": "Not Found"
           },
           "422": {
-            "description": "Unprocessable Entity - Validation errors or SSO-managed teams"
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -20312,7 +21820,10 @@
             "description": "Not Found"
           },
           "422": {
-            "description": "Unprocessable Entity - Validation errors or SSO-managed teams"
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -20368,7 +21879,10 @@
             "description": "Not Found"
           },
           "422": {
-            "description": "Unprocessable Entity - Validation errors or SSO-managed teams"
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -20439,7 +21953,10 @@
             "description": "Not Found"
           },
           "422": {
-            "description": "Unprocessable Entity - Validation errors or SSO-managed teams"
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -20490,7 +22007,10 @@
             "description": "Not Found"
           },
           "422": {
-            "description": "Unprocessable Entity - Validation errors or SSO-managed teams"
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -20560,7 +22080,10 @@
             "description": "Not Found"
           },
           "422": {
-            "description": "Unprocessable Entity - Validation errors"
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -20630,7 +22153,10 @@
             "description": "Not Found"
           },
           "422": {
-            "description": "Unprocessable Entity - Validation errors"
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -20693,7 +22219,10 @@
             "description": "Not Found"
           },
           "422": {
-            "description": "Unprocessable Entity - Validation errors"
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -20757,7 +22286,10 @@
             "description": "Not Found"
           },
           "422": {
-            "description": "Unprocessable Entity - Validation errors"
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -20807,6 +22339,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -20858,6 +22396,12 @@
           "404": {
             "description": "Not Found"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -20892,6 +22436,12 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
           },
           "500": {
             "description": "Internal Server Error"
@@ -21226,7 +22776,8 @@
               },
               "schedule_time": {
                 "type": "string",
-                "description": "The time of day that the backup is scheduled, in HH:MM format"
+                "description": "The time of day that the backup is scheduled, in HH:MM format",
+                "x-nullable": true
               },
               "schedule_day": {
                 "type": "integer",
@@ -21270,7 +22821,6 @@
               "retention_unit",
               "frequency_value",
               "frequency_unit",
-              "schedule_time",
               "schedule_day",
               "schedule_week",
               "created_at",
@@ -21334,7 +22884,8 @@
         },
         "schedule_time": {
           "type": "string",
-          "description": "The time of day that the backup is scheduled, in HH:MM format"
+          "description": "The time of day that the backup is scheduled, in HH:MM format",
+          "x-nullable": true
         },
         "schedule_day": {
           "type": "integer",
@@ -21378,7 +22929,6 @@
         "retention_unit",
         "frequency_value",
         "frequency_unit",
-        "schedule_time",
         "schedule_day",
         "schedule_week",
         "created_at",
@@ -21608,7 +23158,8 @@
                   },
                   "schedule_time": {
                     "type": "string",
-                    "description": "The time of day that the backup is scheduled, in HH:MM format"
+                    "description": "The time of day that the backup is scheduled, in HH:MM format",
+                    "x-nullable": true
                   },
                   "schedule_day": {
                     "type": "integer",
@@ -21652,7 +23203,6 @@
                   "retention_unit",
                   "frequency_value",
                   "frequency_unit",
-                  "schedule_time",
                   "schedule_day",
                   "schedule_week",
                   "created_at",
@@ -21947,7 +23497,8 @@
             },
             "schedule_time": {
               "type": "string",
-              "description": "The time of day that the backup is scheduled, in HH:MM format"
+              "description": "The time of day that the backup is scheduled, in HH:MM format",
+              "x-nullable": true
             },
             "schedule_day": {
               "type": "integer",
@@ -21991,7 +23542,6 @@
             "retention_unit",
             "frequency_value",
             "frequency_unit",
-            "schedule_time",
             "schedule_day",
             "schedule_week",
             "created_at",
@@ -22922,11 +24472,13 @@
               },
               "mysql_address": {
                 "type": "string",
-                "description": "The MySQL address for the branch"
+                "description": "The MySQL address for the branch",
+                "x-nullable": true
               },
               "mysql_edge_address": {
                 "type": "string",
-                "description": "The address of the MySQL provider for the branch"
+                "description": "The address of the MySQL provider for the branch",
+                "x-nullable": true
               },
               "state": {
                 "type": "string",
@@ -22941,11 +24493,13 @@
               },
               "direct_vtgate": {
                 "type": "boolean",
-                "description": "True if the branch allows passwords to connect directly to a vtgate, bypassing load balancers"
+                "description": "True if the branch allows passwords to connect directly to a vtgate, bypassing load balancers",
+                "x-nullable": true
               },
               "vtgate_size": {
                 "type": "string",
-                "description": "The size of the vtgate cluster for the branch"
+                "description": "The size of the vtgate cluster for the branch",
+                "x-nullable": true
               },
               "vtgate_name": {
                 "type": "string",
@@ -22954,11 +24508,13 @@
               },
               "vtgate_count": {
                 "type": "integer",
-                "description": "The number of vtgate instances in the branch"
+                "description": "The number of vtgate instances in the branch",
+                "x-nullable": true
               },
               "vtgate_autoscaling": {
                 "type": "boolean",
-                "description": "Whether VTGate autoscaling is enabled"
+                "description": "Whether VTGate autoscaling is enabled",
+                "x-nullable": true
               },
               "vtgate_max_count": {
                 "type": "integer",
@@ -22985,7 +24541,8 @@
               },
               "schema_ready": {
                 "type": "boolean",
-                "description": "Whether or not the schema is ready for queries"
+                "description": "Whether or not the schema is ready for queries",
+                "x-nullable": true
               },
               "metal": {
                 "type": "boolean",
@@ -23009,7 +24566,8 @@
               },
               "shard_count": {
                 "type": "integer",
-                "description": "The number of shards in the branch"
+                "description": "The number of shards in the branch",
+                "x-nullable": true
               },
               "keyspace_count": {
                 "type": "integer",
@@ -23169,7 +24727,8 @@
               "vtgate_options": {
                 "type": "object",
                 "additionalProperties": true,
-                "description": "VTGate configuration options"
+                "description": "VTGate configuration options",
+                "x-nullable": true
               }
             },
             "required": [
@@ -23181,26 +24740,15 @@
               "restore_checklist_completed_at",
               "schema_last_updated_at",
               "kind",
-              "mysql_address",
-              "mysql_edge_address",
               "state",
-              "direct_vtgate",
-              "vtgate_size",
-              "vtgate_name",
-              "vtgate_count",
-              "vtgate_autoscaling",
-              "vtgate_max_count",
-              "vtgate_target_cpu_utilization",
               "cluster_name",
               "cluster_iops",
               "ready",
-              "schema_ready",
               "metal",
               "production",
               "safe_migrations",
               "deletion_protected",
               "sharded",
-              "shard_count",
               "keyspace_count",
               "stale_schema",
               "actor",
@@ -23211,8 +24759,7 @@
               "html_url",
               "url",
               "region",
-              "parent_branch",
-              "vtgate_options"
+              "parent_branch"
             ]
           }
         }
@@ -23275,11 +24822,13 @@
         },
         "mysql_address": {
           "type": "string",
-          "description": "The MySQL address for the branch"
+          "description": "The MySQL address for the branch",
+          "x-nullable": true
         },
         "mysql_edge_address": {
           "type": "string",
-          "description": "The address of the MySQL provider for the branch"
+          "description": "The address of the MySQL provider for the branch",
+          "x-nullable": true
         },
         "state": {
           "type": "string",
@@ -23294,11 +24843,13 @@
         },
         "direct_vtgate": {
           "type": "boolean",
-          "description": "True if the branch allows passwords to connect directly to a vtgate, bypassing load balancers"
+          "description": "True if the branch allows passwords to connect directly to a vtgate, bypassing load balancers",
+          "x-nullable": true
         },
         "vtgate_size": {
           "type": "string",
-          "description": "The size of the vtgate cluster for the branch"
+          "description": "The size of the vtgate cluster for the branch",
+          "x-nullable": true
         },
         "vtgate_name": {
           "type": "string",
@@ -23307,11 +24858,13 @@
         },
         "vtgate_count": {
           "type": "integer",
-          "description": "The number of vtgate instances in the branch"
+          "description": "The number of vtgate instances in the branch",
+          "x-nullable": true
         },
         "vtgate_autoscaling": {
           "type": "boolean",
-          "description": "Whether VTGate autoscaling is enabled"
+          "description": "Whether VTGate autoscaling is enabled",
+          "x-nullable": true
         },
         "vtgate_max_count": {
           "type": "integer",
@@ -23338,7 +24891,8 @@
         },
         "schema_ready": {
           "type": "boolean",
-          "description": "Whether or not the schema is ready for queries"
+          "description": "Whether or not the schema is ready for queries",
+          "x-nullable": true
         },
         "metal": {
           "type": "boolean",
@@ -23362,7 +24916,8 @@
         },
         "shard_count": {
           "type": "integer",
-          "description": "The number of shards in the branch"
+          "description": "The number of shards in the branch",
+          "x-nullable": true
         },
         "keyspace_count": {
           "type": "integer",
@@ -23522,7 +25077,8 @@
         "vtgate_options": {
           "type": "object",
           "additionalProperties": true,
-          "description": "VTGate configuration options"
+          "description": "VTGate configuration options",
+          "x-nullable": true
         }
       },
       "required": [
@@ -23534,26 +25090,15 @@
         "restore_checklist_completed_at",
         "schema_last_updated_at",
         "kind",
-        "mysql_address",
-        "mysql_edge_address",
         "state",
-        "direct_vtgate",
-        "vtgate_size",
-        "vtgate_name",
-        "vtgate_count",
-        "vtgate_autoscaling",
-        "vtgate_max_count",
-        "vtgate_target_cpu_utilization",
         "cluster_name",
         "cluster_iops",
         "ready",
-        "schema_ready",
         "metal",
         "production",
         "safe_migrations",
         "deletion_protected",
         "sharded",
-        "shard_count",
         "keyspace_count",
         "stale_schema",
         "actor",
@@ -23564,8 +25109,7 @@
         "html_url",
         "url",
         "region",
-        "parent_branch",
-        "vtgate_options"
+        "parent_branch"
       ]
     },
     "PaginatedSchemaLintError": {
@@ -25398,6 +26942,256 @@
           "type": "string",
           "description": "The plaintext password. Null except in the response from the create endpoint.",
           "x-nullable": true
+        },
+        "replica": {
+          "type": "boolean",
+          "description": "Whether or not the password is for a read replica"
+        },
+        "read_only_region": {
+          "type": "boolean",
+          "description": "Whether or not the password is scoped to a read-only region"
+        },
+        "renewable": {
+          "type": "boolean",
+          "description": "Whether or not the password can be renewed"
+        },
+        "database_branch": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name for the branch"
+            },
+            "id": {
+              "type": "string",
+              "description": "The ID for the branch"
+            },
+            "production": {
+              "type": "boolean",
+              "description": "Whether or not the branch is a production branch"
+            },
+            "mysql_edge_address": {
+              "type": "string",
+              "description": "The address of the MySQL provider for the branch"
+            },
+            "private_edge_connectivity": {
+              "type": "boolean",
+              "description": "True if private connectivity is enabled"
+            }
+          },
+          "required": [
+            "name",
+            "id",
+            "production",
+            "mysql_edge_address",
+            "private_edge_connectivity"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "role",
+        "cidrs",
+        "created_at",
+        "deleted_at",
+        "expires_at",
+        "last_used_at",
+        "expired",
+        "direct_vtgate",
+        "direct_vtgate_addresses",
+        "ttl_seconds",
+        "access_host_url",
+        "access_host_regional_url",
+        "access_host_regional_urls",
+        "actor",
+        "region",
+        "username",
+        "plain_text",
+        "replica",
+        "read_only_region",
+        "renewable",
+        "database_branch"
+      ]
+    },
+    "DatabaseBranchPasswordWithSecret": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID for the password"
+        },
+        "name": {
+          "type": "string",
+          "description": "The display name for the password"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "reader",
+            "writer",
+            "admin",
+            "readwriter"
+          ],
+          "description": "The role for the password"
+        },
+        "cidrs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "List of IP addresses or CIDR ranges that can use this password",
+          "x-nullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "description": "When the password was created"
+        },
+        "deleted_at": {
+          "type": "string",
+          "description": "When the password was deleted",
+          "x-nullable": true
+        },
+        "expires_at": {
+          "type": "string",
+          "description": "When the password will expire",
+          "x-nullable": true
+        },
+        "last_used_at": {
+          "type": "string",
+          "description": "When the password was last used to execute a query",
+          "x-nullable": true
+        },
+        "expired": {
+          "type": "boolean",
+          "description": "True if the credentials are expired"
+        },
+        "direct_vtgate": {
+          "type": "boolean",
+          "description": "True if the credentials connect directly to a vtgate, bypassing load balancers"
+        },
+        "direct_vtgate_addresses": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "The list of hosts in each availability zone providing direct access to a vtgate"
+        },
+        "ttl_seconds": {
+          "type": "integer",
+          "description": "Time to live (in seconds) for the password. The password will be invalid when TTL has passed",
+          "x-nullable": true
+        },
+        "access_host_url": {
+          "type": "string",
+          "description": "The host URL for the password"
+        },
+        "access_host_regional_url": {
+          "type": "string",
+          "description": "The regional host URL"
+        },
+        "access_host_regional_urls": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "The read-only replica host URLs"
+        },
+        "actor": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The ID of the actor"
+            },
+            "display_name": {
+              "type": "string",
+              "description": "The name of the actor"
+            },
+            "avatar_url": {
+              "type": "string",
+              "description": "The URL of the actor's avatar"
+            }
+          },
+          "required": [
+            "id",
+            "display_name",
+            "avatar_url"
+          ],
+          "x-nullable": true
+        },
+        "region": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The ID of the region"
+            },
+            "provider": {
+              "type": "string",
+              "description": "Provider for the region (ex. AWS)"
+            },
+            "enabled": {
+              "type": "boolean",
+              "description": "Whether or not the region is currently active"
+            },
+            "public_ip_addresses": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array",
+              "description": "Public IP addresses for the region"
+            },
+            "display_name": {
+              "type": "string",
+              "description": "Name of the region"
+            },
+            "location": {
+              "type": "string",
+              "description": "Location of the region"
+            },
+            "slug": {
+              "type": "string",
+              "description": "The slug of the region"
+            },
+            "current_default": {
+              "type": "boolean",
+              "description": "True if the region is the default for new branch creation"
+            },
+            "mysql_supported": {
+              "type": "boolean",
+              "description": "Whether the region supports MySQL/Vitess databases"
+            },
+            "postgresql_supported": {
+              "type": "boolean",
+              "description": "Whether the region supports PostgreSQL databases"
+            },
+            "neki_supported": {
+              "type": "boolean",
+              "description": "Whether the region supports Neki databases"
+            }
+          },
+          "required": [
+            "id",
+            "provider",
+            "enabled",
+            "public_ip_addresses",
+            "display_name",
+            "location",
+            "slug",
+            "current_default",
+            "mysql_supported",
+            "postgresql_supported",
+            "neki_supported"
+          ]
+        },
+        "username": {
+          "type": "string",
+          "description": "The username for the password"
+        },
+        "plain_text": {
+          "type": "string",
+          "description": "The plaintext password returned by create and renew"
         },
         "replica": {
           "type": "boolean",
@@ -30844,7 +32638,8 @@
                   },
                   "name": {
                     "type": "string",
-                    "description": "The name of the user"
+                    "description": "The name of the user",
+                    "x-nullable": true
                   },
                   "email": {
                     "type": "string",
@@ -30992,7 +32787,8 @@
             },
             "name": {
               "type": "string",
-              "description": "The name of the user"
+              "description": "The name of the user",
+              "x-nullable": true
             },
             "email": {
               "type": "string",
@@ -35369,7 +37165,8 @@
               },
               "password": {
                 "type": "string",
-                "description": "The plaintext password, available only after create"
+                "description": "The plaintext password, available only after create",
+                "x-nullable": true
               },
               "database_name": {
                 "type": "string",
@@ -35405,7 +37202,8 @@
               },
               "drop_failed": {
                 "type": "string",
-                "description": "Error message available when dropping the role fails"
+                "description": "Error message available when dropping the role fails",
+                "x-nullable": true
               },
               "ready": {
                 "type": "boolean",
@@ -35421,7 +37219,8 @@
               },
               "ttl": {
                 "type": "integer",
-                "description": "Number of seconds before the credentials expire"
+                "description": "Number of seconds before the credentials expire",
+                "x-nullable": true
               },
               "inherited_roles": {
                 "items": {
@@ -35607,7 +37406,8 @@
         },
         "password": {
           "type": "string",
-          "description": "The plaintext password, available only after create"
+          "description": "The plaintext password, available only after create",
+          "x-nullable": true
         },
         "database_name": {
           "type": "string",
@@ -35643,7 +37443,8 @@
         },
         "drop_failed": {
           "type": "string",
-          "description": "Error message available when dropping the role fails"
+          "description": "Error message available when dropping the role fails",
+          "x-nullable": true
         },
         "ready": {
           "type": "boolean",
@@ -35659,7 +37460,8 @@
         },
         "ttl": {
           "type": "integer",
-          "description": "Number of seconds before the credentials expire"
+          "description": "Number of seconds before the credentials expire",
+          "x-nullable": true
         },
         "inherited_roles": {
           "items": {
@@ -36445,7 +38247,8 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the user"
+          "description": "The name of the user",
+          "x-nullable": true
         },
         "email": {
           "type": "string",
@@ -41659,7 +43462,8 @@
                   },
                   "name": {
                     "type": "string",
-                    "description": "The name of the user"
+                    "description": "The name of the user",
+                    "x-nullable": true
                   },
                   "email": {
                     "type": "string",
@@ -42076,7 +43880,8 @@
             },
             "name": {
               "type": "string",
-              "description": "The name of the user"
+              "description": "The name of the user",
+              "x-nullable": true
             },
             "email": {
               "type": "string",
@@ -42551,7 +44356,8 @@
                     },
                     "name": {
                       "type": "string",
-                      "description": "The name of the user"
+                      "description": "The name of the user",
+                      "x-nullable": true
                     },
                     "email": {
                       "type": "string",
@@ -42804,7 +44610,8 @@
               },
               "name": {
                 "type": "string",
-                "description": "The name of the user"
+                "description": "The name of the user",
+                "x-nullable": true
               },
               "email": {
                 "type": "string",
