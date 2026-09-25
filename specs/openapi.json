@@ -10349,6 +10349,870 @@
         "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |\n| Branch | `read_branch` |"
       }
     },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/move-tables/workflows": {
+      "get": {
+        "tags": [
+          "MoveTables"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "list_move_tables_workflows",
+        "summary": "List MoveTables workflows",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name"
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name"
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name"
+          },
+          {
+            "name": "target_keyspace",
+            "type": "string",
+            "in": "query",
+            "description": "Filter by target keyspace (returns workflows from all kept keyspaces if omitted)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "MoveTables workflows",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "workflows": {
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": true
+                      },
+                      "type": "array",
+                      "description": "MoveTables workflows reported by Vitess"
+                    }
+                  },
+                  "required": [
+                    "workflows"
+                  ]
+                }
+              },
+              "required": [
+                "data"
+              ]
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_workflow`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_workflows` |\n| Database | `read_workflows` |"
+      },
+      "post": {
+        "tags": [
+          "MoveTables"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "create_move_tables_workflow",
+        "summary": "Create a MoveTables workflow",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name"
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name"
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "MoveTables create operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The ID of the vtctld operation. Poll the vtctld operation endpoint for its result."
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_workflow`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_workflows` |\n| Database | `write_workflows` |"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/move-tables/workflows/{workflow}": {
+      "get": {
+        "tags": [
+          "MoveTables"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "get_move_tables_workflow",
+        "summary": "Show MoveTables workflow details",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name"
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name"
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name"
+          },
+          {
+            "name": "workflow",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Workflow name"
+          },
+          {
+            "name": "target_keyspace",
+            "type": "string",
+            "in": "query",
+            "required": true,
+            "description": "Target keyspace name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "MoveTables show response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "workflows": {
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": true
+                      },
+                      "type": "array",
+                      "description": "The workflows Vitess reports for the target keyspace"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_workflow`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_workflows` |\n| Database | `read_workflows` |"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/move-tables/workflows/{workflow}/cancel": {
+      "post": {
+        "tags": [
+          "MoveTables"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "cancel_move_tables_workflow",
+        "summary": "Cancel a MoveTables workflow",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name"
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name"
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name"
+          },
+          {
+            "name": "workflow",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Workflow name"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "MoveTables cancel operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The ID of the vtctld operation. Poll the vtctld operation endpoint for its result."
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `delete_workflow`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_workflows` |\n| Database | `write_workflows` |"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/move-tables/workflows/{workflow}/complete": {
+      "post": {
+        "tags": [
+          "MoveTables"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "complete_move_tables_workflow",
+        "summary": "Complete a MoveTables workflow",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name"
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name"
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name"
+          },
+          {
+            "name": "workflow",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Workflow name"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "MoveTables complete operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The ID of the vtctld operation. Poll the vtctld operation endpoint for its result."
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_workflow`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_workflows` |\n| Database | `write_workflows` |"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/move-tables/workflows/{workflow}/reverse-traffic": {
+      "post": {
+        "tags": [
+          "MoveTables"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "reverse_traffic_move_tables_workflow",
+        "summary": "Reverse traffic back to the source keyspace",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name"
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name"
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name"
+          },
+          {
+            "name": "workflow",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Workflow name"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "MoveTables reverse traffic operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The ID of the vtctld operation. Poll the vtctld operation endpoint for its result."
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_workflow`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_workflows` |\n| Database | `write_workflows` |"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/move-tables/workflows/{workflow}/start": {
+      "post": {
+        "tags": [
+          "MoveTables"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "start_move_tables_workflow",
+        "summary": "Start a MoveTables workflow",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name"
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name"
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name"
+          },
+          {
+            "name": "workflow",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Workflow name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "MoveTables start response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "summary": {
+                      "type": "string",
+                      "description": "Human-readable summary of the start result"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_workflow`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_workflows` |\n| Database | `write_workflows` |"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/move-tables/workflows/{workflow}/status": {
+      "get": {
+        "tags": [
+          "MoveTables"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "get_move_tables_workflow_status",
+        "summary": "Show MoveTables workflow status",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name"
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name"
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name"
+          },
+          {
+            "name": "workflow",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Workflow name"
+          },
+          {
+            "name": "target_keyspace",
+            "type": "string",
+            "in": "query",
+            "required": true,
+            "description": "Target keyspace name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "MoveTables status response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "traffic_state": {
+                      "type": "string",
+                      "description": "Human-readable summary of the workflow's current traffic state"
+                    },
+                    "table_copy_state": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "rows_copied": {
+                            "type": "integer"
+                          },
+                          "rows_total": {
+                            "type": "integer"
+                          },
+                          "rows_percentage": {
+                            "type": "number"
+                          },
+                          "bytes_copied": {
+                            "type": "integer"
+                          },
+                          "bytes_total": {
+                            "type": "integer"
+                          },
+                          "bytes_percentage": {
+                            "type": "number"
+                          }
+                        }
+                      },
+                      "description": "VReplication table copy progress, keyed by table name"
+                    },
+                    "shard_streams": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object"
+                      },
+                      "description": "VReplication stream status, keyed by Vitess keyspace/shard"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_workflow`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_workflows` |\n| Database | `read_workflows` |"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/move-tables/workflows/{workflow}/stop": {
+      "post": {
+        "tags": [
+          "MoveTables"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "stop_move_tables_workflow",
+        "summary": "Stop a MoveTables workflow",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name"
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name"
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name"
+          },
+          {
+            "name": "workflow",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Workflow name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "MoveTables stop response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "summary": {
+                      "type": "string",
+                      "description": "Human-readable summary of the stop result"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_workflow`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_workflows` |\n| Database | `write_workflows` |"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/move-tables/workflows/{workflow}/switch-traffic": {
+      "post": {
+        "tags": [
+          "MoveTables"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "switch_traffic_move_tables_workflow",
+        "summary": "Switch traffic to the target keyspace",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name"
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name"
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name"
+          },
+          {
+            "name": "workflow",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Workflow name"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "MoveTables switch traffic operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The ID of the vtctld operation. Poll the vtctld operation endpoint for its result."
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_workflow`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_workflows` |\n| Database | `write_workflows` |"
+      }
+    },
     "/organizations/{organization}/databases/{database}/branches/{branch}/neki-changes": {
       "get": {
         "tags": [
@@ -16149,6 +17013,142 @@
           }
         },
         "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_databases` |\n| Database | `write_database` |"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/vtctld/operations/{id}": {
+      "get": {
+        "tags": [
+          "VtctldOperations"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "get_vtctld_operation",
+        "summary": "Get a vtctld operation",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          },
+          {
+            "name": "id",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The vtctld operation UUID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the vtctld operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "The object type, always VtctldOperation"
+                },
+                "id": {
+                  "type": "string",
+                  "description": "The UUID of the operation"
+                },
+                "action": {
+                  "type": "string",
+                  "description": "The vtctld action being executed, such as move_tables_create"
+                },
+                "timeout": {
+                  "type": "integer",
+                  "description": "Timeout in seconds"
+                },
+                "created_at": {
+                  "type": "string",
+                  "description": "When the operation was created"
+                },
+                "completed_at": {
+                  "type": "string",
+                  "description": "When the operation completed, or null while it is still running",
+                  "x-nullable": true
+                },
+                "state": {
+                  "type": "string",
+                  "enum": [
+                    "pending",
+                    "running",
+                    "completed",
+                    "failed",
+                    "cancelled"
+                  ],
+                  "description": "The current state of the operation"
+                },
+                "completed": {
+                  "type": "string",
+                  "description": "Whether the operation has reached a terminal state"
+                },
+                "metadata": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "description": "Operation-specific metadata captured when the operation started"
+                },
+                "result": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "description": "Operation-specific result payload, present once the operation succeeds"
+                },
+                "error": {
+                  "type": "string",
+                  "description": "The error message, present when the operation fails or its status could not be checked"
+                }
+              },
+              "required": [
+                "type",
+                "id",
+                "action",
+                "timeout",
+                "created_at",
+                "completed_at",
+                "state",
+                "completed"
+              ]
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_workflow`, `write_branch_topology`, `write_production_branch_topology`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_workflows`, `manage_branch_topologies`, `manage_production_branch_topologies` |\n| Database | `read_workflows`, `manage_branch_topologies`, `manage_production_branch_topologies` |\n| Branch | `manage_topology` |"
       }
     },
     "/organizations/{organization}/databases/{database}/cidrs": {
@@ -44883,6 +45883,10 @@
       "description": "          Resources for retrieving database metrics.\n"
     },
     {
+      "name": "MoveTables",
+      "description": "          API endpoints for creating and managing Vitess MoveTables workflows on a branch.\n"
+    },
+    {
       "name": "OAuth applications",
       "description": "          Resources for managing OAuth applications.\n"
     },
@@ -44945,6 +45949,10 @@
     {
       "name": "Users",
       "description": "          Resources for managing users.\n"
+    },
+    {
+      "name": "VtctldOperations",
+      "description": "          API endpoints for checking the result of asynchronous vtctld operations, such as MoveTables commands.\n"
     },
     {
       "name": "Workflows",
