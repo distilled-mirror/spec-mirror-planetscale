@@ -1947,7 +1947,7 @@
             "headers": {}
           },
           "422": {
-            "description": "Unprocessable Content"
+            "description": "Invalid parameters"
           },
           "429": {
             "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
@@ -3559,7 +3559,7 @@
             "description": "Not Found"
           },
           "422": {
-            "description": "Unprocessable Entity"
+            "description": "Invalid parameters"
           },
           "429": {
             "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
@@ -3889,7 +3889,7 @@
             "description": "Not Found"
           },
           "422": {
-            "description": "Unprocessable Content"
+            "description": "Invalid parameters"
           },
           "429": {
             "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
@@ -4175,7 +4175,7 @@
             "headers": {}
           },
           "422": {
-            "description": "Unprocessable Content"
+            "description": "Invalid parameters"
           },
           "429": {
             "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
@@ -14288,7 +14288,7 @@
             "description": "Not Found"
           },
           "422": {
-            "description": "Unprocessable Content"
+            "description": "Invalid parameters"
           },
           "429": {
             "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
@@ -14462,7 +14462,7 @@
             "headers": {}
           },
           "422": {
-            "description": "Unprocessable Content"
+            "description": "Invalid parameters"
           },
           "429": {
             "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
@@ -15808,7 +15808,7 @@
             "headers": {}
           },
           "422": {
-            "description": "Unprocessable Content"
+            "description": "Invalid parameters"
           },
           "429": {
             "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
