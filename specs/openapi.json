@@ -11275,7 +11275,7 @@
               "type": "string"
             },
             "in": "query",
-            "description": "Filter change requests by target type. Must contain one or more of: NekiAdmin, NekiCluster, NekiConfigurationProfile, NekiRouter, or NekiSidecar"
+            "description": "Filter change requests by target type. Must contain one or more of: NekiAdmin, NekiCluster, NekiConfigurationProfile, NekiExternalShard, NekiRouter, or NekiSidecar"
           },
           {
             "name": "target_id",
@@ -27098,26 +27098,31 @@
                 ],
                 "description": "Controls when node TTL drains are allowed"
               },
-              "disk_autoscaling": {
+              "storage": {
                 "type": "object",
                 "properties": {
-                  "strategy": {
+                  "storage_bytes": {
+                    "type": "integer",
+                    "description": "The current provisioned disk size in bytes. Disks grow from and shrink to this size. Custom shards may have staff-set overrides"
+                  },
+                  "max_storage_bytes": {
+                    "type": "integer",
+                    "description": "The maximum size in bytes disks may autoscale to"
+                  },
+                  "disk_scaling_strategy": {
                     "type": "string",
                     "enum": [
                       "grow",
                       "disable",
                       "shrink"
                     ],
-                    "description": "The disk autoscaling strategy"
-                  },
-                  "storage_limit_bytes": {
-                    "type": "integer",
-                    "description": "The maximum size in bytes disks may autoscale to"
+                    "description": "The disk scaling strategy"
                   }
                 },
                 "required": [
-                  "strategy",
-                  "storage_limit_bytes"
+                  "storage_bytes",
+                  "max_storage_bytes",
+                  "disk_scaling_strategy"
                 ]
               },
               "max_rollout": {
@@ -27213,7 +27218,7 @@
               "imported",
               "vector_pool_allocation",
               "node_ttl_strategy",
-              "disk_autoscaling",
+              "storage",
               "max_rollout",
               "replication_durability_constraints",
               "vreplication_flags",
@@ -27328,26 +27333,31 @@
           ],
           "description": "Controls when node TTL drains are allowed"
         },
-        "disk_autoscaling": {
+        "storage": {
           "type": "object",
           "properties": {
-            "strategy": {
+            "storage_bytes": {
+              "type": "integer",
+              "description": "The current provisioned disk size in bytes. Disks grow from and shrink to this size. Custom shards may have staff-set overrides"
+            },
+            "max_storage_bytes": {
+              "type": "integer",
+              "description": "The maximum size in bytes disks may autoscale to"
+            },
+            "disk_scaling_strategy": {
               "type": "string",
               "enum": [
                 "grow",
                 "disable",
                 "shrink"
               ],
-              "description": "The disk autoscaling strategy"
-            },
-            "storage_limit_bytes": {
-              "type": "integer",
-              "description": "The maximum size in bytes disks may autoscale to"
+              "description": "The disk scaling strategy"
             }
           },
           "required": [
-            "strategy",
-            "storage_limit_bytes"
+            "storage_bytes",
+            "max_storage_bytes",
+            "disk_scaling_strategy"
           ]
         },
         "max_rollout": {
@@ -27443,7 +27453,7 @@
         "imported",
         "vector_pool_allocation",
         "node_ttl_strategy",
-        "disk_autoscaling",
+        "storage",
         "max_rollout",
         "replication_durability_constraints",
         "vreplication_flags",
@@ -28571,59 +28581,6 @@
                 "type": "boolean",
                 "description": "If the database has reached its development branch limit"
               },
-              "data_import": {
-                "type": "object",
-                "properties": {
-                  "state": {
-                    "type": "string",
-                    "description": "State of the data import"
-                  },
-                  "import_check_errors": {
-                    "type": "string",
-                    "description": "Errors encountered during the import check"
-                  },
-                  "started_at": {
-                    "type": "string",
-                    "description": "When the import started",
-                    "x-nullable": true
-                  },
-                  "finished_at": {
-                    "type": "string",
-                    "description": "When the import finished",
-                    "x-nullable": true
-                  },
-                  "data_source": {
-                    "type": "object",
-                    "properties": {
-                      "hostname": {
-                        "type": "string",
-                        "description": "Hostname of the data source"
-                      },
-                      "port": {
-                        "type": "integer",
-                        "description": "Port of the data source"
-                      },
-                      "database": {
-                        "type": "string",
-                        "description": "Database name of the data source"
-                      }
-                    },
-                    "required": [
-                      "hostname",
-                      "port",
-                      "database"
-                    ]
-                  }
-                },
-                "required": [
-                  "state",
-                  "import_check_errors",
-                  "started_at",
-                  "finished_at",
-                  "data_source"
-                ],
-                "x-nullable": true
-              },
               "region": {
                 "type": "object",
                 "properties": {
@@ -28931,59 +28888,6 @@
         "at_development_branch_usage_limit": {
           "type": "boolean",
           "description": "If the database has reached its development branch limit"
-        },
-        "data_import": {
-          "type": "object",
-          "properties": {
-            "state": {
-              "type": "string",
-              "description": "State of the data import"
-            },
-            "import_check_errors": {
-              "type": "string",
-              "description": "Errors encountered during the import check"
-            },
-            "started_at": {
-              "type": "string",
-              "description": "When the import started",
-              "x-nullable": true
-            },
-            "finished_at": {
-              "type": "string",
-              "description": "When the import finished",
-              "x-nullable": true
-            },
-            "data_source": {
-              "type": "object",
-              "properties": {
-                "hostname": {
-                  "type": "string",
-                  "description": "Hostname of the data source"
-                },
-                "port": {
-                  "type": "integer",
-                  "description": "Port of the data source"
-                },
-                "database": {
-                  "type": "string",
-                  "description": "Database name of the data source"
-                }
-              },
-              "required": [
-                "hostname",
-                "port",
-                "database"
-              ]
-            }
-          },
-          "required": [
-            "state",
-            "import_check_errors",
-            "started_at",
-            "finished_at",
-            "data_source"
-          ],
-          "x-nullable": true
         },
         "region": {
           "type": "object",
@@ -31013,6 +30917,7 @@
                   "NekiAdminChangeRequest",
                   "NekiClusterChangeRequest",
                   "NekiConfigurationProfileChangeRequest",
+                  "NekiExternalShardChangeRequest",
                   "NekiRouterChangeRequest",
                   "NekiSidecarChangeRequest"
                 ],
@@ -31088,6 +30993,7 @@
                   "NekiAdmin",
                   "NekiCluster",
                   "NekiConfigurationProfile",
+                  "NekiExternalShard",
                   "NekiRouter",
                   "NekiSidecar"
                 ],
@@ -31153,6 +31059,16 @@
               "previous_neki_image_version": {
                 "type": "string",
                 "description": "The previous Neki image version",
+                "x-nullable": true
+              },
+              "replicas": {
+                "type": "integer",
+                "description": "The number of replicas",
+                "x-nullable": true
+              },
+              "previous_replicas": {
+                "type": "integer",
+                "description": "The previous number of replicas",
                 "x-nullable": true
               },
               "router_size": {
@@ -31245,11 +31161,6 @@
                 "description": "The display order of the cluster size SKU",
                 "x-nullable": true
               },
-              "replicas": {
-                "type": "integer",
-                "description": "The number of replicas",
-                "x-nullable": true
-              },
               "shards": {
                 "type": "integer",
                 "description": "The number of shards",
@@ -31316,11 +31227,6 @@
               "previous_cluster_rank": {
                 "type": "integer",
                 "description": "The previous display order of the cluster size SKU",
-                "x-nullable": true
-              },
-              "previous_replicas": {
-                "type": "integer",
-                "description": "The previous number of replicas",
                 "x-nullable": true
               },
               "previous_shards": {
@@ -31409,6 +31315,7 @@
             "NekiAdminChangeRequest",
             "NekiClusterChangeRequest",
             "NekiConfigurationProfileChangeRequest",
+            "NekiExternalShardChangeRequest",
             "NekiRouterChangeRequest",
             "NekiSidecarChangeRequest"
           ],
@@ -31484,6 +31391,7 @@
             "NekiAdmin",
             "NekiCluster",
             "NekiConfigurationProfile",
+            "NekiExternalShard",
             "NekiRouter",
             "NekiSidecar"
           ],
@@ -31549,6 +31457,16 @@
         "previous_neki_image_version": {
           "type": "string",
           "description": "The previous Neki image version",
+          "x-nullable": true
+        },
+        "replicas": {
+          "type": "integer",
+          "description": "The number of replicas",
+          "x-nullable": true
+        },
+        "previous_replicas": {
+          "type": "integer",
+          "description": "The previous number of replicas",
           "x-nullable": true
         },
         "router_size": {
@@ -31641,11 +31559,6 @@
           "description": "The display order of the cluster size SKU",
           "x-nullable": true
         },
-        "replicas": {
-          "type": "integer",
-          "description": "The number of replicas",
-          "x-nullable": true
-        },
         "shards": {
           "type": "integer",
           "description": "The number of shards",
@@ -31712,11 +31625,6 @@
         "previous_cluster_rank": {
           "type": "integer",
           "description": "The previous display order of the cluster size SKU",
-          "x-nullable": true
-        },
-        "previous_replicas": {
-          "type": "integer",
-          "description": "The previous number of replicas",
           "x-nullable": true
         },
         "previous_shards": {
