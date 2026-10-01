@@ -840,6 +840,10 @@
                 "default_branch": {
                   "type": "string",
                   "description": "The default branch of the database"
+                },
+                "development_branches_limit": {
+                  "type": "integer",
+                  "description": "The number of development branches this database can have, up to 5000."
                 }
               }
             }
@@ -3301,7 +3305,7 @@
             "description": "Not Found"
           },
           "422": {
-            "description": "Unprocessable Entity"
+            "description": "Invalid parameters"
           },
           "429": {
             "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
@@ -12896,7 +12900,7 @@
             "description": "Not Found"
           },
           "422": {
-            "description": "Unprocessable Entity"
+            "description": "Invalid parameters"
           },
           "429": {
             "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
@@ -28556,6 +28560,10 @@
                 "type": "integer",
                 "description": "The total number of database development branches"
               },
+              "development_branches_limit": {
+                "type": "integer",
+                "description": "The current maximum number of development branches. Change it with development_branches_limit on the database PATCH endpoint, up to 5000."
+              },
               "production_branches_count": {
                 "type": "integer",
                 "description": "The total number of database production branches"
@@ -28788,6 +28796,7 @@
               "branches_count",
               "open_schema_recommendations_count",
               "development_branches_count",
+              "development_branches_limit",
               "production_branches_count",
               "multiple_admins_required_for_deletion",
               "ready",
@@ -28863,6 +28872,10 @@
         "development_branches_count": {
           "type": "integer",
           "description": "The total number of database development branches"
+        },
+        "development_branches_limit": {
+          "type": "integer",
+          "description": "The current maximum number of development branches. Change it with development_branches_limit on the database PATCH endpoint, up to 5000."
         },
         "production_branches_count": {
           "type": "integer",
@@ -29096,6 +29109,7 @@
         "branches_count",
         "open_schema_recommendations_count",
         "development_branches_count",
+        "development_branches_limit",
         "production_branches_count",
         "multiple_admins_required_for_deletion",
         "ready",
@@ -31071,6 +31085,26 @@
                 "description": "The previous number of replicas",
                 "x-nullable": true
               },
+              "cluster_name": {
+                "type": "string",
+                "description": "The SKU representing the external sidecar size",
+                "x-nullable": true
+              },
+              "cluster_display_name": {
+                "type": "string",
+                "description": "The display name of the cluster size SKU",
+                "x-nullable": true
+              },
+              "previous_cluster_name": {
+                "type": "string",
+                "description": "The SKU representing the previous external sidecar size",
+                "x-nullable": true
+              },
+              "previous_cluster_display_name": {
+                "type": "string",
+                "description": "The previous display name of the cluster size SKU",
+                "x-nullable": true
+              },
               "router_size": {
                 "type": "string",
                 "description": "The name of the router size SKU",
@@ -31146,11 +31180,6 @@
                 "description": "The name of the cluster size SKU",
                 "x-nullable": true
               },
-              "cluster_display_name": {
-                "type": "string",
-                "description": "The display name of the cluster size SKU",
-                "x-nullable": true
-              },
               "metal": {
                 "type": "boolean",
                 "description": "Whether the cluster size SKU uses metal instances",
@@ -31212,11 +31241,6 @@
               "previous_cluster_size": {
                 "type": "string",
                 "description": "The previous name of the cluster size SKU",
-                "x-nullable": true
-              },
-              "previous_cluster_display_name": {
-                "type": "string",
-                "description": "The previous display name of the cluster size SKU",
                 "x-nullable": true
               },
               "previous_metal": {
@@ -31469,6 +31493,26 @@
           "description": "The previous number of replicas",
           "x-nullable": true
         },
+        "cluster_name": {
+          "type": "string",
+          "description": "The SKU representing the external sidecar size",
+          "x-nullable": true
+        },
+        "cluster_display_name": {
+          "type": "string",
+          "description": "The display name of the cluster size SKU",
+          "x-nullable": true
+        },
+        "previous_cluster_name": {
+          "type": "string",
+          "description": "The SKU representing the previous external sidecar size",
+          "x-nullable": true
+        },
+        "previous_cluster_display_name": {
+          "type": "string",
+          "description": "The previous display name of the cluster size SKU",
+          "x-nullable": true
+        },
         "router_size": {
           "type": "string",
           "description": "The name of the router size SKU",
@@ -31544,11 +31588,6 @@
           "description": "The name of the cluster size SKU",
           "x-nullable": true
         },
-        "cluster_display_name": {
-          "type": "string",
-          "description": "The display name of the cluster size SKU",
-          "x-nullable": true
-        },
         "metal": {
           "type": "boolean",
           "description": "Whether the cluster size SKU uses metal instances",
@@ -31610,11 +31649,6 @@
         "previous_cluster_size": {
           "type": "string",
           "description": "The previous name of the cluster size SKU",
-          "x-nullable": true
-        },
-        "previous_cluster_display_name": {
-          "type": "string",
-          "description": "The previous display name of the cluster size SKU",
           "x-nullable": true
         },
         "previous_metal": {
