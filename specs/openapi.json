@@ -3503,6 +3503,13 @@
                   "type": "integer",
                   "description": "The total number of replicas"
                 },
+                "extensions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Extensions to enable. This replaces the current set; omit it to leave them unchanged."
+                },
                 "parameters": {
                   "type": "object",
                   "additionalProperties": true,
@@ -5792,7 +5799,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/PostgresClusterExtension"
+                "$ref": "#/definitions/PostgresExtensionDefinition"
               }
             },
             "headers": {}
@@ -21024,6 +21031,194 @@
         "description": "\n### Authorization\nA   OAuth token must have at least one of the following   scopes in order to use this API endpoint:\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_workflows` |\n| Database | `write_workflows` |"
       }
     },
+    "/organizations/{organization}/invitations": {
+      "get": {
+        "tags": [
+          "Organization invitations"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "list_organization_invitations",
+        "summary": "List pending invitations",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the organization"
+          },
+          {
+            "name": "page",
+            "type": "integer",
+            "in": "query",
+            "default": 1,
+            "description": "If provided, specifies the page offset of returned results"
+          },
+          {
+            "name": "per_page",
+            "type": "integer",
+            "in": "query",
+            "default": 25,
+            "description": "If provided, specifies the number of returned results"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns pending invitations for the organization",
+            "schema": {
+              "$ref": "#/definitions/PaginatedOrganizationInvitation"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_members`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_members` |"
+      },
+      "post": {
+        "tags": [
+          "Organization invitations"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "create_organization_invitation",
+        "summary": "Send an invitation",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the organization"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "description": "The email address to send the invitation to"
+                },
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "admin",
+                    "analyst",
+                    "member"
+                  ],
+                  "description": "The role granted when the invitation is accepted. Defaults to member. Service tokens can only invite members; requesting another role returns 422."
+                }
+              },
+              "required": [
+                "email"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the created invitation. Service tokens can only create invitations with the member role.",
+            "schema": {
+              "$ref": "#/definitions/OrganizationInvitation"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_members`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_members` |"
+      }
+    },
+    "/organizations/{organization}/invitations/{id}": {
+      "delete": {
+        "tags": [
+          "Organization invitations"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "cancel_organization_invitation",
+        "summary": "Cancel an invitation",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the organization"
+          },
+          {
+            "name": "id",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the invitation"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Invitation cancelled successfully",
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_members`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_members` |"
+      }
+    },
     "/organizations/{organization}/invoices": {
       "get": {
         "tags": [
@@ -26282,33 +26477,29 @@
         "data"
       ]
     },
-    "PostgresClusterExtension": {
+    "PostgresExtensionDefinition": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of the extension"
-        },
         "name": {
           "type": "string",
           "description": "The name of the extension"
+        },
+        "can_enable": {
+          "type": "boolean",
+          "description": "Whether the extension can be enabled or disabled by the cluster"
         },
         "description": {
           "type": "string",
           "description": "The description of the extension"
         },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the extension is enabled by the cluster",
+          "x-nullable": true
+        },
         "internal": {
           "type": "boolean",
           "description": "The internal state of the extension"
-        },
-        "loader": {
-          "type": "string",
-          "enum": [
-            "shared_preload_libraries",
-            "session_preload_libraries",
-            "create_extension"
-          ],
-          "description": "How the extension is loaded"
         },
         "requirements": {
           "type": "object",
@@ -26468,11 +26659,10 @@
         }
       },
       "required": [
-        "id",
         "name",
+        "can_enable",
         "description",
         "internal",
-        "loader",
         "requirements",
         "url",
         "parameters"
@@ -33513,6 +33703,574 @@
         "actor_id",
         "actor_display_name",
         "actor_type"
+      ]
+    },
+    "PaginatedOrganizationInvitation": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The response type. Always \"list\" for paginated responses."
+        },
+        "current_page": {
+          "type": "integer",
+          "description": "The current page number"
+        },
+        "per_page": {
+          "type": "integer",
+          "description": "The maximum number of results per page"
+        },
+        "next_page": {
+          "type": "integer",
+          "description": "The next page number, or null when this is the last page",
+          "x-nullable": true
+        },
+        "next_page_url": {
+          "type": "string",
+          "description": "The next page of results, or null when this is the last page",
+          "x-nullable": true
+        },
+        "prev_page": {
+          "type": "integer",
+          "description": "The previous page number, or null when this is the first page",
+          "x-nullable": true
+        },
+        "prev_page_url": {
+          "type": "string",
+          "description": "The previous page of results, or null when this is the first page",
+          "x-nullable": true
+        },
+        "total_count": {
+          "type": "integer",
+          "description": "The total number of matching results"
+        },
+        "total_pages": {
+          "type": "integer",
+          "description": "The total number of pages of matching results"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The ID of the invitation"
+              },
+              "email": {
+                "type": "string",
+                "description": "The email address the invitation was sent to"
+              },
+              "role": {
+                "type": "string",
+                "enum": [
+                  "admin",
+                  "analyst",
+                  "member"
+                ],
+                "description": "The role granted when the invitation is accepted. Invitations sent by service tokens are always member."
+              },
+              "sender": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The ID of the user"
+                  },
+                  "display_name": {
+                    "type": "string",
+                    "description": "The display name of the user"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "The name of the user",
+                    "x-nullable": true
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "The email of the user"
+                  },
+                  "avatar_url": {
+                    "type": "string",
+                    "description": "The URL source of the user's avatar"
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "description": "When the user was created"
+                  },
+                  "updated_at": {
+                    "type": "string",
+                    "description": "When the user was last updated"
+                  },
+                  "two_factor_auth_configured": {
+                    "type": "boolean",
+                    "description": "Whether or not the user has configured two factor authentication"
+                  },
+                  "default_organization": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "The ID for the resource"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "The name for the resource"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "description": "When the resource was created"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "description": "When the resource was last updated"
+                      },
+                      "deleted_at": {
+                        "type": "string",
+                        "description": "When the resource was deleted, if deleted",
+                        "x-nullable": true
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "name",
+                      "created_at",
+                      "updated_at",
+                      "deleted_at"
+                    ],
+                    "x-nullable": true
+                  },
+                  "sso": {
+                    "type": "boolean",
+                    "description": "Whether or not the user is managed by SSO.",
+                    "x-nullable": true
+                  },
+                  "managed": {
+                    "type": "boolean",
+                    "description": "Whether or not the user is managed by an authentication provider.",
+                    "x-nullable": true
+                  },
+                  "directory_managed": {
+                    "type": "boolean",
+                    "description": "Whether or not the user is managed by a SSO directory.",
+                    "x-nullable": true
+                  },
+                  "email_verified": {
+                    "type": "boolean",
+                    "description": "Whether or not the user is verified by email.",
+                    "x-nullable": true
+                  }
+                },
+                "required": [
+                  "id",
+                  "display_name",
+                  "name",
+                  "email",
+                  "avatar_url",
+                  "created_at",
+                  "updated_at",
+                  "two_factor_auth_configured"
+                ]
+              },
+              "recipient": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The ID of the user"
+                  },
+                  "display_name": {
+                    "type": "string",
+                    "description": "The display name of the user"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "The name of the user",
+                    "x-nullable": true
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "The email of the user"
+                  },
+                  "avatar_url": {
+                    "type": "string",
+                    "description": "The URL source of the user's avatar"
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "description": "When the user was created"
+                  },
+                  "updated_at": {
+                    "type": "string",
+                    "description": "When the user was last updated"
+                  },
+                  "two_factor_auth_configured": {
+                    "type": "boolean",
+                    "description": "Whether or not the user has configured two factor authentication"
+                  },
+                  "default_organization": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "The ID for the resource"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "The name for the resource"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "description": "When the resource was created"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "description": "When the resource was last updated"
+                      },
+                      "deleted_at": {
+                        "type": "string",
+                        "description": "When the resource was deleted, if deleted",
+                        "x-nullable": true
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "name",
+                      "created_at",
+                      "updated_at",
+                      "deleted_at"
+                    ],
+                    "x-nullable": true
+                  },
+                  "sso": {
+                    "type": "boolean",
+                    "description": "Whether or not the user is managed by SSO.",
+                    "x-nullable": true
+                  },
+                  "managed": {
+                    "type": "boolean",
+                    "description": "Whether or not the user is managed by an authentication provider.",
+                    "x-nullable": true
+                  },
+                  "directory_managed": {
+                    "type": "boolean",
+                    "description": "Whether or not the user is managed by a SSO directory.",
+                    "x-nullable": true
+                  },
+                  "email_verified": {
+                    "type": "boolean",
+                    "description": "Whether or not the user is verified by email.",
+                    "x-nullable": true
+                  }
+                },
+                "required": [
+                  "id",
+                  "display_name",
+                  "name",
+                  "email",
+                  "avatar_url",
+                  "created_at",
+                  "updated_at",
+                  "two_factor_auth_configured"
+                ],
+                "x-nullable": true
+              },
+              "expired": {
+                "type": "boolean",
+                "description": "Whether the invitation has expired"
+              },
+              "expires_at": {
+                "type": "string",
+                "description": "When the invitation expires"
+              },
+              "created_at": {
+                "type": "string",
+                "description": "When the invitation was created"
+              },
+              "avatar_url": {
+                "type": "string",
+                "description": "The URL of the avatar shown for the invitation"
+              }
+            },
+            "required": [
+              "id",
+              "email",
+              "role",
+              "sender",
+              "recipient",
+              "expired",
+              "expires_at",
+              "created_at",
+              "avatar_url"
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "current_page",
+        "per_page",
+        "next_page",
+        "next_page_url",
+        "prev_page",
+        "prev_page_url",
+        "total_count",
+        "total_pages",
+        "data"
+      ]
+    },
+    "OrganizationInvitation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the invitation"
+        },
+        "email": {
+          "type": "string",
+          "description": "The email address the invitation was sent to"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "admin",
+            "analyst",
+            "member"
+          ],
+          "description": "The role granted when the invitation is accepted. Invitations sent by service tokens are always member."
+        },
+        "sender": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The ID of the user"
+            },
+            "display_name": {
+              "type": "string",
+              "description": "The display name of the user"
+            },
+            "name": {
+              "type": "string",
+              "description": "The name of the user",
+              "x-nullable": true
+            },
+            "email": {
+              "type": "string",
+              "description": "The email of the user"
+            },
+            "avatar_url": {
+              "type": "string",
+              "description": "The URL source of the user's avatar"
+            },
+            "created_at": {
+              "type": "string",
+              "description": "When the user was created"
+            },
+            "updated_at": {
+              "type": "string",
+              "description": "When the user was last updated"
+            },
+            "two_factor_auth_configured": {
+              "type": "boolean",
+              "description": "Whether or not the user has configured two factor authentication"
+            },
+            "default_organization": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The ID for the resource"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "The name for the resource"
+                },
+                "created_at": {
+                  "type": "string",
+                  "description": "When the resource was created"
+                },
+                "updated_at": {
+                  "type": "string",
+                  "description": "When the resource was last updated"
+                },
+                "deleted_at": {
+                  "type": "string",
+                  "description": "When the resource was deleted, if deleted",
+                  "x-nullable": true
+                }
+              },
+              "required": [
+                "id",
+                "name",
+                "created_at",
+                "updated_at",
+                "deleted_at"
+              ],
+              "x-nullable": true
+            },
+            "sso": {
+              "type": "boolean",
+              "description": "Whether or not the user is managed by SSO.",
+              "x-nullable": true
+            },
+            "managed": {
+              "type": "boolean",
+              "description": "Whether or not the user is managed by an authentication provider.",
+              "x-nullable": true
+            },
+            "directory_managed": {
+              "type": "boolean",
+              "description": "Whether or not the user is managed by a SSO directory.",
+              "x-nullable": true
+            },
+            "email_verified": {
+              "type": "boolean",
+              "description": "Whether or not the user is verified by email.",
+              "x-nullable": true
+            }
+          },
+          "required": [
+            "id",
+            "display_name",
+            "name",
+            "email",
+            "avatar_url",
+            "created_at",
+            "updated_at",
+            "two_factor_auth_configured"
+          ]
+        },
+        "recipient": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The ID of the user"
+            },
+            "display_name": {
+              "type": "string",
+              "description": "The display name of the user"
+            },
+            "name": {
+              "type": "string",
+              "description": "The name of the user",
+              "x-nullable": true
+            },
+            "email": {
+              "type": "string",
+              "description": "The email of the user"
+            },
+            "avatar_url": {
+              "type": "string",
+              "description": "The URL source of the user's avatar"
+            },
+            "created_at": {
+              "type": "string",
+              "description": "When the user was created"
+            },
+            "updated_at": {
+              "type": "string",
+              "description": "When the user was last updated"
+            },
+            "two_factor_auth_configured": {
+              "type": "boolean",
+              "description": "Whether or not the user has configured two factor authentication"
+            },
+            "default_organization": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The ID for the resource"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "The name for the resource"
+                },
+                "created_at": {
+                  "type": "string",
+                  "description": "When the resource was created"
+                },
+                "updated_at": {
+                  "type": "string",
+                  "description": "When the resource was last updated"
+                },
+                "deleted_at": {
+                  "type": "string",
+                  "description": "When the resource was deleted, if deleted",
+                  "x-nullable": true
+                }
+              },
+              "required": [
+                "id",
+                "name",
+                "created_at",
+                "updated_at",
+                "deleted_at"
+              ],
+              "x-nullable": true
+            },
+            "sso": {
+              "type": "boolean",
+              "description": "Whether or not the user is managed by SSO.",
+              "x-nullable": true
+            },
+            "managed": {
+              "type": "boolean",
+              "description": "Whether or not the user is managed by an authentication provider.",
+              "x-nullable": true
+            },
+            "directory_managed": {
+              "type": "boolean",
+              "description": "Whether or not the user is managed by a SSO directory.",
+              "x-nullable": true
+            },
+            "email_verified": {
+              "type": "boolean",
+              "description": "Whether or not the user is verified by email.",
+              "x-nullable": true
+            }
+          },
+          "required": [
+            "id",
+            "display_name",
+            "name",
+            "email",
+            "avatar_url",
+            "created_at",
+            "updated_at",
+            "two_factor_auth_configured"
+          ],
+          "x-nullable": true
+        },
+        "expired": {
+          "type": "boolean",
+          "description": "Whether the invitation has expired"
+        },
+        "expires_at": {
+          "type": "string",
+          "description": "When the invitation expires"
+        },
+        "created_at": {
+          "type": "string",
+          "description": "When the invitation was created"
+        },
+        "avatar_url": {
+          "type": "string",
+          "description": "The URL of the avatar shown for the invitation"
+        }
+      },
+      "required": [
+        "id",
+        "email",
+        "role",
+        "sender",
+        "recipient",
+        "expired",
+        "expires_at",
+        "created_at",
+        "avatar_url"
       ]
     },
     "PaginatedOrganizationMembership": {
@@ -45835,6 +46593,10 @@
     {
       "name": "OAuth tokens",
       "description": "          Resources for managing OAuth tokens.\n"
+    },
+    {
+      "name": "Organization invitations",
+      "description": "          Resources for inviting people to an organization. Service tokens with `write_members` can list, send, and cancel invitations, but can only invite people as members. Only organization administrators can invite people as administrators or analysts.\n"
     },
     {
       "name": "Organization members",
