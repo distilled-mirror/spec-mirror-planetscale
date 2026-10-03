@@ -2969,6 +2969,10 @@
                 "replicas_per_cell": {
                   "type": "integer",
                   "description": "The number of replica servers per cell"
+                },
+                "dedicated_read_replica_id": {
+                  "type": "string",
+                  "description": "The ID of the dedicated read replica where the bouncer should run"
                 }
               }
             }
@@ -3726,6 +3730,395 @@
           }
         },
         "description": "\n### Authorization\nA service token   must have at least one of the following access   in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_database`\n\n"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/config-changes": {
+      "get": {
+        "tags": [
+          "Branch config changes"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "list_branch_config_change_requests",
+        "summary": "List branch config change requests",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the organization the branch belongs to"
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the database the branch belongs to"
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the branch"
+          },
+          {
+            "name": "page",
+            "type": "integer",
+            "in": "query",
+            "default": 1,
+            "description": "If provided, specifies the page offset of returned results"
+          },
+          {
+            "name": "per_page",
+            "type": "integer",
+            "in": "query",
+            "default": 25,
+            "description": "If provided, specifies the number of returned results"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns branch and keyspace config change requests",
+            "schema": {
+              "$ref": "#/definitions/PaginatedConfigChangeRequest"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "        Returns the VTGate config change requests for the branch and the VTTablet and MySQL config change requests for its keyspaces, newest first.\n\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |\n| Branch | `read_branch` |"
+      },
+      "post": {
+        "tags": [
+          "Branch config changes"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "create_branch_config_change_request",
+        "summary": "Create a branch config change request",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the organization the branch belongs to"
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the database the branch belongs to"
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the branch"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "change_type": {
+                  "type": "string",
+                  "enum": [
+                    "vtgate"
+                  ],
+                  "description": "The component to configure. Always `vtgate`."
+                },
+                "options": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "description": "Parameter names and the values to set them to. Set a value to `null` to reset the parameter to its default."
+                }
+              },
+              "required": [
+                "change_type",
+                "options"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the created config change request",
+            "schema": {
+              "$ref": "#/definitions/BranchConfigChangeRequest"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "        Creates a draft change to the VTGate parameters of a branch. Nothing is applied until the draft is submitted with the \"submit_branch_config_change_requests\" endpoint.\n        A branch can have one unfinished VTGate change at a time. Use the \"list_branch_vitess_parameters\" endpoint to see the parameters you can change.\n\n### Authorization\nA service token   must have at least one of the following access   in order to use this API endpoint:\n\n**Service Token Accesses**\n `create_branch`\n\n"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/config-changes/submit": {
+      "post": {
+        "tags": [
+          "Branch config changes"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "submit_branch_config_change_requests",
+        "summary": "Submit draft config change requests",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the organization the branch belongs to"
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the database the branch belongs to"
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the branch"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "The IDs of the draft config change requests to submit"
+                }
+              },
+              "required": [
+                "ids"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the number of submitted config changes",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "submitted": {
+                  "type": "integer",
+                  "description": "The number of config change requests submitted"
+                }
+              },
+              "required": [
+                "submitted"
+              ]
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "        Submits draft config change requests for the branch and its keyspaces together. Each ID must belong to a draft created with the \"create_branch_config_change_request\" or \"create_keyspace_config_change_request\" endpoint.\n        If any draft fails validation, none of them are submitted.\n\n### Authorization\nA service token   must have at least one of the following access   in order to use this API endpoint:\n\n**Service Token Accesses**\n `create_branch`\n\n"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/config-changes/{id}": {
+      "get": {
+        "tags": [
+          "Branch config changes"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "get_branch_config_change_request",
+        "summary": "Get a branch config change request",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the organization the branch belongs to"
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the database the branch belongs to"
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the branch"
+          },
+          {
+            "name": "id",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the config change request"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a branch config change request",
+            "schema": {
+              "$ref": "#/definitions/BranchConfigChangeRequest"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |\n| Branch | `read_branch` |"
+      },
+      "delete": {
+        "tags": [
+          "Branch config changes"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "cancel_branch_config_change_request",
+        "summary": "Cancel a draft branch config change request",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the organization the branch belongs to"
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the database the branch belongs to"
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the branch"
+          },
+          {
+            "name": "id",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the config change request"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Config change request cancelled",
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token   must have at least one of the following access   in order to use this API endpoint:\n\n**Service Token Accesses**\n `create_branch`\n\n"
       }
     },
     "/organizations/{organization}/databases/{database}/branches/{branch}/configuration-profiles": {
@@ -5556,6 +5949,537 @@
           }
         },
         "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `create_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_databases` |\n| Database | `write_databases` |\n| Branch | `write_branch` |"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/dedicated-read-replica-changes": {
+      "get": {
+        "tags": [
+          "api-read_only_replica_changes"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "list_dedicated_read_replica_change_requests",
+        "summary": "Get dedicated read replica change requests",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          },
+          {
+            "name": "page",
+            "type": "integer",
+            "in": "query",
+            "default": 1,
+            "description": "If provided, specifies the page offset of returned results"
+          },
+          {
+            "name": "per_page",
+            "type": "integer",
+            "in": "query",
+            "default": 25,
+            "description": "If provided, specifies the number of returned results"
+          },
+          {
+            "name": "period",
+            "type": "string",
+            "enum": [
+              "15m",
+              "1h",
+              "3h",
+              "6h",
+              "12h",
+              "1d",
+              "2d",
+              "7d",
+              "8d"
+            ],
+            "in": "query",
+            "description": "Filter change requests by named period"
+          },
+          {
+            "name": "completed_at",
+            "type": "string",
+            "in": "query",
+            "description": "Filter change requests completed between two ISO 8601 timestamps"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns dedicated read replica change requests",
+            "schema": {
+              "$ref": "#/definitions/PaginatedPostgresReadOnlyReplicaChangeRequest"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |\n| Branch | `read_branch` |"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/dedicated-read-replicas": {
+      "get": {
+        "tags": [
+          "Dedicated read replicas"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "list_dedicated_read_replicas",
+        "summary": "List dedicated read replicas",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns dedicated read replicas",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PostgresReadOnlyReplica"
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |\n| Branch | `read_branch` |"
+      },
+      "post": {
+        "tags": [
+          "Dedicated read replicas"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "create_dedicated_read_replica",
+        "summary": "Create a dedicated read replica",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The dedicated read replica name"
+                },
+                "region": {
+                  "type": "string",
+                  "description": "The region slug for the dedicated read replica"
+                },
+                "replicas": {
+                  "type": "integer",
+                  "description": "The number of instances serving reads. Defaults to 1."
+                },
+                "cluster_size": {
+                  "type": "string",
+                  "description": "The cluster size SKU name. Defaults to the primary cluster size."
+                },
+                "storage": {
+                  "type": "object",
+                  "properties": {
+                    "minimum_storage_bytes": {
+                      "type": "integer",
+                      "description": "The minimum storage size in bytes."
+                    },
+                    "maximum_storage_bytes": {
+                      "type": "integer",
+                      "description": "The maximum storage size in bytes for autoscaling."
+                    },
+                    "storage_autoscaling": {
+                      "type": "boolean",
+                      "description": "Whether storage autoscaling is enabled."
+                    },
+                    "storage_iops": {
+                      "type": "integer",
+                      "description": "The storage IOPS."
+                    },
+                    "storage_throughput_mibs": {
+                      "type": "integer",
+                      "description": "The storage throughput in MiB/s."
+                    }
+                  }
+                }
+              },
+              "required": [
+                "name",
+                "region"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the new dedicated read replica",
+            "schema": {
+              "$ref": "#/definitions/PostgresReadOnlyReplica"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_databases` |\n| Database | `write_database` |"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/dedicated-read-replicas/{dedicated_read_replica}": {
+      "get": {
+        "tags": [
+          "Dedicated read replicas"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "get_dedicated_read_replica",
+        "summary": "Get a dedicated read replica",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          },
+          {
+            "name": "dedicated_read_replica",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the dedicated read replica"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the dedicated read replica",
+            "schema": {
+              "$ref": "#/definitions/PostgresReadOnlyReplica"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |\n| Branch | `read_branch` |"
+      },
+      "patch": {
+        "tags": [
+          "Dedicated read replicas"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "update_dedicated_read_replica",
+        "summary": "Update a dedicated read replica",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          },
+          {
+            "name": "dedicated_read_replica",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the dedicated read replica"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "replicas": {
+                  "type": "integer",
+                  "description": "The number of instances serving reads"
+                },
+                "cluster_size": {
+                  "type": "string",
+                  "description": "The cluster size SKU name"
+                },
+                "parameters": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "description": "Configuration parameters nested by namespace (e.g., {\"pgconf\": {\"max_connections\": \"300\"}}). Values must be greater than or equal to the primary's."
+                },
+                "storage": {
+                  "type": "object",
+                  "properties": {
+                    "minimum_storage_bytes": {
+                      "type": "integer",
+                      "description": "The minimum storage size in bytes."
+                    },
+                    "maximum_storage_bytes": {
+                      "type": "integer",
+                      "description": "The maximum storage size in bytes for autoscaling."
+                    },
+                    "storage_autoscaling": {
+                      "type": "boolean",
+                      "description": "Whether storage autoscaling is enabled."
+                    },
+                    "storage_iops": {
+                      "type": "integer",
+                      "description": "The storage IOPS."
+                    },
+                    "storage_throughput_mibs": {
+                      "type": "integer",
+                      "description": "The storage throughput in MiB/s."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated dedicated read replica",
+            "schema": {
+              "$ref": "#/definitions/PostgresReadOnlyReplica"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Invalid parameters"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_databases` |\n| Database | `write_database` |"
+      },
+      "delete": {
+        "tags": [
+          "Dedicated read replicas"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "delete_dedicated_read_replica",
+        "summary": "Delete a dedicated read replica",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          },
+          {
+            "name": "dedicated_read_replica",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the dedicated read replica"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deletes the dedicated read replica",
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_databases` |\n| Database | `write_database` |"
       }
     },
     "/organizations/{organization}/databases/{database}/branches/{branch}/default-configuration-profile": {
@@ -8206,6 +9130,333 @@
           }
         },
         "description": "\n### Authorization\nA service token   must have at least one of the following access   in order to use this API endpoint:\n\n**Service Token Accesses**\n `delete_branch`, `delete_production_branch`\n\n"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/keyspaces/{keyspace}/config-changes": {
+      "get": {
+        "tags": [
+          "Keyspace config changes"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "list_keyspace_config_change_requests",
+        "summary": "List keyspace config change requests",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the organization the branch belongs to"
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the database the branch belongs to"
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the branch"
+          },
+          {
+            "name": "keyspace",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the keyspace"
+          },
+          {
+            "name": "page",
+            "type": "integer",
+            "in": "query",
+            "default": 1,
+            "description": "If provided, specifies the page offset of returned results"
+          },
+          {
+            "name": "per_page",
+            "type": "integer",
+            "in": "query",
+            "default": 25,
+            "description": "If provided, specifies the number of returned results"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns keyspace config change requests",
+            "schema": {
+              "$ref": "#/definitions/PaginatedKeyspaceConfigChangeRequest"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |\n| Branch | `read_branch` |"
+      },
+      "post": {
+        "tags": [
+          "Keyspace config changes"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "create_keyspace_config_change_request",
+        "summary": "Create a keyspace config change request",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the organization the branch belongs to"
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the database the branch belongs to"
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the branch"
+          },
+          {
+            "name": "keyspace",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the keyspace"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "change_type": {
+                  "type": "string",
+                  "enum": [
+                    "mysqld",
+                    "vttablet"
+                  ],
+                  "description": "The component to configure: `vttablet` or `mysqld`"
+                },
+                "options": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "description": "Parameter names and the values to set them to. Set a value to `null` to reset the parameter to its default."
+                }
+              },
+              "required": [
+                "change_type",
+                "options"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the created config change request",
+            "schema": {
+              "$ref": "#/definitions/KeyspaceConfigChangeRequest"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "        Creates a draft change to the VTTablet or MySQL parameters of a keyspace. Nothing is applied until the draft is submitted with the \"submit_branch_config_change_requests\" endpoint.\n        A keyspace can have one unfinished change of each type at a time. Use the \"list_branch_vitess_parameters\" endpoint to see the parameters you can change.\n\n### Authorization\nA service token   must have at least one of the following access   in order to use this API endpoint:\n\n**Service Token Accesses**\n `create_branch`\n\n"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/keyspaces/{keyspace}/config-changes/{id}": {
+      "get": {
+        "tags": [
+          "Keyspace config changes"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "get_keyspace_config_change_request",
+        "summary": "Get a keyspace config change request",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the organization the branch belongs to"
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the database the branch belongs to"
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the branch"
+          },
+          {
+            "name": "keyspace",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the keyspace"
+          },
+          {
+            "name": "id",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the config change request"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a keyspace config change request",
+            "schema": {
+              "$ref": "#/definitions/KeyspaceConfigChangeRequest"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |\n| Branch | `read_branch` |"
+      },
+      "delete": {
+        "tags": [
+          "Keyspace config changes"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "cancel_keyspace_config_change_request",
+        "summary": "Cancel a draft or pending keyspace config change request",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the organization the branch belongs to"
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the database the branch belongs to"
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the branch"
+          },
+          {
+            "name": "keyspace",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the keyspace"
+          },
+          {
+            "name": "id",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the config change request"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Config change request cancelled",
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token   must have at least one of the following access   in order to use this API endpoint:\n\n**Service Token Accesses**\n `create_branch`\n\n"
       }
     },
     "/organizations/{organization}/databases/{database}/branches/{branch}/keyspaces/{keyspace}/resizes": {
@@ -12453,537 +13704,6 @@
         "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |\n| Branch | `read_branch` |"
       }
     },
-    "/organizations/{organization}/databases/{database}/branches/{branch}/read-only-replica-changes": {
-      "get": {
-        "tags": [
-          "api-read_only_replica_changes"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "operationId": "list_read_only_replica_change_requests",
-        "summary": "Get read-only replica change requests",
-        "parameters": [
-          {
-            "name": "organization",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Organization name slug from `list_organizations`. Example: `acme`."
-          },
-          {
-            "name": "database",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Database name slug from `list_databases`. Example: `app-db`."
-          },
-          {
-            "name": "branch",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Branch name from `list_branches`. Example: `main`."
-          },
-          {
-            "name": "page",
-            "type": "integer",
-            "in": "query",
-            "default": 1,
-            "description": "If provided, specifies the page offset of returned results"
-          },
-          {
-            "name": "per_page",
-            "type": "integer",
-            "in": "query",
-            "default": 25,
-            "description": "If provided, specifies the number of returned results"
-          },
-          {
-            "name": "period",
-            "type": "string",
-            "enum": [
-              "15m",
-              "1h",
-              "3h",
-              "6h",
-              "12h",
-              "1d",
-              "2d",
-              "7d",
-              "8d"
-            ],
-            "in": "query",
-            "description": "Filter change requests by named period"
-          },
-          {
-            "name": "completed_at",
-            "type": "string",
-            "in": "query",
-            "description": "Filter change requests completed between two ISO 8601 timestamps"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns read-only replica change requests",
-            "schema": {
-              "$ref": "#/definitions/PaginatedPostgresReadOnlyReplicaChangeRequest"
-            },
-            "headers": {}
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "429": {
-            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |\n| Branch | `read_branch` |"
-      }
-    },
-    "/organizations/{organization}/databases/{database}/branches/{branch}/read-only-replicas": {
-      "get": {
-        "tags": [
-          "Read-only replicas"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "operationId": "list_read_only_replicas",
-        "summary": "List read-only replicas",
-        "parameters": [
-          {
-            "name": "organization",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Organization name slug from `list_organizations`. Example: `acme`."
-          },
-          {
-            "name": "database",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Database name slug from `list_databases`. Example: `app-db`."
-          },
-          {
-            "name": "branch",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Branch name from `list_branches`. Example: `main`."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns read-only replicas",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/PostgresReadOnlyReplica"
-              }
-            },
-            "headers": {}
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "429": {
-            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |\n| Branch | `read_branch` |"
-      },
-      "post": {
-        "tags": [
-          "Read-only replicas"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "operationId": "create_read_only_replica",
-        "summary": "Create a read-only replica",
-        "parameters": [
-          {
-            "name": "organization",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Organization name slug from `list_organizations`. Example: `acme`."
-          },
-          {
-            "name": "database",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Database name slug from `list_databases`. Example: `app-db`."
-          },
-          {
-            "name": "branch",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Branch name from `list_branches`. Example: `main`."
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "The read-only replica name"
-                },
-                "region": {
-                  "type": "string",
-                  "description": "The region slug for the read-only replica"
-                },
-                "replicas": {
-                  "type": "integer",
-                  "description": "The number of instances serving reads. Defaults to 1."
-                },
-                "cluster_size": {
-                  "type": "string",
-                  "description": "The cluster size SKU name. Defaults to the primary cluster size."
-                },
-                "storage": {
-                  "type": "object",
-                  "properties": {
-                    "minimum_storage_bytes": {
-                      "type": "integer",
-                      "description": "The minimum storage size in bytes."
-                    },
-                    "maximum_storage_bytes": {
-                      "type": "integer",
-                      "description": "The maximum storage size in bytes for autoscaling."
-                    },
-                    "storage_autoscaling": {
-                      "type": "boolean",
-                      "description": "Whether storage autoscaling is enabled."
-                    },
-                    "storage_iops": {
-                      "type": "integer",
-                      "description": "The storage IOPS."
-                    },
-                    "storage_throughput_mibs": {
-                      "type": "integer",
-                      "description": "The storage throughput in MiB/s."
-                    }
-                  }
-                }
-              },
-              "required": [
-                "name",
-                "region"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns the new read-only replica",
-            "schema": {
-              "$ref": "#/definitions/PostgresReadOnlyReplica"
-            },
-            "headers": {}
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "429": {
-            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_databases` |\n| Database | `write_database` |"
-      }
-    },
-    "/organizations/{organization}/databases/{database}/branches/{branch}/read-only-replicas/{read_only_replica}": {
-      "get": {
-        "tags": [
-          "Read-only replicas"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "operationId": "get_read_only_replica",
-        "summary": "Get a read-only replica",
-        "parameters": [
-          {
-            "name": "organization",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Organization name slug from `list_organizations`. Example: `acme`."
-          },
-          {
-            "name": "database",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Database name slug from `list_databases`. Example: `app-db`."
-          },
-          {
-            "name": "branch",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Branch name from `list_branches`. Example: `main`."
-          },
-          {
-            "name": "read_only_replica",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "The name of the read-only replica"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns the read-only replica",
-            "schema": {
-              "$ref": "#/definitions/PostgresReadOnlyReplica"
-            },
-            "headers": {}
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "429": {
-            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |\n| Branch | `read_branch` |"
-      },
-      "patch": {
-        "tags": [
-          "Read-only replicas"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "operationId": "update_read_only_replica",
-        "summary": "Update a read-only replica",
-        "parameters": [
-          {
-            "name": "organization",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Organization name slug from `list_organizations`. Example: `acme`."
-          },
-          {
-            "name": "database",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Database name slug from `list_databases`. Example: `app-db`."
-          },
-          {
-            "name": "branch",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Branch name from `list_branches`. Example: `main`."
-          },
-          {
-            "name": "read_only_replica",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "The name of the read-only replica"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "replicas": {
-                  "type": "integer",
-                  "description": "The number of instances serving reads"
-                },
-                "cluster_size": {
-                  "type": "string",
-                  "description": "The cluster size SKU name"
-                },
-                "parameters": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Configuration parameters nested by namespace (e.g., {\"pgconf\": {\"max_connections\": \"300\"}}). Values must be greater than or equal to the primary's."
-                },
-                "storage": {
-                  "type": "object",
-                  "properties": {
-                    "minimum_storage_bytes": {
-                      "type": "integer",
-                      "description": "The minimum storage size in bytes."
-                    },
-                    "maximum_storage_bytes": {
-                      "type": "integer",
-                      "description": "The maximum storage size in bytes for autoscaling."
-                    },
-                    "storage_autoscaling": {
-                      "type": "boolean",
-                      "description": "Whether storage autoscaling is enabled."
-                    },
-                    "storage_iops": {
-                      "type": "integer",
-                      "description": "The storage IOPS."
-                    },
-                    "storage_throughput_mibs": {
-                      "type": "integer",
-                      "description": "The storage throughput in MiB/s."
-                    }
-                  }
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns the updated read-only replica",
-            "schema": {
-              "$ref": "#/definitions/PostgresReadOnlyReplica"
-            },
-            "headers": {}
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "422": {
-            "description": "Invalid parameters"
-          },
-          "429": {
-            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_databases` |\n| Database | `write_database` |"
-      },
-      "delete": {
-        "tags": [
-          "Read-only replicas"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "operationId": "delete_read_only_replica",
-        "summary": "Delete a read-only replica",
-        "parameters": [
-          {
-            "name": "organization",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Organization name slug from `list_organizations`. Example: `acme`."
-          },
-          {
-            "name": "database",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Database name slug from `list_databases`. Example: `app-db`."
-          },
-          {
-            "name": "branch",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Branch name from `list_branches`. Example: `main`."
-          },
-          {
-            "name": "read_only_replica",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "The name of the read-only replica"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Deletes the read-only replica",
-            "headers": {}
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "429": {
-            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_databases` |\n| Database | `write_database` |"
-      }
-    },
     "/organizations/{organization}/databases/{database}/branches/{branch}/resizes": {
       "delete": {
         "tags": [
@@ -13657,10 +14377,10 @@
             "description": "Return connection details for a replica"
           },
           {
-            "name": "read_only_replica",
+            "name": "dedicated_read_replica",
             "type": "string",
             "in": "query",
-            "description": "Return connection details for this read-only replica"
+            "description": "Return connection details for this dedicated read replica"
           },
           {
             "name": "bouncer",
@@ -17024,6 +17744,176 @@
           }
         },
         "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_databases` |\n| Database | `write_database` |"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/vitess-parameters": {
+      "get": {
+        "tags": [
+          "Branch Vitess parameters"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "list_branch_vitess_parameters",
+        "summary": "List Vitess parameters",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the organization the branch belongs to"
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the database the branch belongs to"
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the branch"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the Vitess parameters for the branch and its keyspaces",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "The response type. Always \"VitessParameters\"."
+                },
+                "vtgate": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "description": "The object type. Always \"VitessParameterDefinition\"."
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "The name of the parameter"
+                      },
+                      "title": {
+                        "type": "string",
+                        "description": "The display name of the parameter"
+                      },
+                      "component": {
+                        "type": "string",
+                        "enum": [
+                          "vtgate",
+                          "vttablet",
+                          "mysqld"
+                        ],
+                        "description": "The component the parameter configures"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "The description of the parameter"
+                      },
+                      "category": {
+                        "type": "string",
+                        "description": "The category of the parameter"
+                      },
+                      "parameter_type": {
+                        "type": "string",
+                        "description": "The type of the parameter's value: `boolean`, `bytes`, `duration`, `float`, `integer`, `select`, or `string`"
+                      },
+                      "default_value": {
+                        "type": "string",
+                        "description": "The default value of the parameter, which can depend on the cluster size",
+                        "x-nullable": true
+                      },
+                      "value": {
+                        "type": "string",
+                        "description": "The current value of the parameter",
+                        "x-nullable": true
+                      },
+                      "override": {
+                        "type": "boolean",
+                        "description": "Whether the parameter has been set explicitly instead of using its default"
+                      },
+                      "options": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array",
+                        "description": "The allowed values for `select` parameters"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "name",
+                      "component",
+                      "description",
+                      "category",
+                      "parameter_type",
+                      "default_value",
+                      "value",
+                      "override"
+                    ]
+                  }
+                },
+                "keyspaces": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object",
+                    "properties": {
+                      "vttablet": {
+                        "type": "array",
+                        "items": {
+                          "type": "object"
+                        },
+                        "description": "The VTTablet parameters for the keyspace"
+                      },
+                      "mysqld": {
+                        "type": "array",
+                        "items": {
+                          "type": "object"
+                        },
+                        "description": "The MySQL parameters for the keyspace"
+                      }
+                    }
+                  },
+                  "description": "The parameters for each keyspace, keyed by keyspace name. Each value has `vttablet` and `mysqld` arrays of parameters in the same format as `vtgate`."
+                }
+              },
+              "required": [
+                "type",
+                "vtgate",
+                "keyspaces"
+              ]
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "        Returns the VTGate parameters for the branch and the VTTablet and MySQL parameters for each of its keyspaces, with their default and current values.\n        To change VTGate parameters, use the \"create_branch_config_change_request\" endpoint. To change VTTablet or MySQL parameters, use the \"create_keyspace_config_change_request\" endpoint.\n\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |\n| Branch | `read_branch` |"
       }
     },
     "/organizations/{organization}/databases/{database}/branches/{branch}/vtctld/operations/{id}": {
@@ -25843,7 +26733,7 @@
               },
               "has_read_only_replicas": {
                 "type": "boolean",
-                "description": "True if the branch has read-only replica servers"
+                "description": "True if the branch has servers dedicated to read traffic"
               },
               "html_url": {
                 "type": "string",
@@ -26193,7 +27083,7 @@
         },
         "has_read_only_replicas": {
           "type": "boolean",
-          "description": "True if the branch has read-only replica servers"
+          "description": "True if the branch has servers dedicated to read traffic"
         },
         "html_url": {
           "type": "string",
@@ -26475,6 +27365,276 @@
         "prev_page",
         "prev_page_url",
         "data"
+      ]
+    },
+    "PaginatedConfigChangeRequest": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The response type. Always \"list\" for paginated responses."
+        },
+        "current_page": {
+          "type": "integer",
+          "description": "The current page number"
+        },
+        "per_page": {
+          "type": "integer",
+          "description": "The maximum number of results per page"
+        },
+        "next_page": {
+          "type": "integer",
+          "description": "The next page number, or null when this is the last page",
+          "x-nullable": true
+        },
+        "next_page_url": {
+          "type": "string",
+          "description": "The next page of results, or null when this is the last page",
+          "x-nullable": true
+        },
+        "prev_page": {
+          "type": "integer",
+          "description": "The previous page number, or null when this is the first page",
+          "x-nullable": true
+        },
+        "prev_page_url": {
+          "type": "string",
+          "description": "The previous page of results, or null when this is the first page",
+          "x-nullable": true
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The ID of the config change request"
+              },
+              "state": {
+                "type": "string",
+                "enum": [
+                  "draft",
+                  "pending",
+                  "queued",
+                  "applying",
+                  "completed",
+                  "failed",
+                  "canceled"
+                ],
+                "description": "The state of the config change request"
+              },
+              "change_type": {
+                "type": "string",
+                "enum": [
+                  "vtgate",
+                  "mysqld",
+                  "vttablet"
+                ],
+                "description": "The type of configuration being changed"
+              },
+              "previous_options": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "The previous option values"
+              },
+              "new_options": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "The new option values"
+              },
+              "error_message": {
+                "type": "string",
+                "description": "Error message if the change failed",
+                "x-nullable": true
+              },
+              "started_at": {
+                "type": "string",
+                "description": "When the config change started applying",
+                "x-nullable": true
+              },
+              "completed_at": {
+                "type": "string",
+                "description": "When the config change completed",
+                "x-nullable": true
+              },
+              "created_at": {
+                "type": "string",
+                "description": "When the config change request was created"
+              },
+              "updated_at": {
+                "type": "string",
+                "description": "When the config change request was last updated"
+              },
+              "keyspace_name": {
+                "type": "string",
+                "description": "The keyspace name for keyspace-level config changes",
+                "x-nullable": true
+              },
+              "queued_until": {
+                "type": "string",
+                "description": "When the config change is expected to be applied (only set when queued)",
+                "x-nullable": true
+              },
+              "actor": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The ID of the actor"
+                  },
+                  "display_name": {
+                    "type": "string",
+                    "description": "The name of the actor"
+                  },
+                  "avatar_url": {
+                    "type": "string",
+                    "description": "The URL of the actor's avatar"
+                  }
+                },
+                "required": [
+                  "id",
+                  "display_name",
+                  "avatar_url"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "state",
+              "change_type",
+              "previous_options",
+              "new_options",
+              "error_message",
+              "started_at",
+              "completed_at",
+              "created_at",
+              "updated_at",
+              "keyspace_name",
+              "queued_until",
+              "actor"
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "current_page",
+        "per_page",
+        "next_page",
+        "next_page_url",
+        "prev_page",
+        "prev_page_url",
+        "data"
+      ]
+    },
+    "BranchConfigChangeRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the config change request"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "pending",
+            "queued",
+            "applying",
+            "completed",
+            "failed",
+            "canceled"
+          ],
+          "description": "The state of the config change request"
+        },
+        "change_type": {
+          "type": "string",
+          "enum": [
+            "vtgate"
+          ],
+          "description": "The type of configuration being changed"
+        },
+        "previous_options": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "The previous option values"
+        },
+        "new_options": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "The new option values"
+        },
+        "error_message": {
+          "type": "string",
+          "description": "Error message if the change failed",
+          "x-nullable": true
+        },
+        "started_at": {
+          "type": "string",
+          "description": "When the config change started applying",
+          "x-nullable": true
+        },
+        "completed_at": {
+          "type": "string",
+          "description": "When the config change completed",
+          "x-nullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "description": "When the config change request was created"
+        },
+        "updated_at": {
+          "type": "string",
+          "description": "When the config change request was last updated"
+        },
+        "keyspace_name": {
+          "type": "string",
+          "description": "The keyspace name for keyspace-level config changes",
+          "x-nullable": true
+        },
+        "queued_until": {
+          "type": "string",
+          "description": "When the config change is expected to be applied (only set when queued)",
+          "x-nullable": true
+        },
+        "actor": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The ID of the actor"
+            },
+            "display_name": {
+              "type": "string",
+              "description": "The name of the actor"
+            },
+            "avatar_url": {
+              "type": "string",
+              "description": "The URL of the actor's avatar"
+            }
+          },
+          "required": [
+            "id",
+            "display_name",
+            "avatar_url"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "state",
+        "change_type",
+        "previous_options",
+        "new_options",
+        "error_message",
+        "started_at",
+        "completed_at",
+        "created_at",
+        "updated_at",
+        "keyspace_name",
+        "queued_until",
+        "actor"
       ]
     },
     "PostgresExtensionDefinition": {
@@ -30105,6 +31265,276 @@
         "next_run_at"
       ]
     },
+    "PaginatedKeyspaceConfigChangeRequest": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The response type. Always \"list\" for paginated responses."
+        },
+        "current_page": {
+          "type": "integer",
+          "description": "The current page number"
+        },
+        "per_page": {
+          "type": "integer",
+          "description": "The maximum number of results per page"
+        },
+        "next_page": {
+          "type": "integer",
+          "description": "The next page number, or null when this is the last page",
+          "x-nullable": true
+        },
+        "next_page_url": {
+          "type": "string",
+          "description": "The next page of results, or null when this is the last page",
+          "x-nullable": true
+        },
+        "prev_page": {
+          "type": "integer",
+          "description": "The previous page number, or null when this is the first page",
+          "x-nullable": true
+        },
+        "prev_page_url": {
+          "type": "string",
+          "description": "The previous page of results, or null when this is the first page",
+          "x-nullable": true
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The ID of the config change request"
+              },
+              "state": {
+                "type": "string",
+                "enum": [
+                  "draft",
+                  "pending",
+                  "queued",
+                  "applying",
+                  "completed",
+                  "failed",
+                  "canceled"
+                ],
+                "description": "The state of the config change request"
+              },
+              "change_type": {
+                "type": "string",
+                "enum": [
+                  "mysqld",
+                  "vttablet"
+                ],
+                "description": "The type of configuration being changed"
+              },
+              "previous_options": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "The previous option values"
+              },
+              "new_options": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "The new option values"
+              },
+              "error_message": {
+                "type": "string",
+                "description": "Error message if the change failed",
+                "x-nullable": true
+              },
+              "started_at": {
+                "type": "string",
+                "description": "When the config change started applying",
+                "x-nullable": true
+              },
+              "completed_at": {
+                "type": "string",
+                "description": "When the config change completed",
+                "x-nullable": true
+              },
+              "created_at": {
+                "type": "string",
+                "description": "When the config change request was created"
+              },
+              "updated_at": {
+                "type": "string",
+                "description": "When the config change request was last updated"
+              },
+              "keyspace_name": {
+                "type": "string",
+                "description": "The keyspace name for keyspace-level config changes",
+                "x-nullable": true
+              },
+              "queued_until": {
+                "type": "string",
+                "description": "When the config change is expected to be applied (only set when queued)",
+                "x-nullable": true
+              },
+              "actor": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The ID of the actor"
+                  },
+                  "display_name": {
+                    "type": "string",
+                    "description": "The name of the actor"
+                  },
+                  "avatar_url": {
+                    "type": "string",
+                    "description": "The URL of the actor's avatar"
+                  }
+                },
+                "required": [
+                  "id",
+                  "display_name",
+                  "avatar_url"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "state",
+              "change_type",
+              "previous_options",
+              "new_options",
+              "error_message",
+              "started_at",
+              "completed_at",
+              "created_at",
+              "updated_at",
+              "keyspace_name",
+              "queued_until",
+              "actor"
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "current_page",
+        "per_page",
+        "next_page",
+        "next_page_url",
+        "prev_page",
+        "prev_page_url",
+        "data"
+      ]
+    },
+    "KeyspaceConfigChangeRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the config change request"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "pending",
+            "queued",
+            "applying",
+            "completed",
+            "failed",
+            "canceled"
+          ],
+          "description": "The state of the config change request"
+        },
+        "change_type": {
+          "type": "string",
+          "enum": [
+            "mysqld",
+            "vttablet"
+          ],
+          "description": "The type of configuration being changed"
+        },
+        "previous_options": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "The previous option values"
+        },
+        "new_options": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "The new option values"
+        },
+        "error_message": {
+          "type": "string",
+          "description": "Error message if the change failed",
+          "x-nullable": true
+        },
+        "started_at": {
+          "type": "string",
+          "description": "When the config change started applying",
+          "x-nullable": true
+        },
+        "completed_at": {
+          "type": "string",
+          "description": "When the config change completed",
+          "x-nullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "description": "When the config change request was created"
+        },
+        "updated_at": {
+          "type": "string",
+          "description": "When the config change request was last updated"
+        },
+        "keyspace_name": {
+          "type": "string",
+          "description": "The keyspace name for keyspace-level config changes",
+          "x-nullable": true
+        },
+        "queued_until": {
+          "type": "string",
+          "description": "When the config change is expected to be applied (only set when queued)",
+          "x-nullable": true
+        },
+        "actor": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The ID of the actor"
+            },
+            "display_name": {
+              "type": "string",
+              "description": "The name of the actor"
+            },
+            "avatar_url": {
+              "type": "string",
+              "description": "The URL of the actor's avatar"
+            }
+          },
+          "required": [
+            "id",
+            "display_name",
+            "avatar_url"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "state",
+        "change_type",
+        "previous_options",
+        "new_options",
+        "error_message",
+        "started_at",
+        "completed_at",
+        "created_at",
+        "updated_at",
+        "keyspace_name",
+        "queued_until",
+        "actor"
+      ]
+    },
     "PaginatedKeyspaceResizeRequest": {
       "type": "object",
       "properties": {
@@ -30497,7 +31927,8 @@
               },
               "pending_vitess_version_update": {
                 "type": "boolean",
-                "description": "Whether there is a pending Vitess version update"
+                "description": "Whether there is a pending Vitess version update",
+                "x-nullable": true
               },
               "pending_vitess_version": {
                 "type": "string",
@@ -30506,7 +31937,8 @@
               },
               "pending_mysql_version_update": {
                 "type": "boolean",
-                "description": "Whether there is a pending MySQL version update"
+                "description": "Whether there is a pending MySQL version update",
+                "x-nullable": true
               },
               "pending_mysql_version": {
                 "type": "string",
@@ -30530,11 +31962,7 @@
               "enabled",
               "expires_at",
               "deadline_at",
-              "required",
-              "pending_vitess_version_update",
-              "pending_vitess_version",
-              "pending_mysql_version_update",
-              "pending_mysql_version"
+              "required"
             ]
           }
         }
@@ -30627,7 +32055,8 @@
         },
         "pending_vitess_version_update": {
           "type": "boolean",
-          "description": "Whether there is a pending Vitess version update"
+          "description": "Whether there is a pending Vitess version update",
+          "x-nullable": true
         },
         "pending_vitess_version": {
           "type": "string",
@@ -30636,7 +32065,8 @@
         },
         "pending_mysql_version_update": {
           "type": "boolean",
-          "description": "Whether there is a pending MySQL version update"
+          "description": "Whether there is a pending MySQL version update",
+          "x-nullable": true
         },
         "pending_mysql_version": {
           "type": "string",
@@ -30660,11 +32090,7 @@
         "enabled",
         "expires_at",
         "deadline_at",
-        "required",
-        "pending_vitess_version_update",
-        "pending_vitess_version",
-        "pending_mysql_version_update",
-        "pending_mysql_version"
+        "required"
       ]
     },
     "PaginatedBranchMaintenanceWindow": {
@@ -36611,6 +38037,14 @@
                 "type": "integer",
                 "description": "The number of rows returned"
               },
+              "egress_bytes": {
+                "type": "integer",
+                "description": "The number of bytes sent to the client"
+              },
+              "ingress_bytes": {
+                "type": "integer",
+                "description": "The number of bytes received from the client"
+              },
               "total_duration_millis": {
                 "type": "integer",
                 "description": "Total query duration in milliseconds"
@@ -36659,6 +38093,8 @@
               "rows_read",
               "rows_affected",
               "rows_returned",
+              "egress_bytes",
+              "ingress_bytes",
               "total_duration_millis",
               "error_message",
               "normalized_sql",
@@ -37021,6 +38457,14 @@
           "type": "integer",
           "description": "The number of rows returned"
         },
+        "egress_bytes": {
+          "type": "integer",
+          "description": "The number of bytes sent to the client"
+        },
+        "ingress_bytes": {
+          "type": "integer",
+          "description": "The number of bytes received from the client"
+        },
         "total_duration_millis": {
           "type": "integer",
           "description": "Total query duration in milliseconds"
@@ -37069,6 +38513,8 @@
         "rows_read",
         "rows_affected",
         "rows_returned",
+        "egress_bytes",
+        "ingress_bytes",
         "total_duration_millis",
         "error_message",
         "normalized_sql",
@@ -38090,7 +39536,7 @@
             "properties": {
               "id": {
                 "type": "string",
-                "description": "The ID of the read-only replica change request"
+                "description": "The ID of the dedicated read replica change request"
               },
               "state": {
                 "type": "string",
@@ -38336,39 +39782,39 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ID of the read-only replica"
+          "description": "The ID of the dedicated read replica"
         },
         "name": {
           "type": "string",
-          "description": "The name of the read-only replica"
+          "description": "The name of the dedicated read replica"
         },
         "state": {
           "type": "string",
-          "description": "The state of the read-only replica: pending, ready, or deleting"
+          "description": "The state of the dedicated read replica: pending, ready, or deleting"
         },
         "replicas": {
           "type": "integer",
-          "description": "The number of instances serving reads in this read-only replica"
+          "description": "The number of instances serving reads in this dedicated read replica"
         },
         "cluster_name": {
           "type": "string",
-          "description": "The SKU representing the cluster size of the read-only replica"
+          "description": "The SKU representing the cluster size of the dedicated read replica"
         },
         "cluster_display_name": {
           "type": "string",
-          "description": "The SKU representing the cluster size of the read-only replica, for display"
+          "description": "The SKU representing the cluster size of the dedicated read replica, for display"
         },
         "access_host_url": {
           "type": "string",
-          "description": "The database connection host for the read-only replica"
+          "description": "The database connection host for the dedicated read replica"
         },
         "private_access_host_url": {
           "type": "string",
-          "description": "The private database connection host for the read-only replica"
+          "description": "The private database connection host for the dedicated read replica"
         },
         "private_connection_service_name": {
           "type": "string",
-          "description": "The service name to set up private connectivity for the read-only replica",
+          "description": "The service name to set up private connectivity for the dedicated read replica",
           "x-nullable": true
         },
         "minimum_storage_bytes": {
@@ -38415,20 +39861,20 @@
         },
         "created_at": {
           "type": "string",
-          "description": "When the read-only replica was created"
+          "description": "When the dedicated read replica was created"
         },
         "updated_at": {
           "type": "string",
-          "description": "When the read-only replica was last updated"
+          "description": "When the dedicated read replica was last updated"
         },
         "ready_at": {
           "type": "string",
-          "description": "When the read-only replica was ready to serve queries",
+          "description": "When the dedicated read replica was ready to serve queries",
           "x-nullable": true
         },
         "ready": {
           "type": "boolean",
-          "description": "Whether or not the read-only replica is ready to serve queries"
+          "description": "Whether or not the dedicated read replica is ready to serve queries"
         },
         "actor": {
           "type": "object",
@@ -46535,6 +47981,10 @@
       "description": "          Resources for managing cluster configuration parameters.\n"
     },
     {
+      "name": "Branch Vitess parameters",
+      "description": "          Returns all editable Vitess parameter definitions with their current effective values for a branch.\n"
+    },
+    {
       "name": "Database branch keyspaces",
       "description": "          Resources for managing keyspaces.\n"
     },
@@ -46623,8 +48073,8 @@
       "description": "          Resources for downloading query insights data.\n"
     },
     {
-      "name": "Read-only replicas",
-      "description": "          Resources for managing Postgres read-only replicas.\n"
+      "name": "Dedicated read replicas",
+      "description": "          Resources for managing Postgres dedicated read replicas.\n"
     },
     {
       "name": "Roles",
