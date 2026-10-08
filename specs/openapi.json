@@ -31894,32 +31894,6 @@
                 "description": "The target resource parameters before the change",
                 "x-nullable": true
               },
-              "flags": {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array",
-                "description": "The cluster flags",
-                "x-nullable": true
-              },
-              "neki_image_version": {
-                "type": "string",
-                "description": "The Neki image version",
-                "x-nullable": true
-              },
-              "previous_flags": {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array",
-                "description": "The previous cluster flags",
-                "x-nullable": true
-              },
-              "previous_neki_image_version": {
-                "type": "string",
-                "description": "The previous Neki image version",
-                "x-nullable": true
-              },
               "replicas": {
                 "type": "integer",
                 "description": "The number of replicas",
@@ -32300,32 +32274,6 @@
           "type": "object",
           "additionalProperties": true,
           "description": "The target resource parameters before the change",
-          "x-nullable": true
-        },
-        "flags": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array",
-          "description": "The cluster flags",
-          "x-nullable": true
-        },
-        "neki_image_version": {
-          "type": "string",
-          "description": "The Neki image version",
-          "x-nullable": true
-        },
-        "previous_flags": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array",
-          "description": "The previous cluster flags",
-          "x-nullable": true
-        },
-        "previous_neki_image_version": {
-          "type": "string",
-          "description": "The previous Neki image version",
           "x-nullable": true
         },
         "replicas": {
