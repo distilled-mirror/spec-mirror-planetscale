@@ -4156,7 +4156,7 @@
           "application/json"
         ],
         "operationId": "list_shard_configuration_profiles",
-        "summary": "List shard configuration profiles for a Neki branch",
+        "summary": "List configuration profiles for a Neki branch",
         "parameters": [
           {
             "name": "organization",
@@ -4182,7 +4182,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns shard configuration profiles for the branch",
+            "description": "Returns configuration profiles for the branch",
             "schema": {
               "type": "array",
               "items": {
@@ -4220,7 +4220,7 @@
           "application/json"
         ],
         "operationId": "create_shard_configuration_profile",
-        "summary": "Create a shard configuration profile for a Neki branch",
+        "summary": "Create a configuration profile for a Neki branch",
         "parameters": [
           {
             "name": "organization",
@@ -4251,23 +4251,23 @@
               "properties": {
                 "name": {
                   "type": "string",
-                  "description": "The name of the shard configuration profile"
+                  "description": "The name of the configuration profile"
                 },
                 "cluster_size": {
                   "type": "string",
-                  "description": "The cluster size for the shard configuration profile"
+                  "description": "The cluster size for the configuration profile"
                 },
                 "replicas": {
                   "type": "integer",
-                  "description": "The number of replicas for the shard configuration profile"
+                  "description": "The number of replicas for the configuration profile"
                 },
                 "postgres_major_version": {
                   "type": "string",
-                  "description": "The PostgreSQL major version for the shard configuration profile"
+                  "description": "The PostgreSQL major version for the configuration profile"
                 },
                 "postgres_minor_version": {
                   "type": "string",
-                  "description": "The PostgreSQL minor version for the shard configuration profile. Requires postgres_major_version when specified."
+                  "description": "The PostgreSQL minor version for the configuration profile. Requires postgres_major_version when specified."
                 },
                 "storage": {
                   "type": "object",
@@ -4303,7 +4303,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Returns the created shard configuration profile",
+            "description": "Returns the created configuration profile",
             "schema": {
               "$ref": "#/definitions/NekiShardConfigurationProfile"
             },
@@ -4340,7 +4340,7 @@
           "application/json"
         ],
         "operationId": "run_shard_configuration_profiles_maintenance",
-        "summary": "Run maintenance for selected Neki shard configuration profiles",
+        "summary": "Run maintenance for selected Neki configuration profiles",
         "parameters": [
           {
             "name": "organization",
@@ -4374,7 +4374,7 @@
                   "items": {
                     "type": "string"
                   },
-                  "description": "The names of the shard configuration profiles to maintain"
+                  "description": "The names of the configuration profiles to maintain"
                 }
               },
               "required": [
@@ -4395,7 +4395,7 @@
             "description": "Forbidden"
           },
           "404": {
-            "description": "Shard configuration profile not found",
+            "description": "Configuration profile not found",
             "headers": {}
           },
           "422": {
@@ -4420,7 +4420,7 @@
           "application/json"
         ],
         "operationId": "get_shard_configuration_profile",
-        "summary": "Get a shard configuration profile for a Neki branch",
+        "summary": "Get a configuration profile for a Neki branch",
         "parameters": [
           {
             "name": "organization",
@@ -4453,7 +4453,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns the shard configuration profile",
+            "description": "Returns the configuration profile",
             "schema": {
               "$ref": "#/definitions/NekiShardConfigurationProfile"
             },
@@ -4466,7 +4466,7 @@
             "description": "Forbidden"
           },
           "404": {
-            "description": "Shard configuration profile not found",
+            "description": "Configuration profile not found",
             "headers": {}
           },
           "422": {
@@ -4489,7 +4489,7 @@
           "application/json"
         ],
         "operationId": "update_shard_configuration_profile",
-        "summary": "Update a shard configuration profile for a Neki branch",
+        "summary": "Update a configuration profile for a Neki branch",
         "parameters": [
           {
             "name": "organization",
@@ -4527,11 +4527,11 @@
               "properties": {
                 "name": {
                   "type": "string",
-                  "description": "The new name for the shard configuration profile"
+                  "description": "The new name for the configuration profile"
                 },
                 "cluster_size": {
                   "type": "string",
-                  "description": "The new cluster size for the shard configuration profile"
+                  "description": "The new cluster size for the configuration profile"
                 },
                 "extensions": {
                   "type": "array",
@@ -4542,7 +4542,7 @@
                 },
                 "replicas": {
                   "type": "integer",
-                  "description": "The new number of replicas for the shard configuration profile"
+                  "description": "The new number of replicas for the configuration profile"
                 },
                 "parameters": {
                   "type": "object",
@@ -4551,11 +4551,11 @@
                 },
                 "postgres_major_version": {
                   "type": "string",
-                  "description": "The PostgreSQL major version for the shard configuration profile"
+                  "description": "The PostgreSQL major version for the configuration profile"
                 },
                 "postgres_minor_version": {
                   "type": "string",
-                  "description": "The PostgreSQL minor version for the shard configuration profile. Requires postgres_major_version when specified."
+                  "description": "The PostgreSQL minor version for the configuration profile. Requires postgres_major_version when specified."
                 },
                 "storage": {
                   "type": "object",
@@ -4588,7 +4588,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns the updated shard configuration profile",
+            "description": "Returns the updated configuration profile",
             "schema": {
               "$ref": "#/definitions/NekiShardConfigurationProfile"
             },
@@ -4601,7 +4601,7 @@
             "description": "Forbidden"
           },
           "404": {
-            "description": "Shard configuration profile not found",
+            "description": "Configuration profile not found",
             "headers": {}
           },
           "422": {
@@ -4624,7 +4624,7 @@
           "application/json"
         ],
         "operationId": "delete_shard_configuration_profile",
-        "summary": "Delete a shard configuration profile for a Neki branch",
+        "summary": "Delete a configuration profile for a Neki branch",
         "parameters": [
           {
             "name": "organization",
@@ -4657,7 +4657,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Shard configuration profile deleted",
+            "description": "Configuration profile deleted",
             "headers": {}
           },
           "401": {
@@ -4667,7 +4667,7 @@
             "description": "Forbidden"
           },
           "404": {
-            "description": "Shard configuration profile not found",
+            "description": "Configuration profile not found",
             "headers": {}
           },
           "422": {
@@ -4692,7 +4692,7 @@
           "application/json"
         ],
         "operationId": "list_shard_configuration_profile_change_requests",
-        "summary": "List change requests for a Neki shard configuration profile",
+        "summary": "List change requests for a Neki configuration profile",
         "parameters": [
           {
             "name": "organization",
@@ -4772,7 +4772,7 @@
             "description": "Forbidden"
           },
           "404": {
-            "description": "Shard configuration profile not found",
+            "description": "Configuration profile not found",
             "headers": {}
           },
           "422": {
@@ -4797,7 +4797,7 @@
           "application/json"
         ],
         "operationId": "get_shard_configuration_profile_change_request",
-        "summary": "Get a change request for a Neki shard configuration profile",
+        "summary": "Get a change request for a Neki configuration profile",
         "parameters": [
           {
             "name": "organization",
@@ -4847,7 +4847,7 @@
             "description": "Forbidden"
           },
           "404": {
-            "description": "Shard configuration profile or change request not found",
+            "description": "Configuration profile or change request not found",
             "headers": {}
           },
           "422": {
@@ -4870,7 +4870,7 @@
           "application/json"
         ],
         "operationId": "cancel_shard_configuration_profile_change_request",
-        "summary": "Cancel a change request for a Neki shard configuration profile",
+        "summary": "Cancel a change request for a Neki configuration profile",
         "parameters": [
           {
             "name": "organization",
@@ -4920,7 +4920,7 @@
             "description": "Forbidden"
           },
           "404": {
-            "description": "Shard configuration profile or change request not found",
+            "description": "Configuration profile or change request not found",
             "headers": {}
           },
           "422": {
@@ -4936,6 +4936,93 @@
         "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_databases` |\n| Database | `write_database` |"
       }
     },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/configuration-profiles/{configuration_profile}/duplicate": {
+      "post": {
+        "tags": [
+          "api-neki_shard_configuration_profiles"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "duplicate_shard_configuration_profile",
+        "summary": "Duplicate a configuration profile for a Neki branch",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          },
+          {
+            "name": "configuration_profile",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Name from `list_shard_configuration_profiles`."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The name of the new configuration profile"
+                }
+              },
+              "required": [
+                "name"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the duplicated configuration profile",
+            "schema": {
+              "$ref": "#/definitions/NekiShardConfigurationProfile"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Configuration profile not found",
+            "headers": {}
+          },
+          "422": {
+            "description": "Invalid parameters"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "        Copies the profile's settings and any parameters you've changed. Parameters you haven't changed start at their current defaults. Creating a duplicate follows the same rules as creating a profile.\n\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_databases` |\n| Database | `write_database` |"
+      }
+    },
     "/organizations/{organization}/databases/{database}/branches/{branch}/configuration-profiles/{configuration_profile}/extensions": {
       "get": {
         "tags": [
@@ -4945,7 +5032,7 @@
           "application/json"
         ],
         "operationId": "list_shard_configuration_profile_extensions",
-        "summary": "List extensions for a Neki shard configuration profile",
+        "summary": "List extensions for a Neki configuration profile",
         "parameters": [
           {
             "name": "organization",
@@ -4978,7 +5065,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns extensions for the shard configuration profile",
+            "description": "Returns extensions for the configuration profile",
             "schema": {
               "type": "array",
               "items": {
@@ -4994,7 +5081,7 @@
             "description": "Forbidden"
           },
           "404": {
-            "description": "Shard configuration profile not found",
+            "description": "Configuration profile not found",
             "headers": {}
           },
           "422": {
@@ -5019,7 +5106,7 @@
           "application/json"
         ],
         "operationId": "run_shard_configuration_profile_maintenance",
-        "summary": "Run maintenance for a Neki shard configuration profile",
+        "summary": "Run maintenance for a Neki configuration profile",
         "parameters": [
           {
             "name": "organization",
@@ -5062,7 +5149,7 @@
             "description": "Forbidden"
           },
           "404": {
-            "description": "Shard configuration profile not found",
+            "description": "Configuration profile not found",
             "headers": {}
           },
           "422": {
@@ -5087,7 +5174,7 @@
           "application/json"
         ],
         "operationId": "list_shard_configuration_profile_parameters",
-        "summary": "List parameters for a Neki shard configuration profile",
+        "summary": "List parameters for a Neki configuration profile",
         "parameters": [
           {
             "name": "organization",
@@ -5120,7 +5207,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns parameters for the shard configuration profile",
+            "description": "Returns parameters for the configuration profile",
             "schema": {
               "type": "array",
               "items": {
@@ -5136,7 +5223,7 @@
             "description": "Forbidden"
           },
           "404": {
-            "description": "Shard configuration profile not found",
+            "description": "Configuration profile not found",
             "headers": {}
           },
           "422": {
@@ -5161,7 +5248,7 @@
           "application/json"
         ],
         "operationId": "list_shard_configuration_profile_shards",
-        "summary": "List shards for a Neki shard configuration profile",
+        "summary": "List shards for a Neki configuration profile",
         "parameters": [
           {
             "name": "organization",
@@ -5214,7 +5301,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns shards for the shard configuration profile",
+            "description": "Returns shards for the configuration profile",
             "schema": {
               "$ref": "#/definitions/PaginatedNekiShard"
             },
@@ -5227,7 +5314,7 @@
             "description": "Forbidden"
           },
           "404": {
-            "description": "Shard configuration profile not found",
+            "description": "Configuration profile not found",
             "headers": {}
           },
           "422": {
@@ -5250,7 +5337,7 @@
           "application/json"
         ],
         "operationId": "create_shard_configuration_profile_shard",
-        "summary": "Add a shard to a Neki shard configuration profile",
+        "summary": "Add a shard to a Neki configuration profile",
         "parameters": [
           {
             "name": "organization",
@@ -5309,7 +5396,7 @@
             "description": "Forbidden"
           },
           "404": {
-            "description": "Shard configuration profile not found",
+            "description": "Configuration profile not found",
             "headers": {}
           },
           "422": {
@@ -5332,7 +5419,7 @@
           "application/json"
         ],
         "operationId": "assign_shard_configuration_profile_shards",
-        "summary": "Assign shards to a Neki shard configuration profile",
+        "summary": "Assign shards to a Neki configuration profile",
         "parameters": [
           {
             "name": "organization",
@@ -5400,7 +5487,7 @@
             "description": "Forbidden"
           },
           "404": {
-            "description": "Shard configuration profile or shard not found",
+            "description": "Configuration profile or shard not found",
             "headers": {}
           },
           "422": {
@@ -5423,7 +5510,7 @@
           "application/json"
         ],
         "operationId": "delete_shard_configuration_profile_shards",
-        "summary": "Remove shards from a Neki shard configuration profile",
+        "summary": "Remove shards from a Neki configuration profile",
         "parameters": [
           {
             "name": "organization",
@@ -5476,7 +5563,7 @@
             "description": "Forbidden"
           },
           "404": {
-            "description": "Shard configuration profile or shard not found",
+            "description": "Configuration profile or shard not found",
             "headers": {}
           },
           "422": {
@@ -5501,7 +5588,7 @@
           "application/json"
         ],
         "operationId": "bulk_create_shard_configuration_profile_shards",
-        "summary": "Add shards to a Neki shard configuration profile",
+        "summary": "Add shards to a Neki configuration profile",
         "parameters": [
           {
             "name": "organization",
@@ -5580,7 +5667,7 @@
             "description": "Forbidden"
           },
           "404": {
-            "description": "Shard configuration profile not found",
+            "description": "Configuration profile not found",
             "headers": {}
           },
           "422": {
@@ -5605,7 +5692,7 @@
           "application/json"
         ],
         "operationId": "get_shard_configuration_profile_shard",
-        "summary": "Get a shard in a Neki shard configuration profile",
+        "summary": "Get a shard in a Neki configuration profile",
         "parameters": [
           {
             "name": "organization",
@@ -5658,7 +5745,7 @@
             "description": "Forbidden"
           },
           "404": {
-            "description": "Shard configuration profile or shard not found",
+            "description": "Configuration profile or shard not found",
             "headers": {}
           },
           "422": {
@@ -5681,7 +5768,7 @@
           "application/json"
         ],
         "operationId": "update_shard_configuration_profile_shard",
-        "summary": "Update a shard in a Neki shard configuration profile",
+        "summary": "Update a shard in a Neki configuration profile",
         "parameters": [
           {
             "name": "organization",
@@ -5747,7 +5834,7 @@
             "description": "Forbidden"
           },
           "404": {
-            "description": "Shard configuration profile or shard not found",
+            "description": "Configuration profile or shard not found",
             "headers": {}
           },
           "422": {
@@ -5770,7 +5857,7 @@
           "application/json"
         ],
         "operationId": "delete_shard_configuration_profile_shard",
-        "summary": "Remove a shard from a Neki shard configuration profile",
+        "summary": "Remove a shard from a Neki configuration profile",
         "parameters": [
           {
             "name": "organization",
@@ -5820,7 +5907,7 @@
             "description": "Forbidden"
           },
           "404": {
-            "description": "Shard configuration profile or shard not found",
+            "description": "Configuration profile or shard not found",
             "headers": {}
           },
           "422": {
@@ -6517,7 +6604,7 @@
           "application/json"
         ],
         "operationId": "get_default_shard_configuration_profile",
-        "summary": "Get the default shard configuration profile for a Neki branch",
+        "summary": "Get the default configuration profile for a Neki branch",
         "parameters": [
           {
             "name": "organization",
@@ -6543,7 +6630,7 @@
         ],
         "responses": {
           "302": {
-            "description": "Redirects to the default shard configuration profile",
+            "description": "Redirects to the default configuration profile",
             "headers": {}
           },
           "401": {
@@ -6553,7 +6640,7 @@
             "description": "Forbidden"
           },
           "404": {
-            "description": "Default shard configuration profile not found",
+            "description": "Default configuration profile not found",
             "headers": {}
           },
           "422": {
@@ -6576,7 +6663,7 @@
           "application/json"
         ],
         "operationId": "set_default_shard_configuration_profile",
-        "summary": "Set the default shard configuration profile for a Neki branch",
+        "summary": "Set the default configuration profile for a Neki branch",
         "parameters": [
           {
             "name": "organization",
@@ -6607,7 +6694,7 @@
               "properties": {
                 "configuration_profile": {
                   "type": "string",
-                  "description": "The name of the shard configuration profile to make the default"
+                  "description": "The name of the configuration profile to make the default"
                 }
               },
               "required": [
@@ -6618,7 +6705,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns the new default shard configuration profile",
+            "description": "Returns the new default configuration profile",
             "schema": {
               "$ref": "#/definitions/NekiShardConfigurationProfile"
             },
@@ -6631,11 +6718,11 @@
             "description": "Forbidden"
           },
           "404": {
-            "description": "Shard configuration profile not found",
+            "description": "Configuration profile not found",
             "headers": {}
           },
           "422": {
-            "description": "Default shard configuration profile could not be updated"
+            "description": "Default configuration profile could not be updated"
           },
           "429": {
             "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
@@ -10050,7 +10137,7 @@
             "name": "shard_config_profile",
             "type": "string",
             "in": "query",
-            "description": "Filter by shard configuration profile name"
+            "description": "Filter by configuration profile name"
           },
           {
             "name": "router",
@@ -10231,7 +10318,7 @@
             "name": "shard_config_profile",
             "type": "string",
             "in": "query",
-            "description": "Filter by shard configuration profile name"
+            "description": "Filter by configuration profile name"
           },
           {
             "name": "container",
@@ -15637,7 +15724,7 @@
             "name": "exclude_configuration_profile",
             "type": "string",
             "in": "query",
-            "description": "Exclude shards in this shard configuration profile"
+            "description": "Exclude shards in this configuration profile"
           },
           {
             "name": "q",
@@ -15709,7 +15796,7 @@
         ],
         "responses": {
           "308": {
-            "description": "Redirects to the default shard configuration profile shards endpoint",
+            "description": "Redirects to the default configuration profile shards endpoint",
             "headers": {}
           },
           "401": {
@@ -15845,7 +15932,7 @@
         ],
         "responses": {
           "308": {
-            "description": "Redirects to the shard configuration profile shard endpoint",
+            "description": "Redirects to the configuration profile shard endpoint",
             "headers": {}
           },
           "401": {
@@ -15911,7 +15998,7 @@
         ],
         "responses": {
           "308": {
-            "description": "Redirects to the shard configuration profile shard endpoint",
+            "description": "Redirects to the configuration profile shard endpoint",
             "headers": {}
           },
           "401": {
@@ -15972,7 +16059,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns sidecars for the branch, one per shard configuration profile",
+            "description": "Returns sidecars for the branch, one per configuration profile",
             "schema": {
               "type": "array",
               "items": {
@@ -28109,6 +28196,10 @@
                     "type": "integer",
                     "description": "The maximum size in bytes disks may autoscale to"
                   },
+                  "max_storage_bytes_managed_by_staff": {
+                    "type": "boolean",
+                    "description": "True when PlanetScale staff raised the limit above the organization default. The limit is read-only while this is set"
+                  },
                   "disk_scaling_strategy": {
                     "type": "string",
                     "enum": [
@@ -28122,6 +28213,7 @@
                 "required": [
                   "storage_bytes",
                   "max_storage_bytes",
+                  "max_storage_bytes_managed_by_staff",
                   "disk_scaling_strategy"
                 ]
               },
@@ -28344,6 +28436,10 @@
               "type": "integer",
               "description": "The maximum size in bytes disks may autoscale to"
             },
+            "max_storage_bytes_managed_by_staff": {
+              "type": "boolean",
+              "description": "True when PlanetScale staff raised the limit above the organization default. The limit is read-only while this is set"
+            },
             "disk_scaling_strategy": {
               "type": "string",
               "enum": [
@@ -28357,6 +28453,7 @@
           "required": [
             "storage_bytes",
             "max_storage_bytes",
+            "max_storage_bytes_managed_by_staff",
             "disk_scaling_strategy"
           ]
         },
@@ -32005,12 +32102,12 @@
               },
               "name": {
                 "type": "string",
-                "description": "The name of the shard configuration profile",
+                "description": "The name of the configuration profile",
                 "x-nullable": true
               },
               "previous_name": {
                 "type": "string",
-                "description": "The previous name of the shard configuration profile",
+                "description": "The previous name of the configuration profile",
                 "x-nullable": true
               },
               "cluster_size": {
@@ -32387,12 +32484,12 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the shard configuration profile",
+          "description": "The name of the configuration profile",
           "x-nullable": true
         },
         "previous_name": {
           "type": "string",
-          "description": "The previous name of the shard configuration profile",
+          "description": "The previous name of the configuration profile",
           "x-nullable": true
         },
         "cluster_size": {
@@ -32542,11 +32639,11 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ID of the shard configuration profile"
+          "description": "The ID of the configuration profile"
         },
         "name": {
           "type": "string",
-          "description": "The name of the shard configuration profile"
+          "description": "The name of the configuration profile"
         },
         "architecture": {
           "type": "string",
@@ -32562,7 +32659,7 @@
         },
         "default": {
           "type": "boolean",
-          "description": "Whether this is the default shard configuration profile"
+          "description": "Whether this is the default configuration profile"
         },
         "metal": {
           "type": "boolean",
@@ -32574,23 +32671,23 @@
         },
         "postgres_image_version": {
           "type": "string",
-          "description": "The PostgreSQL image used by the shard configuration profile"
+          "description": "The PostgreSQL image used by the configuration profile"
         },
         "latest_postgres_image_version": {
           "type": "string",
-          "description": "The latest PostgreSQL image available to the shard configuration profile"
+          "description": "The latest PostgreSQL image available to the configuration profile"
         },
         "postgres_major_version": {
           "type": "integer",
-          "description": "The PostgreSQL major version used by the shard configuration profile"
+          "description": "The PostgreSQL major version used by the configuration profile"
         },
         "postgres_minor_version": {
           "type": "integer",
-          "description": "The PostgreSQL minor version used by the shard configuration profile"
+          "description": "The PostgreSQL minor version used by the configuration profile"
         },
         "latest_postgres_minor_version": {
           "type": "integer",
-          "description": "The latest PostgreSQL minor version available to the shard configuration profile"
+          "description": "The latest PostgreSQL minor version available to the configuration profile"
         },
         "shards": {
           "type": "integer",
@@ -32641,15 +32738,15 @@
             "applying",
             "ready"
           ],
-          "description": "The current state of the shard configuration profile"
+          "description": "The current state of the configuration profile"
         },
         "created_at": {
           "type": "string",
-          "description": "When the shard configuration profile was created"
+          "description": "When the configuration profile was created"
         },
         "updated_at": {
           "type": "string",
-          "description": "When the shard configuration profile was last updated"
+          "description": "When the configuration profile was last updated"
         }
       },
       "required": [
@@ -33101,7 +33198,7 @@
               },
               "configuration_profile": {
                 "type": "string",
-                "description": "The name of the shard configuration profile"
+                "description": "The name of the configuration profile"
               },
               "created_at": {
                 "type": "string",
@@ -33159,7 +33256,7 @@
         },
         "configuration_profile": {
           "type": "string",
-          "description": "The name of the shard configuration profile"
+          "description": "The name of the configuration profile"
         },
         "created_at": {
           "type": "string",
@@ -33216,7 +33313,7 @@
         },
         "configuration_profile": {
           "type": "string",
-          "description": "The name of the shard configuration profile the sidecar belongs to"
+          "description": "The name of the configuration profile the sidecar belongs to"
         },
         "state": {
           "type": "string",
@@ -42330,6 +42427,15 @@
                     "description": "When force cutover was triggered for the deployment",
                     "x-nullable": true
                   },
+                  "retry_requested": {
+                    "type": "boolean",
+                    "description": "Whether a retry of failed operations was requested within the retry window"
+                  },
+                  "retry_requested_at": {
+                    "type": "string",
+                    "description": "When a retry of failed operations was last requested",
+                    "x-nullable": true
+                  },
                   "queued_at": {
                     "type": "string",
                     "description": "When the deployment was queued",
@@ -42833,6 +42939,8 @@
                   "cutover_expiring",
                   "finished_at",
                   "force_cutover_requested_at",
+                  "retry_requested",
+                  "retry_requested_at",
                   "queued_at",
                   "ready_to_cutover_at",
                   "started_at",
@@ -43124,6 +43232,15 @@
             "force_cutover_requested_at": {
               "type": "string",
               "description": "When force cutover was triggered for the deployment",
+              "x-nullable": true
+            },
+            "retry_requested": {
+              "type": "boolean",
+              "description": "Whether a retry of failed operations was requested within the retry window"
+            },
+            "retry_requested_at": {
+              "type": "string",
+              "description": "When a retry of failed operations was last requested",
               "x-nullable": true
             },
             "queued_at": {
@@ -43629,6 +43746,8 @@
             "cutover_expiring",
             "finished_at",
             "force_cutover_requested_at",
+            "retry_requested",
+            "retry_requested_at",
             "queued_at",
             "ready_to_cutover_at",
             "started_at",
@@ -43755,6 +43874,15 @@
         "force_cutover_requested_at": {
           "type": "string",
           "description": "When force cutover was triggered for the deployment",
+          "x-nullable": true
+        },
+        "retry_requested": {
+          "type": "boolean",
+          "description": "Whether a retry of failed operations was requested within the retry window"
+        },
+        "retry_requested_at": {
+          "type": "string",
+          "description": "When a retry of failed operations was last requested",
           "x-nullable": true
         },
         "queued_at": {
@@ -44260,6 +44388,8 @@
         "cutover_expiring",
         "finished_at",
         "force_cutover_requested_at",
+        "retry_requested",
+        "retry_requested_at",
         "queued_at",
         "ready_to_cutover_at",
         "started_at",
@@ -44532,6 +44662,15 @@
               "force_cutover_requested_at": {
                 "type": "string",
                 "description": "When force cutover was triggered for the deployment",
+                "x-nullable": true
+              },
+              "retry_requested": {
+                "type": "boolean",
+                "description": "Whether a retry of failed operations was requested within the retry window"
+              },
+              "retry_requested_at": {
+                "type": "string",
+                "description": "When a retry of failed operations was last requested",
                 "x-nullable": true
               },
               "queued_at": {
@@ -45037,6 +45176,8 @@
               "cutover_expiring",
               "finished_at",
               "force_cutover_requested_at",
+              "retry_requested",
+              "retry_requested_at",
               "queued_at",
               "ready_to_cutover_at",
               "started_at",
