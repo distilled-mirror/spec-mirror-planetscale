@@ -20149,6 +20149,12 @@
             "description": "Filter by recommendation state"
           },
           {
+            "name": "branch",
+            "type": "string",
+            "in": "query",
+            "description": "Filter by the name of the branch the recommendation is for"
+          },
+          {
             "name": "page",
             "type": "integer",
             "in": "query",
@@ -26692,9 +26698,13 @@
                 "description": "Why the parameter cannot be changed",
                 "x-nullable": true
               },
-              "requires_cluster_update": {
-                "type": "boolean",
-                "description": "Whether a cluster update is required before the parameter can be configured"
+              "requires_update": {
+                "type": "string",
+                "enum": [
+                  "cluster"
+                ],
+                "description": "The update required before the parameter can be configured",
+                "x-nullable": true
               },
               "value": {
                 "type": "string",
@@ -26781,7 +26791,7 @@
               "description",
               "parameter_type",
               "default_value",
-              "requires_cluster_update",
+              "requires_update",
               "value",
               "required",
               "created_at",
@@ -26792,9 +26802,13 @@
             ]
           }
         },
-        "requires_cluster_update": {
-          "type": "boolean",
-          "description": "Whether a cluster update is required before the extension can be used"
+        "requires_update": {
+          "type": "string",
+          "enum": [
+            "cluster"
+          ],
+          "description": "The update required before the extension can be used",
+          "x-nullable": true
         },
         "url": {
           "type": "string",
@@ -26807,7 +26821,7 @@
         "description",
         "internal",
         "parameters",
-        "requires_cluster_update",
+        "requires_update",
         "url"
       ]
     },
@@ -26874,9 +26888,13 @@
           "description": "Why the parameter cannot be changed",
           "x-nullable": true
         },
-        "requires_cluster_update": {
-          "type": "boolean",
-          "description": "Whether a cluster update is required before the parameter can be configured"
+        "requires_update": {
+          "type": "string",
+          "enum": [
+            "cluster"
+          ],
+          "description": "The update required before the parameter can be configured",
+          "x-nullable": true
         },
         "value": {
           "type": "string",
@@ -26963,7 +26981,7 @@
         "description",
         "parameter_type",
         "default_value",
-        "requires_cluster_update",
+        "requires_update",
         "value",
         "required",
         "created_at",
@@ -30918,9 +30936,14 @@
           "description": "Why the parameter cannot be changed",
           "x-nullable": true
         },
-        "requires_cluster_update": {
-          "type": "boolean",
-          "description": "Whether a cluster update is required before the parameter can be configured"
+        "requires_update": {
+          "type": "string",
+          "enum": [
+            "cluster",
+            "configuration_profile"
+          ],
+          "description": "The update required before the parameter can be configured",
+          "x-nullable": true
         },
         "value": {
           "type": "string",
@@ -31007,7 +31030,7 @@
         "description",
         "parameter_type",
         "default_value",
-        "requires_cluster_update",
+        "requires_update",
         "value",
         "required",
         "created_at",
@@ -32289,9 +32312,14 @@
                 "description": "Why the parameter cannot be changed",
                 "x-nullable": true
               },
-              "requires_cluster_update": {
-                "type": "boolean",
-                "description": "Whether a cluster update is required before the parameter can be configured"
+              "requires_update": {
+                "type": "string",
+                "enum": [
+                  "cluster",
+                  "configuration_profile"
+                ],
+                "description": "The update required before the parameter can be configured",
+                "x-nullable": true
               },
               "value": {
                 "type": "string",
@@ -32378,7 +32406,7 @@
               "description",
               "parameter_type",
               "default_value",
-              "requires_cluster_update",
+              "requires_update",
               "value",
               "required",
               "created_at",
@@ -32389,9 +32417,14 @@
             ]
           }
         },
-        "requires_cluster_update": {
-          "type": "boolean",
-          "description": "Whether a cluster update is required before the extension can be used"
+        "requires_update": {
+          "type": "string",
+          "enum": [
+            "cluster",
+            "configuration_profile"
+          ],
+          "description": "The update required before the extension can be used",
+          "x-nullable": true
         },
         "url": {
           "type": "string",
@@ -32404,7 +32437,7 @@
         "description",
         "internal",
         "parameters",
-        "requires_cluster_update",
+        "requires_update",
         "url"
       ]
     },
@@ -35566,9 +35599,13 @@
                       "description": "Why the parameter cannot be changed",
                       "x-nullable": true
                     },
-                    "requires_cluster_update": {
-                      "type": "boolean",
-                      "description": "Whether a cluster update is required before the parameter can be configured"
+                    "requires_update": {
+                      "type": "string",
+                      "enum": [
+                        "cluster"
+                      ],
+                      "description": "The update required before the parameter can be configured",
+                      "x-nullable": true
                     },
                     "value": {
                       "type": "string",
@@ -35655,7 +35692,7 @@
                     "description",
                     "parameter_type",
                     "default_value",
-                    "requires_cluster_update",
+                    "requires_update",
                     "value",
                     "required",
                     "created_at",
@@ -35883,9 +35920,13 @@
                 "description": "Why the parameter cannot be changed",
                 "x-nullable": true
               },
-              "requires_cluster_update": {
-                "type": "boolean",
-                "description": "Whether a cluster update is required before the parameter can be configured"
+              "requires_update": {
+                "type": "string",
+                "enum": [
+                  "cluster"
+                ],
+                "description": "The update required before the parameter can be configured",
+                "x-nullable": true
               },
               "value": {
                 "type": "string",
@@ -35972,7 +36013,7 @@
               "description",
               "parameter_type",
               "default_value",
-              "requires_cluster_update",
+              "requires_update",
               "value",
               "required",
               "created_at",
@@ -38667,9 +38708,13 @@
                 "description": "Why the parameter cannot be changed",
                 "x-nullable": true
               },
-              "requires_cluster_update": {
-                "type": "boolean",
-                "description": "Whether a cluster update is required before the parameter can be configured"
+              "requires_update": {
+                "type": "string",
+                "enum": [
+                  "cluster"
+                ],
+                "description": "The update required before the parameter can be configured",
+                "x-nullable": true
               },
               "value": {
                 "type": "string",
@@ -38756,7 +38801,7 @@
               "description",
               "parameter_type",
               "default_value",
-              "requires_cluster_update",
+              "requires_update",
               "value",
               "required",
               "created_at",
