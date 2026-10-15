@@ -14677,7 +14677,7 @@
               "properties": {
                 "name": {
                   "type": "string",
-                  "description": "The name of the router group. Letters, digits, dashes, and underscores; 1-64 characters; cannot start or end with a dash or underscore. `new`, `primary`, and `replica` are reserved. Clients connect through the group by appending it to the username, e.g. `user|my-router`."
+                  "description": "The name of the router group. Lowercase letters, digits, and dashes (an RFC 1123 DNS label); 1-16 characters; cannot start or end with a dash. `new`, `primary`, and `replica` are reserved. Clients connect through the group by appending it to the username, e.g. `user|my-router`."
                 },
                 "router_size": {
                   "type": "string",
@@ -26655,8 +26655,8 @@
                 "type": "string",
                 "enum": [
                   "patroni",
-                  "pgconf",
-                  "pgbouncer"
+                  "pgbouncer",
+                  "pgconf"
                 ],
                 "description": "The namespace of the parameter"
               },
@@ -26681,7 +26681,6 @@
                   "bytes",
                   "float",
                   "integer",
-                  "seconds",
                   "select",
                   "string",
                   "time"
@@ -26730,13 +26729,13 @@
                 "description": "Whether processes require a server restart after the parameter changes"
               },
               "max": {
-                "type": "number",
-                "description": "The maximum value of the parameter",
+                "type": "string",
+                "description": "The maximum value of the parameter, e.g. `800` or `1h`",
                 "x-nullable": true
               },
               "min": {
-                "type": "number",
-                "description": "The minimum value of the parameter",
+                "type": "string",
+                "description": "The minimum value of the parameter, e.g. `0` or `1ms`",
                 "x-nullable": true
               },
               "options": {
@@ -26845,8 +26844,8 @@
           "type": "string",
           "enum": [
             "patroni",
-            "pgconf",
-            "pgbouncer"
+            "pgbouncer",
+            "pgconf"
           ],
           "description": "The namespace of the parameter"
         },
@@ -26871,7 +26870,6 @@
             "bytes",
             "float",
             "integer",
-            "seconds",
             "select",
             "string",
             "time"
@@ -26920,13 +26918,13 @@
           "description": "Whether processes require a server restart after the parameter changes"
         },
         "max": {
-          "type": "number",
-          "description": "The maximum value of the parameter",
+          "type": "string",
+          "description": "The maximum value of the parameter, e.g. `800` or `1h`",
           "x-nullable": true
         },
         "min": {
-          "type": "number",
-          "description": "The minimum value of the parameter",
+          "type": "string",
+          "description": "The minimum value of the parameter, e.g. `0` or `1ms`",
           "x-nullable": true
         },
         "options": {
@@ -30891,11 +30889,11 @@
         "namespace": {
           "type": "string",
           "enum": [
-            "pgconf",
-            "router",
-            "sidecar",
             "admin",
-            "replicator"
+            "pgconf",
+            "replicator",
+            "router",
+            "sidecar"
           ],
           "description": "The namespace of the parameter"
         },
@@ -30969,13 +30967,13 @@
           "description": "Whether processes require a server restart after the parameter changes"
         },
         "max": {
-          "type": "number",
-          "description": "The maximum value of the parameter",
+          "type": "string",
+          "description": "The maximum value of the parameter, e.g. `800` or `1h`",
           "x-nullable": true
         },
         "min": {
-          "type": "number",
-          "description": "The minimum value of the parameter",
+          "type": "string",
+          "description": "The minimum value of the parameter, e.g. `0` or `1ms`",
           "x-nullable": true
         },
         "options": {
@@ -32267,11 +32265,11 @@
               "namespace": {
                 "type": "string",
                 "enum": [
-                  "pgconf",
-                  "router",
-                  "sidecar",
                   "admin",
-                  "replicator"
+                  "pgconf",
+                  "replicator",
+                  "router",
+                  "sidecar"
                 ],
                 "description": "The namespace of the parameter"
               },
@@ -32345,13 +32343,13 @@
                 "description": "Whether processes require a server restart after the parameter changes"
               },
               "max": {
-                "type": "number",
-                "description": "The maximum value of the parameter",
+                "type": "string",
+                "description": "The maximum value of the parameter, e.g. `800` or `1h`",
                 "x-nullable": true
               },
               "min": {
-                "type": "number",
-                "description": "The minimum value of the parameter",
+                "type": "string",
+                "description": "The minimum value of the parameter, e.g. `0` or `1ms`",
                 "x-nullable": true
               },
               "options": {
@@ -35556,8 +35554,8 @@
                       "type": "string",
                       "enum": [
                         "patroni",
-                        "pgconf",
-                        "pgbouncer"
+                        "pgbouncer",
+                        "pgconf"
                       ],
                       "description": "The namespace of the parameter"
                     },
@@ -35582,7 +35580,6 @@
                         "bytes",
                         "float",
                         "integer",
-                        "seconds",
                         "select",
                         "string",
                         "time"
@@ -35631,13 +35628,13 @@
                       "description": "Whether processes require a server restart after the parameter changes"
                     },
                     "max": {
-                      "type": "number",
-                      "description": "The maximum value of the parameter",
+                      "type": "string",
+                      "description": "The maximum value of the parameter, e.g. `800` or `1h`",
                       "x-nullable": true
                     },
                     "min": {
-                      "type": "number",
-                      "description": "The minimum value of the parameter",
+                      "type": "string",
+                      "description": "The minimum value of the parameter, e.g. `0` or `1ms`",
                       "x-nullable": true
                     },
                     "options": {
@@ -35877,8 +35874,8 @@
                 "type": "string",
                 "enum": [
                   "patroni",
-                  "pgconf",
-                  "pgbouncer"
+                  "pgbouncer",
+                  "pgconf"
                 ],
                 "description": "The namespace of the parameter"
               },
@@ -35903,7 +35900,6 @@
                   "bytes",
                   "float",
                   "integer",
-                  "seconds",
                   "select",
                   "string",
                   "time"
@@ -35952,13 +35948,13 @@
                 "description": "Whether processes require a server restart after the parameter changes"
               },
               "max": {
-                "type": "number",
-                "description": "The maximum value of the parameter",
+                "type": "string",
+                "description": "The maximum value of the parameter, e.g. `800` or `1h`",
                 "x-nullable": true
               },
               "min": {
-                "type": "number",
-                "description": "The minimum value of the parameter",
+                "type": "string",
+                "description": "The minimum value of the parameter, e.g. `0` or `1ms`",
                 "x-nullable": true
               },
               "options": {
@@ -36357,6 +36353,10 @@
                 "type": "boolean",
                 "description": "Whether the query is a multishard query"
               },
+              "comment_count": {
+                "type": "integer",
+                "description": "How many comments are on this query pattern"
+              },
               "query_count": {
                 "type": "integer",
                 "description": "The number of times this query was executed"
@@ -36556,6 +36556,7 @@
               "normalized_sql",
               "syntax_highlighted_sql",
               "multishard",
+              "comment_count",
               "query_count",
               "error_count",
               "tables",
@@ -36825,6 +36826,10 @@
           "type": "boolean",
           "description": "Whether the query is a multishard query"
         },
+        "comment_count": {
+          "type": "integer",
+          "description": "How many comments are on this query pattern"
+        },
         "query_count": {
           "type": "integer",
           "description": "The number of times this query was executed"
@@ -37024,6 +37029,7 @@
         "normalized_sql",
         "syntax_highlighted_sql",
         "multishard",
+        "comment_count",
         "query_count",
         "error_count",
         "tables",
@@ -38665,8 +38671,8 @@
                 "type": "string",
                 "enum": [
                   "patroni",
-                  "pgconf",
-                  "pgbouncer"
+                  "pgbouncer",
+                  "pgconf"
                 ],
                 "description": "The namespace of the parameter"
               },
@@ -38691,7 +38697,6 @@
                   "bytes",
                   "float",
                   "integer",
-                  "seconds",
                   "select",
                   "string",
                   "time"
@@ -38740,13 +38745,13 @@
                 "description": "Whether processes require a server restart after the parameter changes"
               },
               "max": {
-                "type": "number",
-                "description": "The maximum value of the parameter",
+                "type": "string",
+                "description": "The maximum value of the parameter, e.g. `800` or `1h`",
                 "x-nullable": true
               },
               "min": {
-                "type": "number",
-                "description": "The minimum value of the parameter",
+                "type": "string",
+                "description": "The minimum value of the parameter, e.g. `0` or `1ms`",
                 "x-nullable": true
               },
               "options": {
@@ -45690,6 +45695,10 @@
     {
       "name": "Switchovers",
       "description": "          Resources for moving the primary of a Postgres branch.\n"
+    },
+    {
+      "name": "QueryPatternComments",
+      "description": "          Comments attached to an Insights query pattern.\n"
     },
     {
       "name": "Query Insights reports",
