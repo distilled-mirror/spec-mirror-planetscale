@@ -9998,6 +9998,13 @@
                 "planetscale_neki_router_query_latency_p95_by_database",
                 "planetscale_neki_router_query_latency_p99",
                 "planetscale_neki_router_query_latency_p99_by_database",
+                "planetscale_neki_sidecar_pool_capacity",
+                "planetscale_neki_sidecar_pool_connections_active",
+                "planetscale_neki_sidecar_pool_connections_available",
+                "planetscale_neki_sidecar_pool_connections_in_use",
+                "planetscale_neki_sidecar_pool_connections_waiting",
+                "planetscale_neki_sidecar_pool_wait_time_avg",
+                "planetscale_neki_sidecar_pool_waits_rate",
                 "planetscale_pgbouncer_current_connections",
                 "planetscale_pgbouncer_pools_client",
                 "planetscale_pgbouncer_pools_server",
@@ -26692,10 +26699,9 @@
                 "description": "The default value of the parameter",
                 "x-nullable": true
               },
-              "disabled_reason": {
-                "type": "string",
-                "description": "Why the parameter cannot be changed",
-                "x-nullable": true
+              "disabled": {
+                "type": "boolean",
+                "description": "Whether the parameter is disabled"
               },
               "requires_update": {
                 "type": "string",
@@ -26743,7 +26749,7 @@
                   "type": "string"
                 },
                 "type": "array",
-                "description": "Valid options for the parameter value. Null represents an unset value",
+                "description": "Options, including disabled ones, for the parameter value. Null means unset",
                 "x-nullable": true
               },
               "units": {
@@ -26790,6 +26796,7 @@
               "description",
               "parameter_type",
               "default_value",
+              "disabled",
               "requires_update",
               "value",
               "required",
@@ -26881,10 +26888,9 @@
           "description": "The default value of the parameter",
           "x-nullable": true
         },
-        "disabled_reason": {
-          "type": "string",
-          "description": "Why the parameter cannot be changed",
-          "x-nullable": true
+        "disabled": {
+          "type": "boolean",
+          "description": "Whether the parameter is disabled"
         },
         "requires_update": {
           "type": "string",
@@ -26932,7 +26938,7 @@
             "type": "string"
           },
           "type": "array",
-          "description": "Valid options for the parameter value. Null represents an unset value",
+          "description": "Options, including disabled ones, for the parameter value. Null means unset",
           "x-nullable": true
         },
         "units": {
@@ -26979,6 +26985,7 @@
         "description",
         "parameter_type",
         "default_value",
+        "disabled",
         "requires_update",
         "value",
         "required",
@@ -30929,10 +30936,9 @@
           "description": "The default value of the parameter",
           "x-nullable": true
         },
-        "disabled_reason": {
-          "type": "string",
-          "description": "Why the parameter cannot be changed",
-          "x-nullable": true
+        "disabled": {
+          "type": "boolean",
+          "description": "Whether the parameter is disabled"
         },
         "requires_update": {
           "type": "string",
@@ -30981,7 +30987,7 @@
             "type": "string"
           },
           "type": "array",
-          "description": "Valid options for the parameter value. Null represents an unset value",
+          "description": "Options, including disabled ones, for the parameter value. Null means unset",
           "x-nullable": true
         },
         "units": {
@@ -31028,6 +31034,7 @@
         "description",
         "parameter_type",
         "default_value",
+        "disabled",
         "requires_update",
         "value",
         "required",
@@ -32305,10 +32312,9 @@
                 "description": "The default value of the parameter",
                 "x-nullable": true
               },
-              "disabled_reason": {
-                "type": "string",
-                "description": "Why the parameter cannot be changed",
-                "x-nullable": true
+              "disabled": {
+                "type": "boolean",
+                "description": "Whether the parameter is disabled"
               },
               "requires_update": {
                 "type": "string",
@@ -32357,7 +32363,7 @@
                   "type": "string"
                 },
                 "type": "array",
-                "description": "Valid options for the parameter value. Null represents an unset value",
+                "description": "Options, including disabled ones, for the parameter value. Null means unset",
                 "x-nullable": true
               },
               "units": {
@@ -32404,6 +32410,7 @@
               "description",
               "parameter_type",
               "default_value",
+              "disabled",
               "requires_update",
               "value",
               "required",
@@ -35591,10 +35598,9 @@
                       "description": "The default value of the parameter",
                       "x-nullable": true
                     },
-                    "disabled_reason": {
-                      "type": "string",
-                      "description": "Why the parameter cannot be changed",
-                      "x-nullable": true
+                    "disabled": {
+                      "type": "boolean",
+                      "description": "Whether the parameter is disabled"
                     },
                     "requires_update": {
                       "type": "string",
@@ -35642,7 +35648,7 @@
                         "type": "string"
                       },
                       "type": "array",
-                      "description": "Valid options for the parameter value. Null represents an unset value",
+                      "description": "Options, including disabled ones, for the parameter value. Null means unset",
                       "x-nullable": true
                     },
                     "units": {
@@ -35689,6 +35695,7 @@
                     "description",
                     "parameter_type",
                     "default_value",
+                    "disabled",
                     "requires_update",
                     "value",
                     "required",
@@ -35911,10 +35918,9 @@
                 "description": "The default value of the parameter",
                 "x-nullable": true
               },
-              "disabled_reason": {
-                "type": "string",
-                "description": "Why the parameter cannot be changed",
-                "x-nullable": true
+              "disabled": {
+                "type": "boolean",
+                "description": "Whether the parameter is disabled"
               },
               "requires_update": {
                 "type": "string",
@@ -35962,7 +35968,7 @@
                   "type": "string"
                 },
                 "type": "array",
-                "description": "Valid options for the parameter value. Null represents an unset value",
+                "description": "Options, including disabled ones, for the parameter value. Null means unset",
                 "x-nullable": true
               },
               "units": {
@@ -36009,6 +36015,7 @@
               "description",
               "parameter_type",
               "default_value",
+              "disabled",
               "requires_update",
               "value",
               "required",
@@ -38708,10 +38715,9 @@
                 "description": "The default value of the parameter",
                 "x-nullable": true
               },
-              "disabled_reason": {
-                "type": "string",
-                "description": "Why the parameter cannot be changed",
-                "x-nullable": true
+              "disabled": {
+                "type": "boolean",
+                "description": "Whether the parameter is disabled"
               },
               "requires_update": {
                 "type": "string",
@@ -38759,7 +38765,7 @@
                   "type": "string"
                 },
                 "type": "array",
-                "description": "Valid options for the parameter value. Null represents an unset value",
+                "description": "Options, including disabled ones, for the parameter value. Null means unset",
                 "x-nullable": true
               },
               "units": {
@@ -38806,6 +38812,7 @@
               "description",
               "parameter_type",
               "default_value",
+              "disabled",
               "requires_update",
               "value",
               "required",
@@ -45703,6 +45710,10 @@
     {
       "name": "Query Insights reports",
       "description": "          Resources for downloading query insights data.\n"
+    },
+    {
+      "name": "Dedicated read replica promotions",
+      "description": "          Resources for promoting Postgres dedicated read replicas.\n"
     },
     {
       "name": "Dedicated read replicas",
