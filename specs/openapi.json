@@ -8725,6 +8725,28 @@
                       "description": "Replication lag in seconds that trips the throttler. Must be >= 0"
                     }
                   }
+                },
+                "storage": {
+                  "type": "object",
+                  "properties": {
+                    "disk_scaling_strategy": {
+                      "type": "string",
+                      "enum": [
+                        "grow",
+                        "disable",
+                        "shrink"
+                      ],
+                      "description": "How disk size is managed. `grow` automatically increases disk size as needed, up to `max_storage_bytes`. `disable` turns off automatic disk growth. `shrink` resizes disks to `storage_bytes` and then turns off automatic disk growth."
+                    },
+                    "max_storage_bytes": {
+                      "type": "integer",
+                      "description": "The maximum size in bytes that disks can automatically grow to. Must be at least the size of the largest current disk and no more than the organization's storage limit (4 TB by default)."
+                    },
+                    "storage_bytes": {
+                      "type": "integer",
+                      "description": "The disk size in bytes to shrink to. Only applies when `disk_scaling_strategy` is `shrink`. Must be a multiple of 1 GB and no more than the organization's storage limit (4 TB by default). Rejected if any disk is using more than 80% of the requested size."
+                    }
+                  }
                 }
               }
             }
