@@ -4261,6 +4261,10 @@
                   "type": "integer",
                   "description": "The number of replicas for the configuration profile"
                 },
+                "read_only_replicas": {
+                  "type": "integer",
+                  "description": "The number of read-only replicas for the configuration profile"
+                },
                 "postgres_major_version": {
                   "type": "string",
                   "description": "The PostgreSQL major version for the configuration profile"
@@ -4543,6 +4547,10 @@
                 "replicas": {
                   "type": "integer",
                   "description": "The new number of replicas for the configuration profile"
+                },
+                "read_only_replicas": {
+                  "type": "integer",
+                  "description": "The new number of read-only replicas for the configuration profile"
                 },
                 "parameters": {
                   "type": "object",
@@ -34785,6 +34793,14 @@
                 "type": "boolean",
                 "description": "Whether or not the organization requires payment information"
               },
+              "allow_llm_usage": {
+                "type": "boolean",
+                "description": "Whether or not LLM-powered features are enabled for the organization"
+              },
+              "llm_usage_blocked": {
+                "type": "boolean",
+                "description": "Whether or not LLM usage is blocked for the organization. When true, LLM-powered features are disabled and can't be enabled"
+              },
               "mcp_access_level": {
                 "type": "string",
                 "description": "The query access level MCP clients can be granted for the organization (none, read_only, or read_write)"
@@ -34810,6 +34826,8 @@
               "neki_router_replicas_per_cell_limit",
               "has_card",
               "payment_info_required",
+              "allow_llm_usage",
+              "llm_usage_blocked",
               "mcp_access_level"
             ]
           }
@@ -34916,6 +34934,14 @@
           "type": "boolean",
           "description": "Whether or not the organization requires payment information"
         },
+        "allow_llm_usage": {
+          "type": "boolean",
+          "description": "Whether or not LLM-powered features are enabled for the organization"
+        },
+        "llm_usage_blocked": {
+          "type": "boolean",
+          "description": "Whether or not LLM usage is blocked for the organization. When true, LLM-powered features are disabled and can't be enabled"
+        },
         "mcp_access_level": {
           "type": "string",
           "description": "The query access level MCP clients can be granted for the organization (none, read_only, or read_write)"
@@ -34941,6 +34967,8 @@
         "neki_router_replicas_per_cell_limit",
         "has_card",
         "payment_info_required",
+        "allow_llm_usage",
+        "llm_usage_blocked",
         "mcp_access_level"
       ]
     },
