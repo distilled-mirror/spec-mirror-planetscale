@@ -484,6 +484,16 @@
             "description": "The database engine to filter by. Defaults to 'mysql'."
           },
           {
+            "name": "architecture",
+            "type": "string",
+            "enum": [
+              "aarch64",
+              "x86_64"
+            ],
+            "in": "query",
+            "description": "Filter by CPU architecture."
+          },
+          {
             "name": "rates",
             "type": "boolean",
             "in": "query",
@@ -12279,13 +12289,13 @@
               "type": "string"
             },
             "in": "query",
-            "description": "Filter change requests by target type. Must contain one or more of: NekiAdmin, NekiCluster, NekiConfigurationProfile, NekiExternalShard, NekiRouter, or NekiSidecar"
+            "description": "Filter change requests by target type. Must contain one or more of: NekiAdmin, NekiCluster, NekiConfigurationProfile, NekiExternalShard, or NekiRouter"
           },
           {
             "name": "target_id",
             "type": "string",
             "in": "query",
-            "description": "Filter change requests by target ID. Requires target_types"
+            "description": "Filter change requests for one target. Requires exactly one target type"
           },
           {
             "name": "period",
@@ -14076,7 +14086,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `delete_production_branch_password`, `delete_production_read_only_branch_password`, `delete_branch_password`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `manage_passwords`, `manage_production_branch_passwords`, `manage_read_only_passwords`, `manage_production_read_only_passwords` |\n| Database | `manage_passwords`, `manage_production_branch_passwords`, `manage_read_only_passwords`, `manage_production_read_only_passwords` |\n| Branch | `manage_passwords`, `manage_read_only_passwords` |"
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `connect_production_branch`, `connect_production_read_only_branch`, `connect_branch`, `delete_production_branch_password`, `delete_production_read_only_branch_password`, `delete_branch_password`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `manage_passwords`, `manage_production_branch_passwords`, `manage_read_only_passwords`, `manage_production_read_only_passwords` |\n| Database | `manage_passwords`, `manage_production_branch_passwords`, `manage_read_only_passwords`, `manage_production_read_only_passwords` |\n| Branch | `manage_passwords`, `manage_read_only_passwords` |"
       }
     },
     "/organizations/{organization}/databases/{database}/branches/{branch}/roles/{id}": {
@@ -14559,7 +14569,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `delete_production_branch_password`, `delete_production_read_only_branch_password`, `delete_branch_password`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `manage_passwords`, `manage_production_branch_passwords`, `manage_read_only_passwords`, `manage_production_read_only_passwords` |\n| Database | `manage_passwords`, `manage_production_branch_passwords`, `manage_read_only_passwords`, `manage_production_read_only_passwords` |\n| Branch | `manage_passwords`, `manage_read_only_passwords` |"
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `connect_production_branch`, `connect_production_read_only_branch`, `connect_branch`, `delete_production_branch_password`, `delete_production_read_only_branch_password`, `delete_branch_password`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `manage_passwords`, `manage_production_branch_passwords`, `manage_read_only_passwords`, `manage_production_read_only_passwords` |\n| Database | `manage_passwords`, `manage_production_branch_passwords`, `manage_read_only_passwords`, `manage_production_read_only_passwords` |\n| Branch | `manage_passwords`, `manage_read_only_passwords` |"
       }
     },
     "/organizations/{organization}/databases/{database}/branches/{branch}/router-size-skus": {
@@ -16083,559 +16093,6 @@
           }
         },
         "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_databases` |\n| Database | `write_database` |"
-      }
-    },
-    "/organizations/{organization}/databases/{database}/branches/{branch}/sidecars": {
-      "get": {
-        "tags": [
-          "api-neki_sidecars"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "operationId": "list_sidecars",
-        "summary": "List sidecars for a Neki branch",
-        "parameters": [
-          {
-            "name": "organization",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Organization name slug from `list_organizations`. Example: `acme`."
-          },
-          {
-            "name": "database",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Database name slug from `list_databases`. Example: `app-db`."
-          },
-          {
-            "name": "branch",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Branch name from `list_branches`. Example: `main`."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns sidecars for the branch, one per configuration profile",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/NekiSidecar"
-              }
-            },
-            "headers": {}
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "429": {
-            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |\n| Branch | `read_branch` |"
-      }
-    },
-    "/organizations/{organization}/databases/{database}/branches/{branch}/sidecars/{sidecar}": {
-      "get": {
-        "tags": [
-          "api-neki_sidecars"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "operationId": "get_sidecar",
-        "summary": "Get a sidecar for a Neki branch",
-        "parameters": [
-          {
-            "name": "organization",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Organization name slug from `list_organizations`. Example: `acme`."
-          },
-          {
-            "name": "database",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Database name slug from `list_databases`. Example: `app-db`."
-          },
-          {
-            "name": "branch",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Branch name from `list_branches`. Example: `main`."
-          },
-          {
-            "name": "sidecar",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "ID from `list_sidecars`, or the configuration profile name."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns the sidecar",
-            "schema": {
-              "$ref": "#/definitions/NekiSidecar"
-            },
-            "headers": {}
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Sidecar not found",
-            "headers": {}
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "429": {
-            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |\n| Branch | `read_branch` |"
-      },
-      "patch": {
-        "tags": [
-          "api-neki_sidecars"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "operationId": "update_sidecar",
-        "summary": "Update a sidecar for a Neki branch",
-        "parameters": [
-          {
-            "name": "organization",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Organization name slug from `list_organizations`. Example: `acme`."
-          },
-          {
-            "name": "database",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Database name slug from `list_databases`. Example: `app-db`."
-          },
-          {
-            "name": "branch",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Branch name from `list_branches`. Example: `main`."
-          },
-          {
-            "name": "sidecar",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "ID from `list_sidecars`, or the configuration profile name."
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "parameters": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Sidecar parameters nested by namespace (e.g., {\"sidecar\": {\"pool-capacity\": \"100\"}})"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns the sidecar",
-            "schema": {
-              "$ref": "#/definitions/NekiSidecar"
-            },
-            "headers": {}
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Sidecar not found",
-            "headers": {}
-          },
-          "422": {
-            "description": "Invalid parameters"
-          },
-          "429": {
-            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_databases` |\n| Database | `write_database` |"
-      }
-    },
-    "/organizations/{organization}/databases/{database}/branches/{branch}/sidecars/{sidecar}/changes": {
-      "get": {
-        "tags": [
-          "api-neki_sidecar_changes"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "operationId": "list_sidecar_change_requests",
-        "summary": "List change requests for a Neki sidecar",
-        "parameters": [
-          {
-            "name": "organization",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Organization name slug from `list_organizations`. Example: `acme`."
-          },
-          {
-            "name": "database",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Database name slug from `list_databases`. Example: `app-db`."
-          },
-          {
-            "name": "branch",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Branch name from `list_branches`. Example: `main`."
-          },
-          {
-            "name": "sidecar",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "ID from `list_sidecars`, or the configuration profile name."
-          },
-          {
-            "name": "page",
-            "type": "integer",
-            "in": "query",
-            "default": 1,
-            "description": "If provided, specifies the page offset of returned results"
-          },
-          {
-            "name": "per_page",
-            "type": "integer",
-            "in": "query",
-            "default": 25,
-            "description": "If provided, specifies the number of returned results"
-          },
-          {
-            "name": "period",
-            "type": "string",
-            "enum": [
-              "15m",
-              "1h",
-              "3h",
-              "6h",
-              "12h",
-              "1d",
-              "2d",
-              "7d",
-              "8d"
-            ],
-            "in": "query",
-            "description": "Filter change requests by named period"
-          },
-          {
-            "name": "completed_at",
-            "type": "string",
-            "in": "query",
-            "description": "Filter change requests completed between two ISO 8601 timestamps"
-          }
-        ],
-        "responses": {
-          "308": {
-            "description": "Redirects to the Neki change requests endpoint",
-            "headers": {}
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Sidecar not found",
-            "headers": {}
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "429": {
-            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |\n| Branch | `read_branch` |"
-      }
-    },
-    "/organizations/{organization}/databases/{database}/branches/{branch}/sidecars/{sidecar}/changes/{id}": {
-      "get": {
-        "tags": [
-          "api-neki_sidecar_changes"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "operationId": "get_sidecar_change_request",
-        "summary": "Get a change request for a Neki sidecar",
-        "parameters": [
-          {
-            "name": "organization",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Organization name slug from `list_organizations`. Example: `acme`."
-          },
-          {
-            "name": "database",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Database name slug from `list_databases`. Example: `app-db`."
-          },
-          {
-            "name": "branch",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Branch name from `list_branches`. Example: `main`."
-          },
-          {
-            "name": "sidecar",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "ID from `list_sidecars`, or the configuration profile name."
-          },
-          {
-            "name": "id",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "The ID of the change request"
-          }
-        ],
-        "responses": {
-          "308": {
-            "description": "Redirects to the Neki change request endpoint",
-            "headers": {}
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Sidecar or change request not found",
-            "headers": {}
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "429": {
-            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |\n| Branch | `read_branch` |"
-      },
-      "delete": {
-        "tags": [
-          "api-neki_sidecar_changes"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "operationId": "cancel_sidecar_change_request",
-        "summary": "Cancel a change request for a Neki sidecar",
-        "parameters": [
-          {
-            "name": "organization",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Organization name slug from `list_organizations`. Example: `acme`."
-          },
-          {
-            "name": "database",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Database name slug from `list_databases`. Example: `app-db`."
-          },
-          {
-            "name": "branch",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Branch name from `list_branches`. Example: `main`."
-          },
-          {
-            "name": "sidecar",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "ID from `list_sidecars`, or the configuration profile name."
-          },
-          {
-            "name": "id",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "The ID of the change request"
-          }
-        ],
-        "responses": {
-          "308": {
-            "description": "Redirects to the Neki change request endpoint",
-            "headers": {}
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Sidecar or change request not found",
-            "headers": {}
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "429": {
-            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_databases` |\n| Database | `write_database` |"
-      }
-    },
-    "/organizations/{organization}/databases/{database}/branches/{branch}/sidecars/{sidecar}/parameters": {
-      "get": {
-        "tags": [
-          "api-neki_sidecar_parameters"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "operationId": "list_sidecar_parameters",
-        "summary": "List parameters for a Neki sidecar",
-        "parameters": [
-          {
-            "name": "organization",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Organization name slug from `list_organizations`. Example: `acme`."
-          },
-          {
-            "name": "database",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Database name slug from `list_databases`. Example: `app-db`."
-          },
-          {
-            "name": "branch",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "Branch name from `list_branches`. Example: `main`."
-          },
-          {
-            "name": "sidecar",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "ID from `list_sidecars`, or the configuration profile name."
-          },
-          {
-            "name": "internal",
-            "type": "boolean",
-            "in": "query",
-            "description": "Set to true to return only internal parameters, which cannot be changed. Set to false to return only parameters you can change. Omit to return both."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns parameters for the sidecar",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/NekiParameter"
-              }
-            },
-            "headers": {}
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Sidecar not found",
-            "headers": {}
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "429": {
-            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |\n| Branch | `read_branch` |"
       }
     },
     "/organizations/{organization}/databases/{database}/branches/{branch}/switchovers": {
@@ -31269,8 +30726,7 @@
                   "NekiClusterChangeRequest",
                   "NekiConfigurationProfileChangeRequest",
                   "NekiExternalShardChangeRequest",
-                  "NekiRouterChangeRequest",
-                  "NekiSidecarChangeRequest"
+                  "NekiRouterChangeRequest"
                 ],
                 "description": "The type of change request"
               },
@@ -31345,8 +30801,7 @@
                   "NekiCluster",
                   "NekiConfigurationProfile",
                   "NekiExternalShard",
-                  "NekiRouter",
-                  "NekiSidecar"
+                  "NekiRouter"
                 ],
                 "description": "The type of resource being changed"
               },
@@ -31651,8 +31106,7 @@
             "NekiClusterChangeRequest",
             "NekiConfigurationProfileChangeRequest",
             "NekiExternalShardChangeRequest",
-            "NekiRouterChangeRequest",
-            "NekiSidecarChangeRequest"
+            "NekiRouterChangeRequest"
           ],
           "description": "The type of change request"
         },
@@ -31727,8 +31181,7 @@
             "NekiCluster",
             "NekiConfigurationProfile",
             "NekiExternalShard",
-            "NekiRouter",
-            "NekiSidecar"
+            "NekiRouter"
           ],
           "description": "The type of resource being changed"
         },
@@ -32693,43 +32146,6 @@
       "required": [
         "id",
         "status"
-      ]
-    },
-    "NekiSidecar": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of the sidecar"
-        },
-        "configuration_profile": {
-          "type": "string",
-          "description": "The name of the configuration profile the sidecar belongs to"
-        },
-        "state": {
-          "type": "string",
-          "enum": [
-            "pending",
-            "applying",
-            "ready"
-          ],
-          "description": "The current state of the sidecar"
-        },
-        "created_at": {
-          "type": "string",
-          "description": "When the sidecar was created"
-        },
-        "updated_at": {
-          "type": "string",
-          "description": "When the sidecar was last updated"
-        }
-      },
-      "required": [
-        "id",
-        "configuration_profile",
-        "state",
-        "created_at",
-        "updated_at"
       ]
     },
     "PaginatedOauthApplication": {
