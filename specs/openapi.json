@@ -45243,8 +45243,8 @@
       "description": "          Resources for downloading query insights data.\n"
     },
     {
-      "name": "Dedicated read replica promotions",
-      "description": "          Resources for promoting Postgres dedicated read replicas.\n"
+      "name": "Dedicated read replica detachments",
+      "description": "          Resources for detaching Postgres dedicated read replicas.\n"
     },
     {
       "name": "Dedicated read replicas",
