@@ -31498,6 +31498,10 @@
           "type": "integer",
           "description": "The number of replicas for shards using this configuration profile"
         },
+        "read_only_replicas": {
+          "type": "integer",
+          "description": "The number of read-only replicas for shards using this configuration profile"
+        },
         "postgres_image_version": {
           "type": "string",
           "description": "The PostgreSQL image used by the configuration profile"
@@ -31587,6 +31591,7 @@
         "default",
         "metal",
         "replicas",
+        "read_only_replicas",
         "postgres_image_version",
         "latest_postgres_image_version",
         "postgres_major_version",
@@ -32487,6 +32492,26 @@
                 "description": "When the service token was last used",
                 "x-nullable": true
               },
+              "last_used_ip": {
+                "type": "string",
+                "description": "The IP address from the service token's latest use",
+                "x-nullable": true
+              },
+              "last_used_location": {
+                "type": "string",
+                "description": "The location of the service token's latest use",
+                "x-nullable": true
+              },
+              "last_used_asn": {
+                "type": "integer",
+                "description": "The autonomous system number for the service token's latest use",
+                "x-nullable": true
+              },
+              "last_used_asn_organization": {
+                "type": "string",
+                "description": "The autonomous system organization for the service token's latest use",
+                "x-nullable": true
+              },
               "actor_id": {
                 "type": "string",
                 "description": "The ID of the actor on whose behalf the service token was created",
@@ -32825,6 +32850,10 @@
               "updated_at",
               "expires_at",
               "last_used_at",
+              "last_used_ip",
+              "last_used_location",
+              "last_used_asn",
+              "last_used_asn_organization",
               "actor_id",
               "actor_display_name",
               "actor_type"
@@ -32891,6 +32920,26 @@
         "last_used_at": {
           "type": "string",
           "description": "When the service token was last used",
+          "x-nullable": true
+        },
+        "last_used_ip": {
+          "type": "string",
+          "description": "The IP address from the service token's latest use",
+          "x-nullable": true
+        },
+        "last_used_location": {
+          "type": "string",
+          "description": "The location of the service token's latest use",
+          "x-nullable": true
+        },
+        "last_used_asn": {
+          "type": "integer",
+          "description": "The autonomous system number for the service token's latest use",
+          "x-nullable": true
+        },
+        "last_used_asn_organization": {
+          "type": "string",
+          "description": "The autonomous system organization for the service token's latest use",
           "x-nullable": true
         },
         "actor_id": {
@@ -33231,6 +33280,10 @@
         "updated_at",
         "expires_at",
         "last_used_at",
+        "last_used_ip",
+        "last_used_location",
+        "last_used_asn",
+        "last_used_asn_organization",
         "actor_id",
         "actor_display_name",
         "actor_type"
@@ -34612,6 +34665,16 @@
                 "description": "The location of the actor based on their IP address",
                 "x-nullable": true
               },
+              "asn": {
+                "type": "integer",
+                "description": "The autonomous system number for the actor's IP address",
+                "x-nullable": true
+              },
+              "asn_organization": {
+                "type": "string",
+                "description": "The autonomous system organization for the actor's IP address",
+                "x-nullable": true
+              },
               "target_display_name": {
                 "type": "string",
                 "description": "The name of the target",
@@ -34662,6 +34725,8 @@
               "target_id",
               "target_type",
               "location",
+              "asn",
+              "asn_organization",
               "target_display_name",
               "audit_action",
               "action",
