@@ -7056,6 +7056,23 @@
             "in": "path",
             "required": true,
             "description": "The name of the branch"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "cluster_size": {
+                  "type": "string",
+                  "description": "Postgres cluster size to apply when demoting. PS-DEV is allowed. Changing the size requires write_database."
+                },
+                "replicas": {
+                  "type": "integer",
+                  "description": "Postgres replica count, not including the primary. 0 is a single node. 2 to 8 is high availability. Changing the replica count requires write_database."
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -13337,6 +13354,23 @@
             "in": "path",
             "required": true,
             "description": "The name of the branch"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "cluster_size": {
+                  "type": "string",
+                  "description": "Cluster size to apply when promoting. PS-DEV is not permitted. When omitted, a PS-DEV branch uses the smallest production size. Changing the size requires write_database."
+                },
+                "replicas": {
+                  "type": "integer",
+                  "description": "Postgres replica count, not including the primary. 0 is a single node. 2 to 8 is high availability. Changing the replica count requires write_database."
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -19542,6 +19576,235 @@
         "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `create_deploy_request`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `deploy_deploy_requests` |\n| Database | `deploy_deploy_requests` |"
       }
     },
+    "/organizations/{organization}/databases/{database}/maintenance-events": {
+      "get": {
+        "tags": [
+          "MaintenanceEvents"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "list_maintenance_events",
+        "summary": "List maintenance events",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "page",
+            "type": "integer",
+            "in": "query",
+            "default": 1,
+            "description": "If provided, specifies the page offset of returned results"
+          },
+          {
+            "name": "per_page",
+            "type": "integer",
+            "in": "query",
+            "default": 25,
+            "description": "If provided, specifies the number of returned results"
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "query",
+            "description": "Filter by branch name"
+          },
+          {
+            "name": "state",
+            "type": "string",
+            "enum": [
+              "scheduled",
+              "in_progress",
+              "completed",
+              "canceled",
+              "expired"
+            ],
+            "in": "query",
+            "description": "Filter by maintenance event state"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns maintenance events for the database",
+            "schema": {
+              "$ref": "#/definitions/PaginatedPostgresBranchMaintenanceEvent"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/maintenance-events/{id}": {
+      "get": {
+        "tags": [
+          "MaintenanceEvents"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "get_maintenance_event",
+        "summary": "Get a maintenance event",
+        "parameters": [
+          {
+            "name": "id",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the maintenance event"
+          },
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a maintenance event",
+            "schema": {
+              "$ref": "#/definitions/PostgresBranchMaintenanceEvent"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
+      },
+      "patch": {
+        "tags": [
+          "MaintenanceEvents"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "reschedule_maintenance_event",
+        "summary": "Reschedule a maintenance event",
+        "parameters": [
+          {
+            "name": "id",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the maintenance event"
+          },
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "scheduled_at": {
+                  "type": "string",
+                  "description": "When the maintenance should run, as one of the event's `available_times`"
+                }
+              },
+              "required": [
+                "scheduled_at"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the rescheduled maintenance event",
+            "schema": {
+              "$ref": "#/definitions/PostgresBranchMaintenanceEvent"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_databases` |\n| Database | `write_database` |"
+      }
+    },
     "/organizations/{organization}/databases/{database}/maintenance-schedules": {
       "get": {
         "tags": [
@@ -19673,6 +19936,84 @@
           }
         },
         "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
+      },
+      "patch": {
+        "tags": [
+          "MaintenanceSchedules"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "update_maintenance_schedule",
+        "summary": "Update a maintenance schedule",
+        "parameters": [
+          {
+            "name": "id",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the maintenance schedule"
+          },
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "day": {
+                  "type": "integer",
+                  "description": "Day of the week in UTC (0 = Sunday, 6 = Saturday)"
+                },
+                "hour": {
+                  "type": "integer",
+                  "description": "Hour of the day in UTC (0-23)"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated maintenance schedule",
+            "schema": {
+              "$ref": "#/definitions/BranchMaintenanceSchedule"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "        Changes the day and hour of a branch's weekly maintenance window. Available only for PostgreSQL databases.\n\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_databases` |\n| Database | `write_database` |"
       }
     },
     "/organizations/{organization}/databases/{database}/maintenance-schedules/{id}/windows": {
@@ -27544,6 +27885,11 @@
                 "description": "The display name of the bouncer size SKU",
                 "x-nullable": true
               },
+              "bouncer_rank": {
+                "type": "integer",
+                "description": "The display order of the bouncer size SKU",
+                "x-nullable": true
+              },
               "target": {
                 "type": "string",
                 "enum": [
@@ -27562,6 +27908,11 @@
               "previous_bouncer_size_display_name": {
                 "type": "string",
                 "description": "The previous display name of the bouncer size SKU",
+                "x-nullable": true
+              },
+              "previous_bouncer_rank": {
+                "type": "integer",
+                "description": "The previous display order of the bouncer size SKU",
                 "x-nullable": true
               },
               "previous_target": {
@@ -27966,6 +28317,11 @@
           "description": "The display name of the bouncer size SKU",
           "x-nullable": true
         },
+        "bouncer_rank": {
+          "type": "integer",
+          "description": "The display order of the bouncer size SKU",
+          "x-nullable": true
+        },
         "target": {
           "type": "string",
           "enum": [
@@ -27984,6 +28340,11 @@
         "previous_bouncer_size_display_name": {
           "type": "string",
           "description": "The previous display name of the bouncer size SKU",
+          "x-nullable": true
+        },
+        "previous_bouncer_rank": {
+          "type": "integer",
+          "description": "The previous display order of the bouncer size SKU",
           "x-nullable": true
         },
         "previous_target": {
@@ -31121,6 +31482,262 @@
         "replicas",
         "previous_replicas",
         "actor"
+      ]
+    },
+    "PaginatedPostgresBranchMaintenanceEvent": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The response type. Always \"list\" for paginated responses."
+        },
+        "current_page": {
+          "type": "integer",
+          "description": "The current page number"
+        },
+        "per_page": {
+          "type": "integer",
+          "description": "The maximum number of results per page"
+        },
+        "next_page": {
+          "type": "integer",
+          "description": "The next page number, or null when this is the last page",
+          "x-nullable": true
+        },
+        "next_page_url": {
+          "type": "string",
+          "description": "The next page of results, or null when this is the last page",
+          "x-nullable": true
+        },
+        "prev_page": {
+          "type": "integer",
+          "description": "The previous page number, or null when this is the first page",
+          "x-nullable": true
+        },
+        "prev_page_url": {
+          "type": "string",
+          "description": "The previous page of results, or null when this is the first page",
+          "x-nullable": true
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The ID of the maintenance event"
+              },
+              "state": {
+                "type": "string",
+                "enum": [
+                  "scheduled",
+                  "in_progress",
+                  "completed",
+                  "canceled",
+                  "expired"
+                ],
+                "description": "The state of the maintenance event"
+              },
+              "what": {
+                "type": "string",
+                "description": "What the maintenance changes"
+              },
+              "why": {
+                "type": "string",
+                "description": "Why the maintenance is needed"
+              },
+              "expected_impact": {
+                "type": "string",
+                "description": "The impact to expect while the maintenance runs"
+              },
+              "scheduled_at": {
+                "type": "string",
+                "description": "When the maintenance is scheduled to run",
+                "x-nullable": true
+              },
+              "not_after": {
+                "type": "string",
+                "description": "The deadline by which the maintenance must run"
+              },
+              "completed_at": {
+                "type": "string",
+                "description": "When the maintenance completed",
+                "x-nullable": true
+              },
+              "reschedules_remaining": {
+                "type": "integer",
+                "description": "How many more times the maintenance can be rescheduled"
+              },
+              "branch": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The ID for the resource"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "The name for the resource"
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "description": "When the resource was created"
+                  },
+                  "updated_at": {
+                    "type": "string",
+                    "description": "When the resource was last updated"
+                  },
+                  "deleted_at": {
+                    "type": "string",
+                    "description": "When the resource was deleted, if deleted",
+                    "x-nullable": true
+                  }
+                },
+                "required": [
+                  "id",
+                  "name",
+                  "created_at",
+                  "updated_at",
+                  "deleted_at"
+                ]
+              },
+              "available_times": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "description": "The times the maintenance can be rescheduled to"
+              }
+            },
+            "required": [
+              "id",
+              "state",
+              "what",
+              "why",
+              "expected_impact",
+              "scheduled_at",
+              "not_after",
+              "completed_at",
+              "reschedules_remaining",
+              "branch",
+              "available_times"
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "current_page",
+        "per_page",
+        "next_page",
+        "next_page_url",
+        "prev_page",
+        "prev_page_url",
+        "data"
+      ]
+    },
+    "PostgresBranchMaintenanceEvent": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the maintenance event"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "scheduled",
+            "in_progress",
+            "completed",
+            "canceled",
+            "expired"
+          ],
+          "description": "The state of the maintenance event"
+        },
+        "what": {
+          "type": "string",
+          "description": "What the maintenance changes"
+        },
+        "why": {
+          "type": "string",
+          "description": "Why the maintenance is needed"
+        },
+        "expected_impact": {
+          "type": "string",
+          "description": "The impact to expect while the maintenance runs"
+        },
+        "scheduled_at": {
+          "type": "string",
+          "description": "When the maintenance is scheduled to run",
+          "x-nullable": true
+        },
+        "not_after": {
+          "type": "string",
+          "description": "The deadline by which the maintenance must run"
+        },
+        "completed_at": {
+          "type": "string",
+          "description": "When the maintenance completed",
+          "x-nullable": true
+        },
+        "reschedules_remaining": {
+          "type": "integer",
+          "description": "How many more times the maintenance can be rescheduled"
+        },
+        "branch": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The ID for the resource"
+            },
+            "name": {
+              "type": "string",
+              "description": "The name for the resource"
+            },
+            "created_at": {
+              "type": "string",
+              "description": "When the resource was created"
+            },
+            "updated_at": {
+              "type": "string",
+              "description": "When the resource was last updated"
+            },
+            "deleted_at": {
+              "type": "string",
+              "description": "When the resource was deleted, if deleted",
+              "x-nullable": true
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ]
+        },
+        "available_times": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "The times the maintenance can be rescheduled to"
+        }
+      },
+      "required": [
+        "id",
+        "state",
+        "what",
+        "why",
+        "expected_impact",
+        "scheduled_at",
+        "not_after",
+        "completed_at",
+        "reschedules_remaining",
+        "branch",
+        "available_times"
       ]
     },
     "PaginatedBranchMaintenanceSchedule": {
@@ -45622,7 +46239,7 @@
     },
     {
       "name": "MaintenanceSchedules",
-      "description": "          Resources for viewing database maintenance schedules for Vitess databases (Enterprise only).\n"
+      "description": "          Resources for viewing and updating database maintenance schedules, for PostgreSQL databases and Vitess databases (Enterprise only).\n"
     },
     {
       "name": "MaintenanceWindows",
