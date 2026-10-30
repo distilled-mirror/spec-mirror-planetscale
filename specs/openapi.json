@@ -10245,6 +10245,147 @@
         "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_databases` |\n| Database | `write_database` |"
       }
     },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/maintenance-window": {
+      "get": {
+        "tags": [
+          "MaintenanceSchedules"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "get_branch_maintenance_window",
+        "summary": "Get a branch's maintenance window",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the branch's maintenance schedule",
+            "schema": {
+              "$ref": "#/definitions/BranchMaintenanceSchedule"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "        Returns the weekly maintenance window of a PostgreSQL production branch.\n\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
+      },
+      "patch": {
+        "tags": [
+          "MaintenanceSchedules"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "update_branch_maintenance_window",
+        "summary": "Update a branch's maintenance window",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "day": {
+                  "type": "integer",
+                  "description": "Day of the week in UTC (0 = Sunday, 6 = Saturday)"
+                },
+                "hour": {
+                  "type": "integer",
+                  "description": "Hour of the day in UTC (0-23)"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated maintenance schedule",
+            "schema": {
+              "$ref": "#/definitions/BranchMaintenanceSchedule"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "        Changes the day and hour of a PostgreSQL production branch's weekly maintenance window.\n\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_databases` |\n| Database | `write_database` |"
+      }
+    },
     "/organizations/{organization}/databases/{database}/branches/{branch}/metrics": {
       "get": {
         "tags": [
@@ -44109,6 +44250,11 @@
                     "deploy_request.reverted",
                     "deploy_request.schema_applied",
                     "keyspace.storage",
+                    "maintenance.scheduled",
+                    "maintenance.started",
+                    "maintenance.completed",
+                    "maintenance.failed",
+                    "maintenance.canceled",
                     "webhook.test"
                   ]
                 },
@@ -44214,6 +44360,11 @@
               "deploy_request.reverted",
               "deploy_request.schema_applied",
               "keyspace.storage",
+              "maintenance.scheduled",
+              "maintenance.started",
+              "maintenance.completed",
+              "maintenance.failed",
+              "maintenance.canceled",
               "webhook.test"
             ]
           },
