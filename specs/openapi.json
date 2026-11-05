@@ -46455,6 +46455,10 @@
       "description": "          Resources for managing Postgres bouncer resize requests.\n"
     },
     {
+      "name": "Bouncer restarts",
+      "description": "          Resources for restarting the PgBouncers of a Postgres branch in place.\n"
+    },
+    {
       "name": "Bouncers",
       "description": "          Resources for managing postgres bouncers.\n"
     },
@@ -46657,11 +46661,20 @@
         "user:read_user": "Read user",
         "user:write_user": "Write user"
       }
+    },
+    "service_token": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "A service token, sent as `Bearer <SERVICE_TOKEN>`. Older service tokens are sent as `<SERVICE_TOKEN_ID>:<SERVICE_TOKEN>` instead."
     }
   },
   "security": [
     {
       "oauth2": []
+    },
+    {
+      "service_token": []
     }
   ],
   "host": "api.planetscale.com",
