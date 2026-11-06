@@ -46539,6 +46539,10 @@
       "description": "            Resources for managing invoices.\n"
     },
     {
+      "name": "OIDC trust providers",
+      "description": "            Resources for listing the OIDC providers that OIDC trusts can trust and the claims of their tokens.\n"
+    },
+    {
       "name": "OIDC trusts",
       "description": "            Resources for managing OIDC trusts, which allow tokens from trusted OIDC providers to be exchanged for service tokens.\n"
     },
