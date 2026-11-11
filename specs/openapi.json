@@ -11782,6 +11782,81 @@
         "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |\n| Branch | `read_branch` |"
       }
     },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/move-tables/list-workflows": {
+      "post": {
+        "tags": [
+          "MoveTables"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "start_list_move_tables_workflows",
+        "summary": "Start listing MoveTables workflows",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name"
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name"
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "List MoveTables workflows operations",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ids": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array",
+                  "description": "One vtctld operation ID per keyspace. Poll the vtctld operation endpoint for each result."
+                }
+              },
+              "required": [
+                "ids"
+              ]
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_workflow`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_workflows` |\n| Database | `read_workflows` |"
+      }
+    },
     "/organizations/{organization}/databases/{database}/branches/{branch}/move-tables/workflows": {
       "get": {
         "tags": [
@@ -21554,6 +21629,12 @@
             "type": "string",
             "in": "query",
             "description": "Search term to filter members by name or email"
+          },
+          {
+            "name": "mfa_configured",
+            "type": "boolean",
+            "in": "query",
+            "description": "Filter members by whether they have configured multi-factor authentication"
           },
           {
             "name": "page",
