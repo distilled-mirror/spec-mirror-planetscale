@@ -15927,7 +15927,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n"
+        "description": "\n### Authorization\nA service token   must have at least one of the following access   in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_database`\n\n"
       },
       "put": {
         "tags": [
@@ -16004,7 +16004,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n"
+        "description": "\n### Authorization\nA service token   must have at least one of the following access   in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_database`\n\n"
       },
       "delete": {
         "tags": [
@@ -16065,7 +16065,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n"
+        "description": "\n### Authorization\nA service token   must have at least one of the following access   in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_database`\n\n"
       }
     },
     "/organizations/{organization}/databases/{database}/branches/{branch}/schema": {
@@ -21635,6 +21635,15 @@
             "type": "boolean",
             "in": "query",
             "description": "Filter members by whether they have configured multi-factor authentication"
+          },
+          {
+            "name": "role",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "in": "query",
+            "description": "Filter members by built-in role names or custom role IDs"
           },
           {
             "name": "page",
@@ -46474,6 +46483,10 @@
     {
       "name": "Insights Agent schedules",
       "description": "Resources for managing Insights Agent schedules."
+    },
+    {
+      "name": "InsightsAgentSuggestions",
+      "description": "          Resources for reviewing and applying the cluster size, replica, and parameter changes a branch tuning run suggests.\n"
     },
     {
       "name": "Keyspace config changes",
