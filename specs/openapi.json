@@ -836,7 +836,7 @@
                 },
                 "require_approval_for_deploy": {
                   "type": "boolean",
-                  "description": "Whether or not deploy requests must be approved by a database administrator other than the request creator"
+                  "description": "Whether or not deploy requests must be approved by someone with permission to approve them, other than the request creator"
                 },
                 "restrict_branch_region": {
                   "type": "boolean",
@@ -1582,6 +1582,14 @@
                     "maximum_storage_bytes": {
                       "type": "integer",
                       "description": "The maximum storage size in bytes for autoscaling."
+                    },
+                    "storage_iops": {
+                      "type": "integer",
+                      "description": "For PostgreSQL backup restores and point-in-time recovery, the storage IOPS."
+                    },
+                    "storage_throughput_mibs": {
+                      "type": "integer",
+                      "description": "For PostgreSQL backup restores and point-in-time recovery, the storage throughput in MiB/s."
                     }
                   }
                 },
@@ -7337,15 +7345,13 @@
             "name": "page",
             "type": "integer",
             "in": "query",
-            "default": 1,
-            "description": "If provided, specifies the page offset of returned results"
+            "description": "Ignored. This endpoint is not paginated and always returns the first page of results."
           },
           {
             "name": "per_page",
             "type": "integer",
             "in": "query",
-            "default": 25,
-            "description": "If provided, specifies the number of returned results"
+            "description": "Maximum number of results to return, from 1 to 100. Defaults to 100. This endpoint is not paginated."
           }
         ],
         "responses": {
@@ -7662,15 +7668,13 @@
             "name": "page",
             "type": "integer",
             "in": "query",
-            "default": 1,
-            "description": "If provided, specifies the page offset of returned results"
+            "description": "Ignored. This endpoint is not paginated and always returns the first page of results."
           },
           {
             "name": "per_page",
             "type": "integer",
             "in": "query",
-            "default": 25,
-            "description": "If provided, specifies the number of returned results"
+            "description": "Maximum number of results to return, from 1 to 100. Defaults to 100. This endpoint is not paginated."
           }
         ],
         "responses": {
@@ -7775,15 +7779,13 @@
             "name": "page",
             "type": "integer",
             "in": "query",
-            "default": 1,
-            "description": "If provided, specifies the page offset of returned results"
+            "description": "Ignored. This endpoint is not paginated and always returns the first page of results."
           },
           {
             "name": "per_page",
             "type": "integer",
             "in": "query",
-            "default": 25,
-            "description": "If provided, specifies the number of returned results"
+            "description": "Maximum number of results to return, from 1 to 100. Defaults to 100. This endpoint is not paginated."
           }
         ],
         "responses": {
@@ -7992,15 +7994,13 @@
             "name": "page",
             "type": "integer",
             "in": "query",
-            "default": 1,
-            "description": "If provided, specifies the page offset of returned results"
+            "description": "Ignored. This endpoint is not paginated and always returns the first page of results."
           },
           {
             "name": "per_page",
             "type": "integer",
             "in": "query",
-            "default": 25,
-            "description": "If provided, specifies the number of returned results"
+            "description": "Ignored. This endpoint returns up to 100 tags and is not paginated."
           }
         ],
         "responses": {
@@ -8210,15 +8210,13 @@
             "name": "page",
             "type": "integer",
             "in": "query",
-            "default": 1,
-            "description": "If provided, specifies the page offset of returned results"
+            "description": "Ignored. This endpoint is not paginated and always returns the first page of results."
           },
           {
             "name": "per_page",
             "type": "integer",
             "in": "query",
-            "default": 25,
-            "description": "If provided, specifies the number of returned results"
+            "description": "Maximum number of results to return, from 1 to 100. Defaults to 100. This endpoint is not paginated."
           }
         ],
         "responses": {
@@ -8470,15 +8468,13 @@
             "name": "page",
             "type": "integer",
             "in": "query",
-            "default": 1,
-            "description": "If provided, specifies the page offset of returned results"
+            "description": "Ignored. This endpoint is not paginated and always returns the first page of results."
           },
           {
             "name": "per_page",
             "type": "integer",
             "in": "query",
-            "default": 25,
-            "description": "If provided, specifies the number of returned results"
+            "description": "Maximum number of results to return, from 1 to 100. Defaults to 100. This endpoint is not paginated."
           }
         ],
         "responses": {
@@ -26145,6 +26141,33 @@
                   "neki_supported": {
                     "type": "boolean",
                     "description": "Whether the region supports Neki databases"
+                  },
+                  "availability_zones": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "Provider availability zone name in the account where the database is deployed (e.g. us-east-1a)"
+                        },
+                        "id": {
+                          "type": "string",
+                          "description": "Provider availability zone ID when available (e.g. AWS use1-az1).",
+                          "x-nullable": true
+                        },
+                        "default": {
+                          "type": "boolean",
+                          "description": "Whether this zone is in the caller-stable default selection of three (seeded by the authenticated user or service token)"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "id",
+                        "default"
+                      ]
+                    },
+                    "x-nullable": true
                   }
                 },
                 "required": [
@@ -26495,6 +26518,33 @@
             "neki_supported": {
               "type": "boolean",
               "description": "Whether the region supports Neki databases"
+            },
+            "availability_zones": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Provider availability zone name in the account where the database is deployed (e.g. us-east-1a)"
+                  },
+                  "id": {
+                    "type": "string",
+                    "description": "Provider availability zone ID when available (e.g. AWS use1-az1).",
+                    "x-nullable": true
+                  },
+                  "default": {
+                    "type": "boolean",
+                    "description": "Whether this zone is in the caller-stable default selection of three (seeded by the authenticated user or service token)"
+                  }
+                },
+                "required": [
+                  "name",
+                  "id",
+                  "default"
+                ]
+              },
+              "x-nullable": true
             }
           },
           "required": [
@@ -29327,6 +29377,33 @@
                   "neki_supported": {
                     "type": "boolean",
                     "description": "Whether the region supports Neki databases"
+                  },
+                  "availability_zones": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "Provider availability zone name in the account where the database is deployed (e.g. us-east-1a)"
+                        },
+                        "id": {
+                          "type": "string",
+                          "description": "Provider availability zone ID when available (e.g. AWS use1-az1).",
+                          "x-nullable": true
+                        },
+                        "default": {
+                          "type": "boolean",
+                          "description": "Whether this zone is in the caller-stable default selection of three (seeded by the authenticated user or service token)"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "id",
+                        "default"
+                      ]
+                    },
+                    "x-nullable": true
                   }
                 },
                 "required": [
@@ -29593,6 +29670,33 @@
             "neki_supported": {
               "type": "boolean",
               "description": "Whether the region supports Neki databases"
+            },
+            "availability_zones": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Provider availability zone name in the account where the database is deployed (e.g. us-east-1a)"
+                  },
+                  "id": {
+                    "type": "string",
+                    "description": "Provider availability zone ID when available (e.g. AWS use1-az1).",
+                    "x-nullable": true
+                  },
+                  "default": {
+                    "type": "boolean",
+                    "description": "Whether this zone is in the caller-stable default selection of three (seeded by the authenticated user or service token)"
+                  }
+                },
+                "required": [
+                  "name",
+                  "id",
+                  "default"
+                ]
+              },
+              "x-nullable": true
             }
           },
           "required": [
@@ -29844,6 +29948,33 @@
             "neki_supported": {
               "type": "boolean",
               "description": "Whether the region supports Neki databases"
+            },
+            "availability_zones": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Provider availability zone name in the account where the database is deployed (e.g. us-east-1a)"
+                  },
+                  "id": {
+                    "type": "string",
+                    "description": "Provider availability zone ID when available (e.g. AWS use1-az1).",
+                    "x-nullable": true
+                  },
+                  "default": {
+                    "type": "boolean",
+                    "description": "Whether this zone is in the caller-stable default selection of three (seeded by the authenticated user or service token)"
+                  }
+                },
+                "required": [
+                  "name",
+                  "id",
+                  "default"
+                ]
+              },
+              "x-nullable": true
             }
           },
           "required": [
@@ -30299,6 +30430,33 @@
                   "neki_supported": {
                     "type": "boolean",
                     "description": "Whether the region supports Neki databases"
+                  },
+                  "availability_zones": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "Provider availability zone name in the account where the database is deployed (e.g. us-east-1a)"
+                        },
+                        "id": {
+                          "type": "string",
+                          "description": "Provider availability zone ID when available (e.g. AWS use1-az1).",
+                          "x-nullable": true
+                        },
+                        "default": {
+                          "type": "boolean",
+                          "description": "Whether this zone is in the caller-stable default selection of three (seeded by the authenticated user or service token)"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "id",
+                        "default"
+                      ]
+                    },
+                    "x-nullable": true
                   }
                 },
                 "required": [
@@ -30612,6 +30770,33 @@
             "neki_supported": {
               "type": "boolean",
               "description": "Whether the region supports Neki databases"
+            },
+            "availability_zones": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Provider availability zone name in the account where the database is deployed (e.g. us-east-1a)"
+                  },
+                  "id": {
+                    "type": "string",
+                    "description": "Provider availability zone ID when available (e.g. AWS use1-az1).",
+                    "x-nullable": true
+                  },
+                  "default": {
+                    "type": "boolean",
+                    "description": "Whether this zone is in the caller-stable default selection of three (seeded by the authenticated user or service token)"
+                  }
+                },
+                "required": [
+                  "name",
+                  "id",
+                  "default"
+                ]
+              },
+              "x-nullable": true
             }
           },
           "required": [
@@ -30891,6 +31076,33 @@
               "neki_supported": {
                 "type": "boolean",
                 "description": "Whether the region supports Neki databases"
+              },
+              "availability_zones": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Provider availability zone name in the account where the database is deployed (e.g. us-east-1a)"
+                    },
+                    "id": {
+                      "type": "string",
+                      "description": "Provider availability zone ID when available (e.g. AWS use1-az1).",
+                      "x-nullable": true
+                    },
+                    "default": {
+                      "type": "boolean",
+                      "description": "Whether this zone is in the caller-stable default selection of three (seeded by the authenticated user or service token)"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "id",
+                    "default"
+                  ]
+                },
+                "x-nullable": true
               }
             },
             "required": [
@@ -31056,6 +31268,33 @@
                   "neki_supported": {
                     "type": "boolean",
                     "description": "Whether the region supports Neki databases"
+                  },
+                  "availability_zones": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "Provider availability zone name in the account where the database is deployed (e.g. us-east-1a)"
+                        },
+                        "id": {
+                          "type": "string",
+                          "description": "Provider availability zone ID when available (e.g. AWS use1-az1).",
+                          "x-nullable": true
+                        },
+                        "default": {
+                          "type": "boolean",
+                          "description": "Whether this zone is in the caller-stable default selection of three (seeded by the authenticated user or service token)"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "id",
+                        "default"
+                      ]
+                    },
+                    "x-nullable": true
                   }
                 },
                 "required": [
@@ -33495,12 +33734,12 @@
               "scopes_by_resource": {
                 "type": "object",
                 "additionalProperties": true,
-                "description": "Scopes grouped by resource type (database, organization, branch, user) with scope, description, and admin flag"
+                "description": "Scopes grouped by resource type (database, organization, branch, user) with scope and description"
               },
               "all_scopes_by_resource": {
                 "type": "object",
                 "additionalProperties": true,
-                "description": "All available scopes grouped by resource type with scope, description, selected, and admin flags"
+                "description": "All available scopes grouped by resource type with scope, description, and selected"
               },
               "mcp_tool_groups": {
                 "items": {
@@ -33508,7 +33747,7 @@
                   "additionalProperties": true
                 },
                 "type": "array",
-                "description": "MCP tool groups (id, label, section, tools, scopes, parent_id, default_enabled, roles) selectable when authorizing a DCR app; only present for DCR apps. Database-section groups also carry org_scopes (the organization-tier scope names granting the group across all databases in an organization) and org_roles (the organization roles allowed to grant them); both are null for organization-section groups. Each group includes blocked_mcp_access_levels: the organization mcp_access_level values that prevent granting it, each with a level and reason. Read query groups are blocked at none; write query groups are also blocked at read_only. Other groups return an empty list",
+                "description": "MCP tool groups (id, label, section, tools, scopes, parent_id, default_enabled) selectable when authorizing a DCR app; only present for DCR apps. Database-section groups also carry org_scopes, the organization-tier scope names granting the group across all databases in an organization; it is null for organization-section groups. Each group includes blocked_mcp_access_levels: the organization mcp_access_level values that prevent granting it, each with a level and reason. Read query groups are blocked at none; write query groups are also blocked at read_only. Other groups return an empty list",
                 "x-nullable": true
               }
             },
@@ -33603,12 +33842,12 @@
         "scopes_by_resource": {
           "type": "object",
           "additionalProperties": true,
-          "description": "Scopes grouped by resource type (database, organization, branch, user) with scope, description, and admin flag"
+          "description": "Scopes grouped by resource type (database, organization, branch, user) with scope and description"
         },
         "all_scopes_by_resource": {
           "type": "object",
           "additionalProperties": true,
-          "description": "All available scopes grouped by resource type with scope, description, selected, and admin flags"
+          "description": "All available scopes grouped by resource type with scope, description, and selected"
         },
         "mcp_tool_groups": {
           "items": {
@@ -33616,7 +33855,7 @@
             "additionalProperties": true
           },
           "type": "array",
-          "description": "MCP tool groups (id, label, section, tools, scopes, parent_id, default_enabled, roles) selectable when authorizing a DCR app; only present for DCR apps. Database-section groups also carry org_scopes (the organization-tier scope names granting the group across all databases in an organization) and org_roles (the organization roles allowed to grant them); both are null for organization-section groups. Each group includes blocked_mcp_access_levels: the organization mcp_access_level values that prevent granting it, each with a level and reason. Read query groups are blocked at none; write query groups are also blocked at read_only. Other groups return an empty list",
+          "description": "MCP tool groups (id, label, section, tools, scopes, parent_id, default_enabled) selectable when authorizing a DCR app; only present for DCR apps. Database-section groups also carry org_scopes, the organization-tier scope names granting the group across all databases in an organization; it is null for organization-section groups. Each group includes blocked_mcp_access_levels: the organization mcp_access_level values that prevent granting it, each with a level and reason. Read query groups are blocked at none; write query groups are also blocked at read_only. Other groups return an empty list",
           "x-nullable": true
         }
       },
@@ -39470,6 +39709,33 @@
             "neki_supported": {
               "type": "boolean",
               "description": "Whether the region supports Neki databases"
+            },
+            "availability_zones": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Provider availability zone name in the account where the database is deployed (e.g. us-east-1a)"
+                  },
+                  "id": {
+                    "type": "string",
+                    "description": "Provider availability zone ID when available (e.g. AWS use1-az1).",
+                    "x-nullable": true
+                  },
+                  "default": {
+                    "type": "boolean",
+                    "description": "Whether this zone is in the caller-stable default selection of three (seeded by the authenticated user or service token)"
+                  }
+                },
+                "required": [
+                  "name",
+                  "id",
+                  "default"
+                ]
+              },
+              "x-nullable": true
             }
           },
           "required": [
@@ -39845,6 +40111,11 @@
                 "type": "string",
                 "description": "The database connection string for private connections"
               },
+              "public_access_host_url": {
+                "type": "string",
+                "description": "The public database host. Not affected by private-only connection string settings. Null when the database only accepts private connections.",
+                "x-nullable": true
+              },
               "private_connection_service_name": {
                 "type": "string",
                 "description": "The service name to set up private connectivity"
@@ -40029,6 +40300,7 @@
               "name",
               "access_host_url",
               "private_access_host_url",
+              "public_access_host_url",
               "private_connection_service_name",
               "username",
               "base_username",
@@ -40085,6 +40357,11 @@
         "private_access_host_url": {
           "type": "string",
           "description": "The database connection string for private connections"
+        },
+        "public_access_host_url": {
+          "type": "string",
+          "description": "The public database host. Not affected by private-only connection string settings. Null when the database only accepts private connections.",
+          "x-nullable": true
         },
         "private_connection_service_name": {
           "type": "string",
@@ -40270,6 +40547,7 @@
         "name",
         "access_host_url",
         "private_access_host_url",
+        "public_access_host_url",
         "private_connection_service_name",
         "username",
         "base_username",
@@ -45360,6 +45638,33 @@
                         "neki_supported": {
                           "type": "boolean",
                           "description": "Whether the region supports Neki databases"
+                        },
+                        "availability_zones": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string",
+                                "description": "Provider availability zone name in the account where the database is deployed (e.g. us-east-1a)"
+                              },
+                              "id": {
+                                "type": "string",
+                                "description": "Provider availability zone ID when available (e.g. AWS use1-az1).",
+                                "x-nullable": true
+                              },
+                              "default": {
+                                "type": "boolean",
+                                "description": "Whether this zone is in the caller-stable default selection of three (seeded by the authenticated user or service token)"
+                              }
+                            },
+                            "required": [
+                              "name",
+                              "id",
+                              "default"
+                            ]
+                          },
+                          "x-nullable": true
                         }
                       },
                       "required": [
@@ -45778,6 +46083,33 @@
                   "neki_supported": {
                     "type": "boolean",
                     "description": "Whether the region supports Neki databases"
+                  },
+                  "availability_zones": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "Provider availability zone name in the account where the database is deployed (e.g. us-east-1a)"
+                        },
+                        "id": {
+                          "type": "string",
+                          "description": "Provider availability zone ID when available (e.g. AWS use1-az1).",
+                          "x-nullable": true
+                        },
+                        "default": {
+                          "type": "boolean",
+                          "description": "Whether this zone is in the caller-stable default selection of three (seeded by the authenticated user or service token)"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "id",
+                        "default"
+                      ]
+                    },
+                    "x-nullable": true
                   }
                 },
                 "required": [
