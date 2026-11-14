@@ -628,7 +628,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_database`, `delete_database`, `write_database`, `read_branch`, `delete_branch`, `create_branch`, `rename_branch`, `promote_branches`, `demote_branches`, `delete_production_branch`, `connect_branch`, `connect_production_branch`, `connect_production_read_only_branch`, `delete_branch_password`, `delete_production_branch_password`, `delete_production_read_only_branch_password`, `read_deploy_request`, `create_deploy_request`, `approve_deploy_request`, `read_comment`, `create_comment`, `restore_backup`, `restore_production_branch_backup`, `read_backups`, `write_backups`, `delete_backups`, `delete_production_branch_backups`, `write_branch_vschema`, `write_production_branch_vschema`, `write_branch_topology`, `write_production_branch_topology`, `read_workflow`, `write_workflow`, `delete_workflow`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |"
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_database`, `delete_database`, `write_database`, `read_branch`, `delete_branch`, `create_branch`, `rename_branch`, `promote_branches`, `demote_branches`, `delete_production_branch`, `connect_branch`, `connect_production_branch`, `connect_production_read_only_branch`, `delete_branch_password`, `delete_production_branch_password`, `delete_production_read_only_branch_password`, `read_deploy_request`, `create_deploy_request`, `approve_deploy_request`, `read_comment`, `create_comment`, `restore_backup`, `restore_production_branch_backup`, `read_backups`, `write_backups`, `delete_backups`, `delete_production_branch_backups`, `write_branch_vschema`, `write_production_branch_vschema`, `write_branch_topology`, `write_production_branch_topology`, `read_workflow`, `write_workflow`, `delete_workflow`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
       },
       "post": {
         "tags": [
@@ -47036,7 +47036,9 @@
         "database:read_comments": "Read deploy request comments in a database",
         "database:read_database": "Read database information",
         "database:read_deploy_requests": "Read deploy requests in a database",
+        "database:read_live_connections": "Read live connections",
         "database:read_members": "Read members",
+        "database:read_production_live_connections": "Read live connections on production branches",
         "database:read_workflows": "Read database workflows",
         "database:restore_backups": "Restore backups to new branches",
         "database:restore_production_branch_backups": "Restore production branch backups to new branches",
@@ -47072,9 +47074,11 @@
         "organization:read_databases": "Read organization databases",
         "organization:read_deploy_requests": "Read deploy requests in an organization",
         "organization:read_invoices": "Read organization invoices",
+        "organization:read_live_connections": "Read live connections in an organization",
         "organization:read_members": "Read members in an organization",
         "organization:read_organization": "Read organization",
         "organization:read_payment_method": "Read organization payment method",
+        "organization:read_production_live_connections": "Read live connections on production branches in an organization",
         "organization:read_workflows": "Read workflows in an organization",
         "organization:restore_backups": "Restore backups to new branches in an organization",
         "organization:restore_production_branch_backups": "Restore production branch backups to new branches in an organization",
