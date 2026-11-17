@@ -185,7 +185,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n### Authorization\nA   OAuth token must have at least one of the following   scopes in order to use this API endpoint:\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_organization` |"
+        "description": "\n### Authorization\nA   OAuth token must have at least one of the following   scopes in order to use this API endpoint:\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_organization`, `write_billing_email` |"
       }
     },
     "/organizations/{organization}/audit-log": {
@@ -549,6 +549,108 @@
           }
         },
         "description": "List available cluster sizes for an organization\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_organization`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| User | `read_organizations` |\n| Organization | `read_organization` |"
+      }
+    },
+    "/organizations/{organization}/database-subscriptions": {
+      "post": {
+        "tags": [
+          "Database report subscriptions"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "create_organization_database_subscriptions",
+        "summary": "Subscribe to every database's weekly report",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a subscription for each database",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Subscription"
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "Subscribe the current user to the weekly report email for every database in the organization they can view\n### Authorization\nA   OAuth token must have at least one of the following   scopes in order to use this API endpoint:\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
+      },
+      "delete": {
+        "tags": [
+          "Database report subscriptions"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "delete_organization_database_subscriptions",
+        "summary": "Unsubscribe from every database's weekly report",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a subscription for each database",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Subscription"
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "Unsubscribe the current user from the weekly report email for every database in the organization they can view\n### Authorization\nA   OAuth token must have at least one of the following   scopes in order to use this API endpoint:\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
       }
     },
     "/organizations/{organization}/databases": {
@@ -9843,52 +9945,7 @@
           "200": {
             "description": "Returns information about a keyspace's rollout",
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "The name of the keyspace"
-                },
-                "state": {
-                  "type": "string",
-                  "description": "The current state of the rollout at the keyspace level"
-                },
-                "shards": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "type": "string",
-                        "description": "The name of the shard"
-                      },
-                      "last_rollout_started_at": {
-                        "type": "string",
-                        "description": "The time at which the rollout started"
-                      },
-                      "last_rollout_finished_at": {
-                        "type": "string",
-                        "description": "The time at which the rollout completed"
-                      },
-                      "state": {
-                        "type": "string",
-                        "description": "The current state of the rollout at the shard level"
-                      }
-                    },
-                    "required": [
-                      "name",
-                      "last_rollout_started_at",
-                      "last_rollout_finished_at",
-                      "state"
-                    ]
-                  }
-                }
-              },
-              "required": [
-                "name",
-                "state",
-                "shards"
-              ]
+              "$ref": "#/definitions/BranchInfrastructureKeyspace"
             },
             "headers": {}
           },
@@ -10811,97 +10868,7 @@
           "200": {
             "description": "Returns current metrics",
             "schema": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "description": "The metrics response type"
-                },
-                "branch": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "description": "The ID for the resource"
-                    },
-                    "name": {
-                      "type": "string",
-                      "description": "The name for the resource"
-                    },
-                    "created_at": {
-                      "type": "string",
-                      "description": "When the resource was created"
-                    },
-                    "updated_at": {
-                      "type": "string",
-                      "description": "When the resource was last updated"
-                    },
-                    "deleted_at": {
-                      "type": "string",
-                      "description": "When the resource was deleted, if deleted",
-                      "x-nullable": true
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "name",
-                    "created_at",
-                    "updated_at",
-                    "deleted_at"
-                  ]
-                },
-                "metrics": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "metric": {
-                        "type": "string",
-                        "description": "The metric name"
-                      },
-                      "label": {
-                        "type": "string",
-                        "description": "A human-readable metric label"
-                      },
-                      "values": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "pod": {
-                              "type": "string",
-                              "description": "Pod name"
-                            },
-                            "role": {
-                              "type": "string",
-                              "description": "Postgres role (primary or replica)"
-                            },
-                            "value": {
-                              "type": "number",
-                              "description": "Current metric value"
-                            }
-                          },
-                          "required": [
-                            "pod",
-                            "role",
-                            "value"
-                          ]
-                        }
-                      }
-                    },
-                    "required": [
-                      "metric",
-                      "label",
-                      "values"
-                    ]
-                  }
-                }
-              },
-              "required": [
-                "type",
-                "branch",
-                "metrics"
-              ]
+              "$ref": "#/definitions/HorizonInstantMetrics"
             },
             "headers": {}
           },
@@ -11472,97 +11439,7 @@
           "200": {
             "description": "Returns current tablet metrics",
             "schema": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "description": "The metrics response type"
-                },
-                "branch": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "description": "The ID for the resource"
-                    },
-                    "name": {
-                      "type": "string",
-                      "description": "The name for the resource"
-                    },
-                    "created_at": {
-                      "type": "string",
-                      "description": "When the resource was created"
-                    },
-                    "updated_at": {
-                      "type": "string",
-                      "description": "When the resource was last updated"
-                    },
-                    "deleted_at": {
-                      "type": "string",
-                      "description": "When the resource was deleted, if deleted",
-                      "x-nullable": true
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "name",
-                    "created_at",
-                    "updated_at",
-                    "deleted_at"
-                  ]
-                },
-                "metrics": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "metric": {
-                        "type": "string",
-                        "description": "The metric name"
-                      },
-                      "label": {
-                        "type": "string",
-                        "description": "A human-readable metric label"
-                      },
-                      "values": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "pod": {
-                              "type": "string",
-                              "description": "Pod name"
-                            },
-                            "role": {
-                              "type": "string",
-                              "description": "Postgres role (primary or replica)"
-                            },
-                            "value": {
-                              "type": "number",
-                              "description": "Current metric value"
-                            }
-                          },
-                          "required": [
-                            "pod",
-                            "role",
-                            "value"
-                          ]
-                        }
-                      }
-                    },
-                    "required": [
-                      "metric",
-                      "label",
-                      "values"
-                    ]
-                  }
-                }
-              },
-              "required": [
-                "type",
-                "branch",
-                "metrics"
-              ]
+              "$ref": "#/definitions/TabletInstantMetrics"
             },
             "headers": {}
           },
@@ -17501,114 +17378,7 @@
           "200": {
             "description": "Returns the Vitess parameters for the branch and its keyspaces",
             "schema": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "description": "The response type. Always \"VitessParameters\"."
-                },
-                "vtgate": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "type": {
-                        "type": "string",
-                        "description": "The object type. Always \"VitessParameterDefinition\"."
-                      },
-                      "name": {
-                        "type": "string",
-                        "description": "The name of the parameter"
-                      },
-                      "title": {
-                        "type": "string",
-                        "description": "The display name of the parameter"
-                      },
-                      "component": {
-                        "type": "string",
-                        "enum": [
-                          "vtgate",
-                          "vttablet",
-                          "mysqld"
-                        ],
-                        "description": "The component the parameter configures"
-                      },
-                      "description": {
-                        "type": "string",
-                        "description": "The description of the parameter"
-                      },
-                      "category": {
-                        "type": "string",
-                        "description": "The category of the parameter"
-                      },
-                      "parameter_type": {
-                        "type": "string",
-                        "description": "The type of the parameter's value: `boolean`, `bytes`, `duration`, `float`, `integer`, `select`, or `string`"
-                      },
-                      "default_value": {
-                        "type": "string",
-                        "description": "The default value of the parameter, which can depend on the cluster size",
-                        "x-nullable": true
-                      },
-                      "value": {
-                        "type": "string",
-                        "description": "The current value of the parameter",
-                        "x-nullable": true
-                      },
-                      "override": {
-                        "type": "boolean",
-                        "description": "Whether the parameter has been set explicitly instead of using its default"
-                      },
-                      "options": {
-                        "items": {
-                          "type": "string"
-                        },
-                        "type": "array",
-                        "description": "The allowed values for `select` parameters"
-                      }
-                    },
-                    "required": [
-                      "type",
-                      "name",
-                      "component",
-                      "description",
-                      "category",
-                      "parameter_type",
-                      "default_value",
-                      "value",
-                      "override"
-                    ]
-                  }
-                },
-                "keyspaces": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "object",
-                    "properties": {
-                      "vttablet": {
-                        "type": "array",
-                        "items": {
-                          "type": "object"
-                        },
-                        "description": "The VTTablet parameters for the keyspace"
-                      },
-                      "mysqld": {
-                        "type": "array",
-                        "items": {
-                          "type": "object"
-                        },
-                        "description": "The MySQL parameters for the keyspace"
-                      }
-                    }
-                  },
-                  "description": "The parameters for each keyspace, keyed by keyspace name. Each value has `vttablet` and `mysqld` arrays of parameters in the same format as `vtgate`."
-                }
-              },
-              "required": [
-                "type",
-                "vtgate",
-                "keyspaces"
-              ]
+              "$ref": "#/definitions/VitessParameterDefinition::BranchParameters"
             },
             "headers": {}
           },
@@ -17678,73 +17448,7 @@
           "200": {
             "description": "Returns the vtctld operation",
             "schema": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "description": "The object type, always VtctldOperation"
-                },
-                "id": {
-                  "type": "string",
-                  "description": "The UUID of the operation"
-                },
-                "action": {
-                  "type": "string",
-                  "description": "The vtctld action being executed, such as move_tables_create"
-                },
-                "timeout": {
-                  "type": "integer",
-                  "description": "Timeout in seconds"
-                },
-                "created_at": {
-                  "type": "string",
-                  "description": "When the operation was created"
-                },
-                "completed_at": {
-                  "type": "string",
-                  "description": "When the operation completed, or null while it is still running",
-                  "x-nullable": true
-                },
-                "state": {
-                  "type": "string",
-                  "enum": [
-                    "pending",
-                    "running",
-                    "completed",
-                    "failed",
-                    "cancelled"
-                  ],
-                  "description": "The current state of the operation"
-                },
-                "completed": {
-                  "type": "string",
-                  "description": "Whether the operation has reached a terminal state"
-                },
-                "metadata": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Operation-specific metadata captured when the operation started"
-                },
-                "result": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Operation-specific result payload, present once the operation succeeds"
-                },
-                "error": {
-                  "type": "string",
-                  "description": "The error message, present when the operation fails or its status could not be checked"
-                }
-              },
-              "required": [
-                "type",
-                "id",
-                "action",
-                "timeout",
-                "created_at",
-                "completed_at",
-                "state",
-                "completed"
-              ]
+              "$ref": "#/definitions/VtctldOperationSerializer"
             },
             "headers": {}
           },
@@ -20670,6 +20374,116 @@
         "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_databases` |\n| Database | `write_database` |"
       }
     },
+    "/organizations/{organization}/databases/{database}/subscription": {
+      "post": {
+        "tags": [
+          "Database report subscriptions"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "create_database_subscription",
+        "summary": "Subscribe to a database's weekly report",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the subscription",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "Subscribe the current user to the database's weekly report email\n### Authorization\nA   OAuth token must have at least one of the following   scopes in order to use this API endpoint:\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
+      },
+      "delete": {
+        "tags": [
+          "Database report subscriptions"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "delete_database_subscription",
+        "summary": "Unsubscribe from a database's weekly report",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the subscription",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "Unsubscribe the current user from the database's weekly report email\n### Authorization\nA   OAuth token must have at least one of the following   scopes in order to use this API endpoint:\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
+      }
+    },
     "/organizations/{organization}/databases/{database}/throttler": {
       "get": {
         "tags": [
@@ -22525,6 +22339,78 @@
         },
         "description": "Get information about a service token.\n### Authorization\nA service token   must have at least one of the following access   in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_service_tokens`\n\n"
       },
+      "patch": {
+        "tags": [
+          "Service tokens"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "update_service_token",
+        "summary": "Update a service token",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the organization"
+          },
+          {
+            "name": "id",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the service token"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The name of the service token. Omit to leave the name unchanged."
+                },
+                "ttl": {
+                  "type": "integer",
+                  "description": "Seconds from now until the service token expires. Omit to leave the expiration unchanged. Null clears the expiration. Must be greater than 0 and at most one year.",
+                  "x-nullable": true
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the service token",
+            "schema": {
+              "$ref": "#/definitions/ServiceToken"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "Update a service token's name or expiration.\n### Authorization\nA service token   must have at least one of the following access   in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_service_tokens`\n\n"
+      },
       "delete": {
         "tags": [
           "Service tokens"
@@ -22575,6 +22461,75 @@
           }
         },
         "description": "Delete a service token from the organization.\n### Authorization\nA service token   must have at least one of the following access   in order to use this API endpoint:\n\n**Service Token Accesses**\n `delete_service_tokens`\n\n"
+      }
+    },
+    "/organizations/{organization}/service-tokens/{id}/duplicate": {
+      "post": {
+        "tags": [
+          "Service tokens"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "duplicate_service_token",
+        "summary": "Duplicate a service token",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the organization"
+          },
+          {
+            "name": "id",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the service token to duplicate"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The name of the new service token"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the new service token with the plaintext token",
+            "schema": {
+              "$ref": "#/definitions/ServiceToken"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "Create a new service token with the same grants as an existing service token. The original token is not changed.\n### Authorization\nA service token   must have at least one of the following access   in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_service_tokens`, `read_service_tokens`\n\n"
       }
     },
     "/organizations/{organization}/sso": {
@@ -27766,6 +27721,116 @@
         "actor"
       ]
     },
+    "VitessParameterDefinition::BranchParameters": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The response type. Always \"VitessParameters\"."
+        },
+        "vtgate": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "The object type. Always \"VitessParameterDefinition\"."
+              },
+              "name": {
+                "type": "string",
+                "description": "The name of the parameter"
+              },
+              "title": {
+                "type": "string",
+                "description": "The display name of the parameter"
+              },
+              "component": {
+                "type": "string",
+                "enum": [
+                  "vtgate",
+                  "vttablet",
+                  "mysqld"
+                ],
+                "description": "The component the parameter configures"
+              },
+              "description": {
+                "type": "string",
+                "description": "The description of the parameter"
+              },
+              "category": {
+                "type": "string",
+                "description": "The category of the parameter"
+              },
+              "parameter_type": {
+                "type": "string",
+                "description": "The type of the parameter's value: `boolean`, `bytes`, `duration`, `float`, `integer`, `select`, or `string`"
+              },
+              "default_value": {
+                "type": "string",
+                "description": "The default value of the parameter, which can depend on the cluster size",
+                "x-nullable": true
+              },
+              "value": {
+                "type": "string",
+                "description": "The current value of the parameter",
+                "x-nullable": true
+              },
+              "override": {
+                "type": "boolean",
+                "description": "Whether the parameter has been set explicitly instead of using its default"
+              },
+              "options": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "description": "The allowed values for `select` parameters"
+              }
+            },
+            "required": [
+              "type",
+              "name",
+              "component",
+              "description",
+              "category",
+              "parameter_type",
+              "default_value",
+              "value",
+              "override"
+            ]
+          }
+        },
+        "keyspaces": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "vttablet": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                },
+                "description": "The VTTablet parameters for the keyspace"
+              },
+              "mysqld": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                },
+                "description": "The MySQL parameters for the keyspace"
+              }
+            }
+          },
+          "description": "The parameters for each keyspace, keyed by keyspace name. Each value has `vttablet` and `mysqld` arrays of parameters in the same format as `vtgate`."
+        }
+      },
+      "required": [
+        "type",
+        "vtgate",
+        "keyspaces"
+      ]
+    },
     "PaginatedChangeRequest": {
       "type": "object",
       "properties": {
@@ -29175,6 +29240,54 @@
         "throttler",
         "mysqld_options",
         "vttablet_options"
+      ]
+    },
+    "BranchInfrastructureKeyspace": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the keyspace"
+        },
+        "state": {
+          "type": "string",
+          "description": "The current state of the rollout at the keyspace level"
+        },
+        "shards": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name of the shard"
+              },
+              "last_rollout_started_at": {
+                "type": "string",
+                "description": "The time at which the rollout started"
+              },
+              "last_rollout_finished_at": {
+                "type": "string",
+                "description": "The time at which the rollout completed"
+              },
+              "state": {
+                "type": "string",
+                "description": "The current state of the rollout at the shard level"
+              }
+            },
+            "required": [
+              "name",
+              "last_rollout_started_at",
+              "last_rollout_finished_at",
+              "state"
+            ]
+          }
+        }
+      },
+      "required": [
+        "name",
+        "state",
+        "shards"
       ]
     },
     "PaginatedDatabaseBranchPassword": {
@@ -32664,6 +32777,192 @@
         "end_date",
         "interval",
         "series"
+      ]
+    },
+    "HorizonInstantMetrics": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The metrics response type"
+        },
+        "branch": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The ID for the resource"
+            },
+            "name": {
+              "type": "string",
+              "description": "The name for the resource"
+            },
+            "created_at": {
+              "type": "string",
+              "description": "When the resource was created"
+            },
+            "updated_at": {
+              "type": "string",
+              "description": "When the resource was last updated"
+            },
+            "deleted_at": {
+              "type": "string",
+              "description": "When the resource was deleted, if deleted",
+              "x-nullable": true
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ]
+        },
+        "metrics": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "metric": {
+                "type": "string",
+                "description": "The metric name"
+              },
+              "label": {
+                "type": "string",
+                "description": "A human-readable metric label"
+              },
+              "values": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "pod": {
+                      "type": "string",
+                      "description": "Pod name"
+                    },
+                    "role": {
+                      "type": "string",
+                      "description": "Postgres role (primary or replica)"
+                    },
+                    "value": {
+                      "type": "number",
+                      "description": "Current metric value"
+                    }
+                  },
+                  "required": [
+                    "pod",
+                    "role",
+                    "value"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "metric",
+              "label",
+              "values"
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "branch",
+        "metrics"
+      ]
+    },
+    "TabletInstantMetrics": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The metrics response type"
+        },
+        "branch": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The ID for the resource"
+            },
+            "name": {
+              "type": "string",
+              "description": "The name for the resource"
+            },
+            "created_at": {
+              "type": "string",
+              "description": "When the resource was created"
+            },
+            "updated_at": {
+              "type": "string",
+              "description": "When the resource was last updated"
+            },
+            "deleted_at": {
+              "type": "string",
+              "description": "When the resource was deleted, if deleted",
+              "x-nullable": true
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ]
+        },
+        "metrics": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "metric": {
+                "type": "string",
+                "description": "The metric name"
+              },
+              "label": {
+                "type": "string",
+                "description": "A human-readable metric label"
+              },
+              "values": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "pod": {
+                      "type": "string",
+                      "description": "Pod name"
+                    },
+                    "role": {
+                      "type": "string",
+                      "description": "Postgres role (primary or replica)"
+                    },
+                    "value": {
+                      "type": "number",
+                      "description": "Current metric value"
+                    }
+                  },
+                  "required": [
+                    "pod",
+                    "role",
+                    "value"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "metric",
+              "label",
+              "values"
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "branch",
+        "metrics"
       ]
     },
     "NekiParameter": {
@@ -40909,6 +41208,95 @@
         "dismissed_by"
       ]
     },
+    "Subscription": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Subscription"
+          ],
+          "description": "The resource type"
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the subscription"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "subscribed",
+            "unsubscribed"
+          ],
+          "description": "Whether the user receives the weekly report"
+        },
+        "frequency": {
+          "type": "string",
+          "enum": [
+            "daily",
+            "weekly",
+            "monthly"
+          ],
+          "description": "How often the report is sent"
+        },
+        "delivered_at": {
+          "type": "string",
+          "description": "When the last report was sent",
+          "x-nullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "description": "When the subscription was created"
+        },
+        "updated_at": {
+          "type": "string",
+          "description": "When the subscription was last updated"
+        },
+        "database": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The ID for the resource"
+            },
+            "name": {
+              "type": "string",
+              "description": "The name for the resource"
+            },
+            "created_at": {
+              "type": "string",
+              "description": "When the resource was created"
+            },
+            "updated_at": {
+              "type": "string",
+              "description": "When the resource was last updated"
+            },
+            "deleted_at": {
+              "type": "string",
+              "description": "When the resource was deleted, if deleted",
+              "x-nullable": true
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "id",
+        "state",
+        "frequency",
+        "delivered_at",
+        "created_at",
+        "updated_at",
+        "database"
+      ]
+    },
     "TrafficBudget": {
       "type": "object",
       "properties": {
@@ -41306,6 +41694,75 @@
         "created_at",
         "updated_at",
         "two_factor_auth_configured"
+      ]
+    },
+    "VtctldOperationSerializer": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The object type, always VtctldOperation"
+        },
+        "id": {
+          "type": "string",
+          "description": "The UUID of the operation"
+        },
+        "action": {
+          "type": "string",
+          "description": "The vtctld action being executed, such as move_tables_create"
+        },
+        "timeout": {
+          "type": "integer",
+          "description": "Timeout in seconds"
+        },
+        "created_at": {
+          "type": "string",
+          "description": "When the operation was created"
+        },
+        "completed_at": {
+          "type": "string",
+          "description": "When the operation completed, or null while it is still running",
+          "x-nullable": true
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "running",
+            "completed",
+            "failed",
+            "cancelled"
+          ],
+          "description": "The current state of the operation"
+        },
+        "completed": {
+          "type": "boolean",
+          "description": "Whether the operation has reached a terminal state"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Operation-specific metadata captured when the operation started"
+        },
+        "result": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Operation-specific result payload, present once the operation succeeds"
+        },
+        "error": {
+          "type": "string",
+          "description": "The error message, present when the operation fails or its status could not be checked"
+        }
+      },
+      "required": [
+        "type",
+        "id",
+        "action",
+        "timeout",
+        "created_at",
+        "completed_at",
+        "state",
+        "completed"
       ]
     },
     "PaginatedDeployRequestReview": {
@@ -46805,6 +47262,10 @@
       "description": "          Resources for managing Postgres IP restriction entries for databases.\n\n          Note: This endpoint is only available for PostgreSQL databases. For MySQL databases, use the Database Branch Passwords endpoint.\n"
     },
     {
+      "name": "Database sleeps",
+      "description": "          Sleep and wake a Postgres database.\n"
+    },
+    {
       "name": "Databases",
       "description": "            Resources for managing databases within an organization.\n"
     },
@@ -46923,6 +47384,10 @@
     {
       "name": "Shard config changes",
       "description": "          Resources for managing shard-level configuration change requests.\n          Only available for custom-sharded keyspaces.\n"
+    },
+    {
+      "name": "Database report subscriptions",
+      "description": "            Subscribe to and unsubscribe from a database's weekly report email.\n"
     },
     {
       "name": "Traffic budgets",
@@ -47083,6 +47548,7 @@
         "organization:restore_backups": "Restore backups to new branches in an organization",
         "organization:restore_production_branch_backups": "Restore production branch backups to new branches in an organization",
         "organization:write_backups": "Create and update backups in an organization",
+        "organization:write_billing_email": "Update the organization billing email",
         "organization:write_branches": "Write branches in an organization",
         "organization:write_comments": "Create deploy request comments in an organization",
         "organization:write_databases": "Write organization databases",
