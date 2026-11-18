@@ -730,7 +730,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_database`, `delete_database`, `write_database`, `read_branch`, `delete_branch`, `create_branch`, `rename_branch`, `promote_branches`, `demote_branches`, `delete_production_branch`, `connect_branch`, `connect_production_branch`, `connect_production_read_only_branch`, `delete_branch_password`, `delete_production_branch_password`, `delete_production_read_only_branch_password`, `read_deploy_request`, `create_deploy_request`, `approve_deploy_request`, `read_comment`, `create_comment`, `restore_backup`, `restore_production_branch_backup`, `read_backups`, `write_backups`, `delete_backups`, `delete_production_branch_backups`, `write_branch_vschema`, `write_production_branch_vschema`, `write_branch_topology`, `write_production_branch_topology`, `read_workflow`, `write_workflow`, `delete_workflow`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_database`, `delete_database`, `write_database`, `read_branch`, `delete_branch`, `create_branch`, `rename_branch`, `promote_branches`, `demote_branches`, `delete_production_branch`, `connect_branch`, `connect_production_branch`, `connect_production_read_only_branch`, `delete_branch_password`, `delete_production_branch_password`, `delete_production_read_only_branch_password`, `read_deploy_request`, `create_deploy_request`, `approve_deploy_request`, `read_comment`, `create_comment`, `restore_backup`, `restore_production_branch_backup`, `read_backups`, `write_backups`, `delete_backups`, `delete_production_branch_backups`, `write_branch_vschema`, `write_production_branch_vschema`, `write_branch_topology`, `write_production_branch_topology`, `read_workflow`, `write_workflow`, `delete_workflow`, `read_insights_agent`, `write_insights_agent`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
       },
       "post": {
         "tags": [
@@ -888,7 +888,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_database`, `delete_database`, `write_database`, `read_branch`, `delete_branch`, `create_branch`, `rename_branch`, `promote_branches`, `demote_branches`, `delete_production_branch`, `connect_branch`, `connect_production_branch`, `connect_production_read_only_branch`, `delete_branch_password`, `delete_production_branch_password`, `delete_production_read_only_branch_password`, `read_deploy_request`, `create_deploy_request`, `approve_deploy_request`, `read_comment`, `create_comment`, `restore_backup`, `restore_production_branch_backup`, `read_backups`, `write_backups`, `delete_backups`, `delete_production_branch_backups`, `write_branch_vschema`, `write_production_branch_vschema`, `write_branch_topology`, `write_production_branch_topology`, `read_workflow`, `write_workflow`, `delete_workflow`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_database`, `delete_database`, `write_database`, `read_branch`, `delete_branch`, `create_branch`, `rename_branch`, `promote_branches`, `demote_branches`, `delete_production_branch`, `connect_branch`, `connect_production_branch`, `connect_production_read_only_branch`, `delete_branch_password`, `delete_production_branch_password`, `delete_production_read_only_branch_password`, `read_deploy_request`, `create_deploy_request`, `approve_deploy_request`, `read_comment`, `create_comment`, `restore_backup`, `restore_production_branch_backup`, `read_backups`, `write_backups`, `delete_backups`, `delete_production_branch_backups`, `write_branch_vschema`, `write_production_branch_vschema`, `write_branch_topology`, `write_production_branch_topology`, `read_workflow`, `write_workflow`, `delete_workflow`, `read_insights_agent`, `write_insights_agent`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
       },
       "patch": {
         "tags": [
@@ -7487,6 +7487,513 @@
           }
         },
         "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_databases`, `read_database`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/insights/agent/runs": {
+      "get": {
+        "tags": [
+          "InsightsAgentRuns"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "list_insights_agent_runs",
+        "summary": "List Insights Agent runs",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          },
+          {
+            "name": "fingerprint",
+            "type": "string",
+            "in": "query",
+            "description": "Only return runs for the slow query with this fingerprint"
+          },
+          {
+            "name": "keyspace",
+            "type": "string",
+            "in": "query",
+            "description": "Only return runs for the slow query in this keyspace. Requires :fingerprint to also be set"
+          },
+          {
+            "name": "schema_recommendation",
+            "type": "integer",
+            "in": "query",
+            "description": "Only return runs for the schema recommendation with this number"
+          },
+          {
+            "name": "page",
+            "type": "integer",
+            "in": "query",
+            "default": 1,
+            "description": "If provided, specifies the page offset of returned results"
+          },
+          {
+            "name": "per_page",
+            "type": "integer",
+            "in": "query",
+            "default": 25,
+            "description": "If provided, specifies the number of returned results"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns Insights Agent runs",
+            "schema": {
+              "$ref": "#/definitions/PaginatedInsightsAgentRun"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_insights_agent`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
+      },
+      "post": {
+        "tags": [
+          "InsightsAgentRuns"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "create_insights_agent_run",
+        "summary": "Create an Insights Agent run",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "query_patterns": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "The slow query patterns to review, each identified by its fingerprint and keyspace"
+                },
+                "schema_recommendations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "The numbers of the schema recommendations to implement"
+                },
+                "run_type": {
+                  "type": "string",
+                  "enum": [
+                    "schema_recommendation",
+                    "slow_query",
+                    "branch_tuning"
+                  ],
+                  "description": "The work the run performs. Branch tuning runs take no targets."
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the created Insights Agent run",
+            "schema": {
+              "$ref": "#/definitions/InsightsAgentRun"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_insights_agent`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_insights_agents` |\n| Database | `write_insights_agent` |"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/insights/agent/runs/{number}": {
+      "get": {
+        "tags": [
+          "InsightsAgentRuns"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "get_insights_agent_run",
+        "summary": "Get an Insights Agent run",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          },
+          {
+            "name": "number",
+            "type": "integer",
+            "in": "path",
+            "required": true,
+            "description": "The Insights Agent run number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an Insights Agent run",
+            "schema": {
+              "$ref": "#/definitions/InsightsAgentRun"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_insights_agent`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/insights/agent/runs/{number}/cancel": {
+      "post": {
+        "tags": [
+          "InsightsAgentRuns"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "cancel_insights_agent_run",
+        "summary": "Cancel an Insights Agent run",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          },
+          {
+            "name": "number",
+            "type": "integer",
+            "in": "path",
+            "required": true,
+            "description": "The Insights Agent run number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the cancelled Insights Agent run",
+            "schema": {
+              "$ref": "#/definitions/InsightsAgentRun"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_insights_agent`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_insights_agents` |\n| Database | `write_insights_agent` |"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/insights/agent/schedules": {
+      "get": {
+        "tags": [
+          "Insights Agent schedules"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "list_insights_agent_schedules",
+        "summary": "List Insights Agent schedules",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns Insights Agent schedules",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/InsightsAgentSchedule"
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_insights_agent`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
+      }
+    },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/insights/agent/schedules/{run_type}": {
+      "patch": {
+        "tags": [
+          "Insights Agent schedules"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "update_insights_agent_schedule",
+        "summary": "Update an Insights Agent schedule",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          },
+          {
+            "name": "run_type",
+            "type": "string",
+            "enum": [
+              "schema_recommendation",
+              "slow_query",
+              "branch_tuning"
+            ],
+            "in": "path",
+            "required": true,
+            "description": "The scheduled run type"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "description": "Whether the schedule is enabled"
+                },
+                "frequency_unit": {
+                  "type": "string",
+                  "enum": [
+                    "day",
+                    "week",
+                    "month"
+                  ],
+                  "description": "The cadence unit"
+                },
+                "schedule_time": {
+                  "type": "string",
+                  "description": "The local time of day in HH:MM format"
+                },
+                "time_zone": {
+                  "type": "string",
+                  "description": "The IANA time zone"
+                },
+                "day_of_week": {
+                  "type": "integer",
+                  "description": "The day of the week for weekly schedules, from 0 (Sunday) to 6 (Saturday)"
+                },
+                "day_of_month": {
+                  "type": "integer",
+                  "description": "The day of the month for monthly schedules, from 1 to 31. Shorter months run on their last day."
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated Insights Agent schedule",
+            "schema": {
+              "$ref": "#/definitions/InsightsAgentSchedule"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_insights_agent`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_insights_agents` |\n| Database | `write_insights_agent` |"
       }
     },
     "/organizations/{organization}/databases/{database}/branches/{branch}/insights/anomalies": {
@@ -20076,7 +20583,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "List read-only regions for the database's default branch\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_database`, `delete_database`, `write_database`, `read_branch`, `delete_branch`, `create_branch`, `rename_branch`, `promote_branches`, `demote_branches`, `delete_production_branch`, `connect_branch`, `connect_production_branch`, `connect_production_read_only_branch`, `delete_branch_password`, `delete_production_branch_password`, `delete_production_read_only_branch_password`, `read_deploy_request`, `create_deploy_request`, `approve_deploy_request`, `read_comment`, `create_comment`, `restore_backup`, `restore_production_branch_backup`, `read_backups`, `write_backups`, `delete_backups`, `delete_production_branch_backups`, `write_branch_vschema`, `write_production_branch_vschema`, `write_branch_topology`, `write_production_branch_topology`, `read_workflow`, `write_workflow`, `delete_workflow`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |"
+        "description": "List read-only regions for the database's default branch\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_database`, `delete_database`, `write_database`, `read_branch`, `delete_branch`, `create_branch`, `rename_branch`, `promote_branches`, `demote_branches`, `delete_production_branch`, `connect_branch`, `connect_production_branch`, `connect_production_read_only_branch`, `delete_branch_password`, `delete_production_branch_password`, `delete_production_read_only_branch_password`, `read_deploy_request`, `create_deploy_request`, `approve_deploy_request`, `read_comment`, `create_comment`, `restore_backup`, `restore_production_branch_backup`, `read_backups`, `write_backups`, `delete_backups`, `delete_production_branch_backups`, `write_branch_vschema`, `write_production_branch_vschema`, `write_branch_topology`, `write_production_branch_topology`, `read_workflow`, `write_workflow`, `delete_workflow`, `read_insights_agent`, `write_insights_agent`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_branches` |\n| Database | `read_branches` |"
       }
     },
     "/organizations/{organization}/databases/{database}/regions": {
@@ -20146,7 +20653,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_database`, `delete_database`, `write_database`, `read_branch`, `delete_branch`, `create_branch`, `rename_branch`, `promote_branches`, `demote_branches`, `delete_production_branch`, `connect_branch`, `connect_production_branch`, `connect_production_read_only_branch`, `delete_branch_password`, `delete_production_branch_password`, `delete_production_read_only_branch_password`, `read_deploy_request`, `create_deploy_request`, `approve_deploy_request`, `read_comment`, `create_comment`, `restore_backup`, `restore_production_branch_backup`, `read_backups`, `write_backups`, `delete_backups`, `delete_production_branch_backups`, `write_branch_vschema`, `write_production_branch_vschema`, `write_branch_topology`, `write_production_branch_topology`, `read_workflow`, `write_workflow`, `delete_workflow`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_database`, `delete_database`, `write_database`, `read_branch`, `delete_branch`, `create_branch`, `rename_branch`, `promote_branches`, `demote_branches`, `delete_production_branch`, `connect_branch`, `connect_production_branch`, `connect_production_read_only_branch`, `delete_branch_password`, `delete_production_branch_password`, `delete_production_read_only_branch_password`, `read_deploy_request`, `create_deploy_request`, `approve_deploy_request`, `read_comment`, `create_comment`, `restore_backup`, `restore_production_branch_backup`, `read_backups`, `write_backups`, `delete_backups`, `delete_production_branch_backups`, `write_branch_vschema`, `write_production_branch_vschema`, `write_branch_topology`, `write_production_branch_topology`, `read_workflow`, `write_workflow`, `delete_workflow`, `read_insights_agent`, `write_insights_agent`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
       }
     },
     "/organizations/{organization}/databases/{database}/schema-recommendations": {
@@ -21671,7 +22178,7 @@
             "description": "Unauthorized"
           },
           "403": {
-            "description": "Forbidden"
+            "description": "User does not have permission to perform this action."
           },
           "404": {
             "description": "Not Found"
@@ -31519,6 +32026,1368 @@
         "configurations"
       ]
     },
+    "PaginatedInsightsAgentRun": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The response type. Always \"list\" for paginated responses."
+        },
+        "current_page": {
+          "type": "integer",
+          "description": "The current page number"
+        },
+        "per_page": {
+          "type": "integer",
+          "description": "The maximum number of results per page"
+        },
+        "next_page": {
+          "type": "integer",
+          "description": "The next page number, or null when this is the last page",
+          "x-nullable": true
+        },
+        "next_page_url": {
+          "type": "string",
+          "description": "The next page of results, or null when this is the last page",
+          "x-nullable": true
+        },
+        "prev_page": {
+          "type": "integer",
+          "description": "The previous page number, or null when this is the first page",
+          "x-nullable": true
+        },
+        "prev_page_url": {
+          "type": "string",
+          "description": "The previous page of results, or null when this is the first page",
+          "x-nullable": true
+        },
+        "total_count": {
+          "type": "integer",
+          "description": "The total number of matching results"
+        },
+        "total_pages": {
+          "type": "integer",
+          "description": "The total number of pages of matching results"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The Insights agent run ID"
+              },
+              "number": {
+                "type": "integer",
+                "description": "The number of the Insights agent run"
+              },
+              "run_type": {
+                "type": "string",
+                "enum": [
+                  "schema_recommendation",
+                  "slow_query",
+                  "branch_tuning"
+                ],
+                "description": "The work performed by the run"
+              },
+              "state": {
+                "type": "string",
+                "enum": [
+                  "pending",
+                  "submitting",
+                  "running",
+                  "completed",
+                  "failed",
+                  "cancelled",
+                  "skipped"
+                ],
+                "description": "The run state"
+              },
+              "outcome": {
+                "type": "string",
+                "enum": [
+                  "changed",
+                  "no_change",
+                  "suggestions"
+                ],
+                "description": "What a completed run produced: changed code, branch tuning suggestions, or no change",
+                "x-nullable": true
+              },
+              "title": {
+                "type": "string",
+                "description": "The agent result title",
+                "x-nullable": true
+              },
+              "summary": {
+                "type": "string",
+                "description": "The summary of the run",
+                "x-nullable": true
+              },
+              "html_summary": {
+                "type": "string",
+                "description": "The summary rendered as sanitized HTML",
+                "x-nullable": true
+              },
+              "failure_message": {
+                "type": "string",
+                "description": "Why the run failed or was cancelled",
+                "x-nullable": true
+              },
+              "html_url": {
+                "type": "string",
+                "description": "The PlanetScale app URL for the run"
+              },
+              "actor": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The ID of the actor"
+                  },
+                  "display_name": {
+                    "type": "string",
+                    "description": "The name of the actor"
+                  },
+                  "avatar_url": {
+                    "type": "string",
+                    "description": "The URL of the actor's avatar"
+                  }
+                },
+                "required": [
+                  "id",
+                  "display_name",
+                  "avatar_url"
+                ]
+              },
+              "branch": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The ID for the resource"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "The name for the resource"
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "description": "When the resource was created"
+                  },
+                  "updated_at": {
+                    "type": "string",
+                    "description": "When the resource was last updated"
+                  },
+                  "deleted_at": {
+                    "type": "string",
+                    "description": "When the resource was deleted, if deleted",
+                    "x-nullable": true
+                  }
+                },
+                "required": [
+                  "id",
+                  "name",
+                  "created_at",
+                  "updated_at",
+                  "deleted_at"
+                ]
+              },
+              "schedule": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The schedule ID"
+                  },
+                  "run_type": {
+                    "type": "string",
+                    "enum": [
+                      "schema_recommendation",
+                      "slow_query",
+                      "branch_tuning"
+                    ],
+                    "description": "The scheduled run type"
+                  },
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Whether the schedule is enabled"
+                  },
+                  "frequency_unit": {
+                    "type": "string",
+                    "enum": [
+                      "day",
+                      "week",
+                      "month"
+                    ],
+                    "description": "The cadence unit"
+                  },
+                  "schedule_time": {
+                    "type": "string",
+                    "description": "The local time of day in HH:MM format"
+                  },
+                  "time_zone": {
+                    "type": "string",
+                    "description": "The IANA time zone"
+                  },
+                  "day_of_week": {
+                    "type": "integer",
+                    "description": "The day of the week for weekly schedules, from 0 (Sunday) to 6 (Saturday)",
+                    "x-nullable": true
+                  },
+                  "day_of_month": {
+                    "type": "integer",
+                    "description": "The day of the month for monthly schedules, from 1 to 31. Shorter months run on their last day.",
+                    "x-nullable": true
+                  },
+                  "next_run_at": {
+                    "type": "string",
+                    "description": "When the schedule will run next",
+                    "x-nullable": true
+                  },
+                  "actor": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "The ID of the actor"
+                      },
+                      "display_name": {
+                        "type": "string",
+                        "description": "The name of the actor"
+                      },
+                      "avatar_url": {
+                        "type": "string",
+                        "description": "The URL of the actor's avatar"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "display_name",
+                      "avatar_url"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "run_type",
+                  "enabled",
+                  "frequency_unit",
+                  "schedule_time",
+                  "time_zone",
+                  "day_of_week",
+                  "day_of_month",
+                  "next_run_at",
+                  "actor"
+                ],
+                "x-nullable": true
+              },
+              "repository": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "The repository snapshot and analyzed commit, null when the run has no repository",
+                "x-nullable": true
+              },
+              "query_patterns": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "fingerprint": {
+                      "type": "string",
+                      "description": "The fingerprint of the query pattern"
+                    },
+                    "keyspace": {
+                      "type": "string",
+                      "description": "The keyspace the query pattern runs against"
+                    },
+                    "normalized_sql": {
+                      "type": "string",
+                      "description": "The query pattern's normalized SQL, once it has been read from Insights",
+                      "x-nullable": true
+                    },
+                    "normalized_sql_highlighted": {
+                      "type": "string",
+                      "description": "The query pattern's normalized SQL rendered as syntax-highlighted HTML",
+                      "x-nullable": true
+                    },
+                    "html_url": {
+                      "type": "string",
+                      "description": "The PlanetScale app URL for the query pattern's insights"
+                    },
+                    "url": {
+                      "type": "string",
+                      "description": "The PlanetScale API URL for the query pattern's insights"
+                    }
+                  },
+                  "required": [
+                    "fingerprint",
+                    "keyspace",
+                    "normalized_sql",
+                    "normalized_sql_highlighted",
+                    "html_url",
+                    "url"
+                  ]
+                }
+              },
+              "schema_recommendations": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "The ID of the schema recommendation"
+                    },
+                    "number": {
+                      "type": "integer",
+                      "description": "The number of the schema recommendation"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "The title of the schema recommendation"
+                    },
+                    "state": {
+                      "type": "string",
+                      "enum": [
+                        "open",
+                        "applied",
+                        "dismissed",
+                        "stale"
+                      ],
+                      "description": "The state of the schema recommendation"
+                    },
+                    "html_url": {
+                      "type": "string",
+                      "description": "The PlanetScale app URL for the schema recommendation"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "number",
+                    "title",
+                    "state",
+                    "html_url"
+                  ]
+                }
+              },
+              "pull_request": {
+                "type": "object",
+                "properties": {
+                  "number": {
+                    "type": "integer",
+                    "description": "The pull request number"
+                  },
+                  "url": {
+                    "type": "string",
+                    "description": "The pull request URL"
+                  },
+                  "state": {
+                    "type": "string",
+                    "enum": [
+                      "open",
+                      "merged",
+                      "closed",
+                      "inaccessible"
+                    ],
+                    "description": "The pull request state"
+                  },
+                  "merged_at": {
+                    "type": "string",
+                    "description": "When the pull request was merged",
+                    "x-nullable": true
+                  },
+                  "closed_at": {
+                    "type": "string",
+                    "description": "When the pull request was closed",
+                    "x-nullable": true
+                  },
+                  "deploy_request": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "The ID of the deploy request"
+                      },
+                      "number": {
+                        "type": "integer",
+                        "description": "The number of the deploy request"
+                      },
+                      "html_url": {
+                        "type": "string",
+                        "description": "The PlanetScale app address for the deploy request"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "number",
+                      "html_url"
+                    ],
+                    "x-nullable": true
+                  }
+                },
+                "required": [
+                  "number",
+                  "url",
+                  "state",
+                  "merged_at",
+                  "closed_at",
+                  "deploy_request"
+                ],
+                "x-nullable": true
+              },
+              "suggestions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "The ID of the suggestion"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "enum": [
+                        "cluster_size",
+                        "replicas",
+                        "parameter"
+                      ],
+                      "description": "What the suggestion changes"
+                    },
+                    "target": {
+                      "type": "object",
+                      "additionalProperties": true,
+                      "description": "The cluster, keyspace, or VTGates the suggestion changes. Keyspace targets include the keyspace name."
+                    },
+                    "parameter": {
+                      "type": "object",
+                      "additionalProperties": true,
+                      "description": "The parameter's namespace and name, for parameter suggestions",
+                      "x-nullable": true
+                    },
+                    "current_value": {
+                      "type": "string",
+                      "description": "The value when the suggestion was last checked",
+                      "x-nullable": true
+                    },
+                    "proposed_value": {
+                      "type": "string",
+                      "description": "The suggested value. A cluster size name, a replica count, or a parameter value."
+                    },
+                    "rationale": {
+                      "type": "string",
+                      "description": "Why the agent suggests the change"
+                    },
+                    "html_rationale": {
+                      "type": "string",
+                      "description": "The rationale rendered as sanitized HTML"
+                    },
+                    "evidence": {
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": true
+                      },
+                      "type": "array",
+                      "description": "The measurements behind the suggestion, each with a metric, statistic, value, and unit"
+                    },
+                    "risk": {
+                      "type": "string",
+                      "enum": [
+                        "low",
+                        "medium",
+                        "high"
+                      ],
+                      "description": "The agent's estimate of the change's risk"
+                    },
+                    "restart_required": {
+                      "type": "boolean",
+                      "description": "Whether applying the suggestion restarts or replaces database instances"
+                    },
+                    "monthly_cost_delta_cents": {
+                      "type": "integer",
+                      "description": "The estimated change in monthly cost, in cents",
+                      "x-nullable": true
+                    },
+                    "state": {
+                      "type": "string",
+                      "enum": [
+                        "open",
+                        "queued",
+                        "applied",
+                        "dismissed",
+                        "expired",
+                        "superseded",
+                        "failed"
+                      ],
+                      "description": "The suggestion state"
+                    },
+                    "expires_at": {
+                      "type": "string",
+                      "description": "When the suggestion can no longer be accepted"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Why the suggestion could not be applied",
+                      "x-nullable": true
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "description": "When the suggestion was created"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "description": "When the suggestion was last updated"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "kind",
+                    "target",
+                    "parameter",
+                    "current_value",
+                    "proposed_value",
+                    "rationale",
+                    "html_rationale",
+                    "evidence",
+                    "risk",
+                    "restart_required",
+                    "monthly_cost_delta_cents",
+                    "state",
+                    "expires_at",
+                    "error",
+                    "created_at",
+                    "updated_at"
+                  ]
+                }
+              },
+              "cost": {
+                "type": "string",
+                "description": "The run cost",
+                "x-nullable": true
+              },
+              "agent_model": {
+                "type": "string",
+                "description": "The model the agent used"
+              },
+              "attempt": {
+                "type": "integer",
+                "description": "The run's latest attempt, starting at 1, once it has reported a stage",
+                "x-nullable": true
+              },
+              "stages": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "enum": [
+                        "sandbox",
+                        "evidence",
+                        "clone",
+                        "agent",
+                        "check",
+                        "publish",
+                        "deploy_request"
+                      ],
+                      "description": "The stage of the run"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "running",
+                        "succeeded",
+                        "failed"
+                      ],
+                      "description": "The stage status"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Why the stage ended the way it did, such as why a deploy request couldn't be opened",
+                      "x-nullable": true
+                    },
+                    "started_at": {
+                      "type": "string",
+                      "description": "When the stage started"
+                    },
+                    "finished_at": {
+                      "type": "string",
+                      "description": "When the stage finished",
+                      "x-nullable": true
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "status",
+                    "message",
+                    "started_at",
+                    "finished_at"
+                  ]
+                },
+                "x-nullable": true
+              },
+              "submitted_at": {
+                "type": "string",
+                "description": "When the run was sent to the agent",
+                "x-nullable": true
+              },
+              "started_at": {
+                "type": "string",
+                "description": "When execution started",
+                "x-nullable": true
+              },
+              "finished_at": {
+                "type": "string",
+                "description": "When execution finished",
+                "x-nullable": true
+              },
+              "created_at": {
+                "type": "string",
+                "description": "When the run was created"
+              },
+              "updated_at": {
+                "type": "string",
+                "description": "When the run was last updated"
+              }
+            },
+            "required": [
+              "id",
+              "number",
+              "run_type",
+              "state",
+              "outcome",
+              "title",
+              "summary",
+              "html_summary",
+              "failure_message",
+              "html_url",
+              "actor",
+              "branch",
+              "schedule",
+              "repository",
+              "query_patterns",
+              "schema_recommendations",
+              "pull_request",
+              "suggestions",
+              "cost",
+              "agent_model",
+              "submitted_at",
+              "started_at",
+              "finished_at",
+              "created_at",
+              "updated_at"
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "current_page",
+        "per_page",
+        "next_page",
+        "next_page_url",
+        "prev_page",
+        "prev_page_url",
+        "total_count",
+        "total_pages",
+        "data"
+      ]
+    },
+    "InsightsAgentRun": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The Insights agent run ID"
+        },
+        "number": {
+          "type": "integer",
+          "description": "The number of the Insights agent run"
+        },
+        "run_type": {
+          "type": "string",
+          "enum": [
+            "schema_recommendation",
+            "slow_query",
+            "branch_tuning"
+          ],
+          "description": "The work performed by the run"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "submitting",
+            "running",
+            "completed",
+            "failed",
+            "cancelled",
+            "skipped"
+          ],
+          "description": "The run state"
+        },
+        "outcome": {
+          "type": "string",
+          "enum": [
+            "changed",
+            "no_change",
+            "suggestions"
+          ],
+          "description": "What a completed run produced: changed code, branch tuning suggestions, or no change",
+          "x-nullable": true
+        },
+        "title": {
+          "type": "string",
+          "description": "The agent result title",
+          "x-nullable": true
+        },
+        "summary": {
+          "type": "string",
+          "description": "The summary of the run",
+          "x-nullable": true
+        },
+        "html_summary": {
+          "type": "string",
+          "description": "The summary rendered as sanitized HTML",
+          "x-nullable": true
+        },
+        "failure_message": {
+          "type": "string",
+          "description": "Why the run failed or was cancelled",
+          "x-nullable": true
+        },
+        "html_url": {
+          "type": "string",
+          "description": "The PlanetScale app URL for the run"
+        },
+        "actor": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The ID of the actor"
+            },
+            "display_name": {
+              "type": "string",
+              "description": "The name of the actor"
+            },
+            "avatar_url": {
+              "type": "string",
+              "description": "The URL of the actor's avatar"
+            }
+          },
+          "required": [
+            "id",
+            "display_name",
+            "avatar_url"
+          ]
+        },
+        "branch": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The ID for the resource"
+            },
+            "name": {
+              "type": "string",
+              "description": "The name for the resource"
+            },
+            "created_at": {
+              "type": "string",
+              "description": "When the resource was created"
+            },
+            "updated_at": {
+              "type": "string",
+              "description": "When the resource was last updated"
+            },
+            "deleted_at": {
+              "type": "string",
+              "description": "When the resource was deleted, if deleted",
+              "x-nullable": true
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ]
+        },
+        "schedule": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The schedule ID"
+            },
+            "run_type": {
+              "type": "string",
+              "enum": [
+                "schema_recommendation",
+                "slow_query",
+                "branch_tuning"
+              ],
+              "description": "The scheduled run type"
+            },
+            "enabled": {
+              "type": "boolean",
+              "description": "Whether the schedule is enabled"
+            },
+            "frequency_unit": {
+              "type": "string",
+              "enum": [
+                "day",
+                "week",
+                "month"
+              ],
+              "description": "The cadence unit"
+            },
+            "schedule_time": {
+              "type": "string",
+              "description": "The local time of day in HH:MM format"
+            },
+            "time_zone": {
+              "type": "string",
+              "description": "The IANA time zone"
+            },
+            "day_of_week": {
+              "type": "integer",
+              "description": "The day of the week for weekly schedules, from 0 (Sunday) to 6 (Saturday)",
+              "x-nullable": true
+            },
+            "day_of_month": {
+              "type": "integer",
+              "description": "The day of the month for monthly schedules, from 1 to 31. Shorter months run on their last day.",
+              "x-nullable": true
+            },
+            "next_run_at": {
+              "type": "string",
+              "description": "When the schedule will run next",
+              "x-nullable": true
+            },
+            "actor": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The ID of the actor"
+                },
+                "display_name": {
+                  "type": "string",
+                  "description": "The name of the actor"
+                },
+                "avatar_url": {
+                  "type": "string",
+                  "description": "The URL of the actor's avatar"
+                }
+              },
+              "required": [
+                "id",
+                "display_name",
+                "avatar_url"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "run_type",
+            "enabled",
+            "frequency_unit",
+            "schedule_time",
+            "time_zone",
+            "day_of_week",
+            "day_of_month",
+            "next_run_at",
+            "actor"
+          ],
+          "x-nullable": true
+        },
+        "repository": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "The repository snapshot and analyzed commit, null when the run has no repository",
+          "x-nullable": true
+        },
+        "query_patterns": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "fingerprint": {
+                "type": "string",
+                "description": "The fingerprint of the query pattern"
+              },
+              "keyspace": {
+                "type": "string",
+                "description": "The keyspace the query pattern runs against"
+              },
+              "normalized_sql": {
+                "type": "string",
+                "description": "The query pattern's normalized SQL, once it has been read from Insights",
+                "x-nullable": true
+              },
+              "normalized_sql_highlighted": {
+                "type": "string",
+                "description": "The query pattern's normalized SQL rendered as syntax-highlighted HTML",
+                "x-nullable": true
+              },
+              "html_url": {
+                "type": "string",
+                "description": "The PlanetScale app URL for the query pattern's insights"
+              },
+              "url": {
+                "type": "string",
+                "description": "The PlanetScale API URL for the query pattern's insights"
+              }
+            },
+            "required": [
+              "fingerprint",
+              "keyspace",
+              "normalized_sql",
+              "normalized_sql_highlighted",
+              "html_url",
+              "url"
+            ]
+          }
+        },
+        "schema_recommendations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The ID of the schema recommendation"
+              },
+              "number": {
+                "type": "integer",
+                "description": "The number of the schema recommendation"
+              },
+              "title": {
+                "type": "string",
+                "description": "The title of the schema recommendation"
+              },
+              "state": {
+                "type": "string",
+                "enum": [
+                  "open",
+                  "applied",
+                  "dismissed",
+                  "stale"
+                ],
+                "description": "The state of the schema recommendation"
+              },
+              "html_url": {
+                "type": "string",
+                "description": "The PlanetScale app URL for the schema recommendation"
+              }
+            },
+            "required": [
+              "id",
+              "number",
+              "title",
+              "state",
+              "html_url"
+            ]
+          }
+        },
+        "pull_request": {
+          "type": "object",
+          "properties": {
+            "number": {
+              "type": "integer",
+              "description": "The pull request number"
+            },
+            "url": {
+              "type": "string",
+              "description": "The pull request URL"
+            },
+            "state": {
+              "type": "string",
+              "enum": [
+                "open",
+                "merged",
+                "closed",
+                "inaccessible"
+              ],
+              "description": "The pull request state"
+            },
+            "merged_at": {
+              "type": "string",
+              "description": "When the pull request was merged",
+              "x-nullable": true
+            },
+            "closed_at": {
+              "type": "string",
+              "description": "When the pull request was closed",
+              "x-nullable": true
+            },
+            "deploy_request": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The ID of the deploy request"
+                },
+                "number": {
+                  "type": "integer",
+                  "description": "The number of the deploy request"
+                },
+                "html_url": {
+                  "type": "string",
+                  "description": "The PlanetScale app address for the deploy request"
+                }
+              },
+              "required": [
+                "id",
+                "number",
+                "html_url"
+              ],
+              "x-nullable": true
+            }
+          },
+          "required": [
+            "number",
+            "url",
+            "state",
+            "merged_at",
+            "closed_at",
+            "deploy_request"
+          ],
+          "x-nullable": true
+        },
+        "suggestions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The ID of the suggestion"
+              },
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "cluster_size",
+                  "replicas",
+                  "parameter"
+                ],
+                "description": "What the suggestion changes"
+              },
+              "target": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "The cluster, keyspace, or VTGates the suggestion changes. Keyspace targets include the keyspace name."
+              },
+              "parameter": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "The parameter's namespace and name, for parameter suggestions",
+                "x-nullable": true
+              },
+              "current_value": {
+                "type": "string",
+                "description": "The value when the suggestion was last checked",
+                "x-nullable": true
+              },
+              "proposed_value": {
+                "type": "string",
+                "description": "The suggested value. A cluster size name, a replica count, or a parameter value."
+              },
+              "rationale": {
+                "type": "string",
+                "description": "Why the agent suggests the change"
+              },
+              "html_rationale": {
+                "type": "string",
+                "description": "The rationale rendered as sanitized HTML"
+              },
+              "evidence": {
+                "items": {
+                  "type": "object",
+                  "additionalProperties": true
+                },
+                "type": "array",
+                "description": "The measurements behind the suggestion, each with a metric, statistic, value, and unit"
+              },
+              "risk": {
+                "type": "string",
+                "enum": [
+                  "low",
+                  "medium",
+                  "high"
+                ],
+                "description": "The agent's estimate of the change's risk"
+              },
+              "restart_required": {
+                "type": "boolean",
+                "description": "Whether applying the suggestion restarts or replaces database instances"
+              },
+              "monthly_cost_delta_cents": {
+                "type": "integer",
+                "description": "The estimated change in monthly cost, in cents",
+                "x-nullable": true
+              },
+              "state": {
+                "type": "string",
+                "enum": [
+                  "open",
+                  "queued",
+                  "applied",
+                  "dismissed",
+                  "expired",
+                  "superseded",
+                  "failed"
+                ],
+                "description": "The suggestion state"
+              },
+              "expires_at": {
+                "type": "string",
+                "description": "When the suggestion can no longer be accepted"
+              },
+              "error": {
+                "type": "string",
+                "description": "Why the suggestion could not be applied",
+                "x-nullable": true
+              },
+              "created_at": {
+                "type": "string",
+                "description": "When the suggestion was created"
+              },
+              "updated_at": {
+                "type": "string",
+                "description": "When the suggestion was last updated"
+              }
+            },
+            "required": [
+              "id",
+              "kind",
+              "target",
+              "parameter",
+              "current_value",
+              "proposed_value",
+              "rationale",
+              "html_rationale",
+              "evidence",
+              "risk",
+              "restart_required",
+              "monthly_cost_delta_cents",
+              "state",
+              "expires_at",
+              "error",
+              "created_at",
+              "updated_at"
+            ]
+          }
+        },
+        "cost": {
+          "type": "string",
+          "description": "The run cost",
+          "x-nullable": true
+        },
+        "agent_model": {
+          "type": "string",
+          "description": "The model the agent used"
+        },
+        "attempt": {
+          "type": "integer",
+          "description": "The run's latest attempt, starting at 1, once it has reported a stage",
+          "x-nullable": true
+        },
+        "stages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "enum": [
+                  "sandbox",
+                  "evidence",
+                  "clone",
+                  "agent",
+                  "check",
+                  "publish",
+                  "deploy_request"
+                ],
+                "description": "The stage of the run"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "running",
+                  "succeeded",
+                  "failed"
+                ],
+                "description": "The stage status"
+              },
+              "message": {
+                "type": "string",
+                "description": "Why the stage ended the way it did, such as why a deploy request couldn't be opened",
+                "x-nullable": true
+              },
+              "started_at": {
+                "type": "string",
+                "description": "When the stage started"
+              },
+              "finished_at": {
+                "type": "string",
+                "description": "When the stage finished",
+                "x-nullable": true
+              }
+            },
+            "required": [
+              "name",
+              "status",
+              "message",
+              "started_at",
+              "finished_at"
+            ]
+          },
+          "x-nullable": true
+        },
+        "submitted_at": {
+          "type": "string",
+          "description": "When the run was sent to the agent",
+          "x-nullable": true
+        },
+        "started_at": {
+          "type": "string",
+          "description": "When execution started",
+          "x-nullable": true
+        },
+        "finished_at": {
+          "type": "string",
+          "description": "When execution finished",
+          "x-nullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "description": "When the run was created"
+        },
+        "updated_at": {
+          "type": "string",
+          "description": "When the run was last updated"
+        }
+      },
+      "required": [
+        "id",
+        "number",
+        "run_type",
+        "state",
+        "outcome",
+        "title",
+        "summary",
+        "html_summary",
+        "failure_message",
+        "html_url",
+        "actor",
+        "branch",
+        "schedule",
+        "repository",
+        "query_patterns",
+        "schema_recommendations",
+        "pull_request",
+        "suggestions",
+        "cost",
+        "agent_model",
+        "submitted_at",
+        "started_at",
+        "finished_at",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    "InsightsAgentSchedule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The schedule ID"
+        },
+        "run_type": {
+          "type": "string",
+          "enum": [
+            "schema_recommendation",
+            "slow_query",
+            "branch_tuning"
+          ],
+          "description": "The scheduled run type"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the schedule is enabled"
+        },
+        "frequency_unit": {
+          "type": "string",
+          "enum": [
+            "day",
+            "week",
+            "month"
+          ],
+          "description": "The cadence unit"
+        },
+        "schedule_time": {
+          "type": "string",
+          "description": "The local time of day in HH:MM format"
+        },
+        "time_zone": {
+          "type": "string",
+          "description": "The IANA time zone"
+        },
+        "day_of_week": {
+          "type": "integer",
+          "description": "The day of the week for weekly schedules, from 0 (Sunday) to 6 (Saturday)",
+          "x-nullable": true
+        },
+        "day_of_month": {
+          "type": "integer",
+          "description": "The day of the month for monthly schedules, from 1 to 31. Shorter months run on their last day.",
+          "x-nullable": true
+        },
+        "next_run_at": {
+          "type": "string",
+          "description": "When the schedule will run next",
+          "x-nullable": true
+        },
+        "actor": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The ID of the actor"
+            },
+            "display_name": {
+              "type": "string",
+              "description": "The name of the actor"
+            },
+            "avatar_url": {
+              "type": "string",
+              "description": "The URL of the actor's avatar"
+            }
+          },
+          "required": [
+            "id",
+            "display_name",
+            "avatar_url"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "run_type",
+        "enabled",
+        "frequency_unit",
+        "schedule_time",
+        "time_zone",
+        "day_of_week",
+        "day_of_month",
+        "next_run_at",
+        "actor"
+      ]
+    },
     "PaginatedKeyspaceConfigChangeRequest": {
       "type": "object",
       "properties": {
@@ -35791,8 +37660,9 @@
               "role": {
                 "type": "string",
                 "enum": [
-                  "member",
-                  "admin"
+                  "admin",
+                  "analyst",
+                  "member"
                 ],
                 "description": "The role of the user in the organization"
               },
@@ -35940,8 +37810,9 @@
         "role": {
           "type": "string",
           "enum": [
-            "member",
-            "admin"
+            "admin",
+            "analyst",
+            "member"
           ],
           "description": "The role of the user in the organization"
         },
@@ -40417,7 +42288,8 @@
               },
               "private_connection_service_name": {
                 "type": "string",
-                "description": "The service name to set up private connectivity"
+                "description": "The service name to set up private connectivity",
+                "x-nullable": true
               },
               "username": {
                 "type": "string",
@@ -40664,7 +42536,8 @@
         },
         "private_connection_service_name": {
           "type": "string",
-          "description": "The service name to set up private connectivity"
+          "description": "The service name to set up private connectivity",
+          "x-nullable": true
         },
         "username": {
           "type": "string",
@@ -42401,8 +44274,30 @@
                           "description": "When the deploy operation summary was created"
                         },
                         "deploy_errors": {
-                          "type": "string",
-                          "description": "Deploy errors for the deploy operation summary"
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "shard": {
+                                "type": "string",
+                                "description": "The shard the deploy error occurred on"
+                              },
+                              "message": {
+                                "type": "string",
+                                "description": "The deploy error message"
+                              },
+                              "docs_url": {
+                                "type": "string",
+                                "description": "A link to documentation explaining the deploy error, if present",
+                                "x-nullable": true
+                              }
+                            },
+                            "required": [
+                              "shard",
+                              "message",
+                              "docs_url"
+                            ]
+                          }
                         },
                         "ddl_statement": {
                           "type": "string",
@@ -42410,7 +44305,8 @@
                         },
                         "eta_seconds": {
                           "type": "integer",
-                          "description": "The estimated seconds until completion for the deploy operation summary"
+                          "description": "The estimated seconds until completion for the deploy operation summary",
+                          "x-nullable": true
                         },
                         "keyspace_name": {
                           "type": "string",
@@ -42510,11 +44406,13 @@
                               },
                               "progress_percentage": {
                                 "type": "number",
-                                "description": "The percent completion for the deploy operation"
+                                "description": "The percent completion for the deploy operation",
+                                "x-nullable": true
                               },
                               "eta_seconds": {
                                 "type": "integer",
-                                "description": "The estimated seconds until completion for the deploy operation"
+                                "description": "The estimated seconds until completion for the deploy operation",
+                                "x-nullable": true
                               }
                             },
                             "required": [
@@ -43213,8 +45111,30 @@
                     "description": "When the deploy operation summary was created"
                   },
                   "deploy_errors": {
-                    "type": "string",
-                    "description": "Deploy errors for the deploy operation summary"
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "shard": {
+                          "type": "string",
+                          "description": "The shard the deploy error occurred on"
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "The deploy error message"
+                        },
+                        "docs_url": {
+                          "type": "string",
+                          "description": "A link to documentation explaining the deploy error, if present",
+                          "x-nullable": true
+                        }
+                      },
+                      "required": [
+                        "shard",
+                        "message",
+                        "docs_url"
+                      ]
+                    }
                   },
                   "ddl_statement": {
                     "type": "string",
@@ -43222,7 +45142,8 @@
                   },
                   "eta_seconds": {
                     "type": "integer",
-                    "description": "The estimated seconds until completion for the deploy operation summary"
+                    "description": "The estimated seconds until completion for the deploy operation summary",
+                    "x-nullable": true
                   },
                   "keyspace_name": {
                     "type": "string",
@@ -43322,11 +45243,13 @@
                         },
                         "progress_percentage": {
                           "type": "number",
-                          "description": "The percent completion for the deploy operation"
+                          "description": "The percent completion for the deploy operation",
+                          "x-nullable": true
                         },
                         "eta_seconds": {
                           "type": "integer",
-                          "description": "The estimated seconds until completion for the deploy operation"
+                          "description": "The estimated seconds until completion for the deploy operation",
+                          "x-nullable": true
                         }
                       },
                       "required": [
@@ -43860,8 +45783,30 @@
                 "description": "When the deploy operation summary was created"
               },
               "deploy_errors": {
-                "type": "string",
-                "description": "Deploy errors for the deploy operation summary"
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "shard": {
+                      "type": "string",
+                      "description": "The shard the deploy error occurred on"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "The deploy error message"
+                    },
+                    "docs_url": {
+                      "type": "string",
+                      "description": "A link to documentation explaining the deploy error, if present",
+                      "x-nullable": true
+                    }
+                  },
+                  "required": [
+                    "shard",
+                    "message",
+                    "docs_url"
+                  ]
+                }
               },
               "ddl_statement": {
                 "type": "string",
@@ -43869,7 +45814,8 @@
               },
               "eta_seconds": {
                 "type": "integer",
-                "description": "The estimated seconds until completion for the deploy operation summary"
+                "description": "The estimated seconds until completion for the deploy operation summary",
+                "x-nullable": true
               },
               "keyspace_name": {
                 "type": "string",
@@ -43969,11 +45915,13 @@
                     },
                     "progress_percentage": {
                       "type": "number",
-                      "description": "The percent completion for the deploy operation"
+                      "description": "The percent completion for the deploy operation",
+                      "x-nullable": true
                     },
                     "eta_seconds": {
                       "type": "integer",
-                      "description": "The estimated seconds until completion for the deploy operation"
+                      "description": "The estimated seconds until completion for the deploy operation",
+                      "x-nullable": true
                     }
                   },
                   "required": [
@@ -44653,8 +46601,30 @@
                       "description": "When the deploy operation summary was created"
                     },
                     "deploy_errors": {
-                      "type": "string",
-                      "description": "Deploy errors for the deploy operation summary"
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "shard": {
+                            "type": "string",
+                            "description": "The shard the deploy error occurred on"
+                          },
+                          "message": {
+                            "type": "string",
+                            "description": "The deploy error message"
+                          },
+                          "docs_url": {
+                            "type": "string",
+                            "description": "A link to documentation explaining the deploy error, if present",
+                            "x-nullable": true
+                          }
+                        },
+                        "required": [
+                          "shard",
+                          "message",
+                          "docs_url"
+                        ]
+                      }
                     },
                     "ddl_statement": {
                       "type": "string",
@@ -44662,7 +46632,8 @@
                     },
                     "eta_seconds": {
                       "type": "integer",
-                      "description": "The estimated seconds until completion for the deploy operation summary"
+                      "description": "The estimated seconds until completion for the deploy operation summary",
+                      "x-nullable": true
                     },
                     "keyspace_name": {
                       "type": "string",
@@ -44762,11 +46733,13 @@
                           },
                           "progress_percentage": {
                             "type": "number",
-                            "description": "The percent completion for the deploy operation"
+                            "description": "The percent completion for the deploy operation",
+                            "x-nullable": true
                           },
                           "eta_seconds": {
                             "type": "integer",
-                            "description": "The estimated seconds until completion for the deploy operation"
+                            "description": "The estimated seconds until completion for the deploy operation",
+                            "x-nullable": true
                           }
                         },
                         "required": [
@@ -45385,7 +47358,7 @@
                 "description": "The ID for the line item"
               },
               "subtotal": {
-                "type": "number",
+                "type": "string",
                 "description": "The total for the line item"
               },
               "description": {
@@ -47271,7 +49244,7 @@
     },
     {
       "name": "InsightsAgentRuns",
-      "description": "          Resources for running and viewing Insights agent analyses.\n"
+      "description": "          Resources for starting, viewing, and cancelling Insights Agent runs.\n"
     },
     {
       "name": "Insights Agent schedules",
@@ -47512,6 +49485,7 @@
         "database:write_comments": "Create deploy request comments in a database",
         "database:write_database": "Write database",
         "database:write_deploy_requests": "Create and update deploy requests in a database",
+        "database:write_insights_agent": "Start Insights Agent runs and change their schedules",
         "database:write_members": "Write members",
         "database:write_workflows": "Create and manage database workflows",
         "organization:approve_deploy_requests": "Approve deploy requests in an organization",
@@ -47553,6 +49527,7 @@
         "organization:write_comments": "Create deploy request comments in an organization",
         "organization:write_databases": "Write organization databases",
         "organization:write_deploy_requests": "Create and update deploy requests in an organization",
+        "organization:write_insights_agents": "Start Insights Agent runs and change their schedules in an organization",
         "organization:write_members": "Write members in an organization",
         "organization:write_organization": "Write organization",
         "organization:write_payment_method": "Update and delete the organization payment method",
