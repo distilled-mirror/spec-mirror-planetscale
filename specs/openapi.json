@@ -7817,6 +7817,180 @@
         "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_insights_agent`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `write_insights_agents` |\n| Database | `write_insights_agent` |"
       }
     },
+    "/organizations/{organization}/databases/{database}/branches/{branch}/insights/agent/runs/{number}/feedback": {
+      "get": {
+        "tags": [
+          "InsightsAgentRunFeedback"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "get_insights_agent_run_feedback",
+        "summary": "Get your Insights Agent run feedback",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          },
+          {
+            "name": "number",
+            "type": "integer",
+            "in": "path",
+            "required": true,
+            "description": "The Insights Agent run number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns your feedback on the run",
+            "schema": {
+              "$ref": "#/definitions/InsightsAgentRunFeedback"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_insights_agent`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
+      },
+      "put": {
+        "tags": [
+          "InsightsAgentRunFeedback"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "update_insights_agent_run_feedback",
+        "summary": "Rate an Insights Agent run",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Organization name slug from `list_organizations`. Example: `acme`."
+          },
+          {
+            "name": "database",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Database name slug from `list_databases`. Example: `app-db`."
+          },
+          {
+            "name": "branch",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Branch name from `list_branches`. Example: `main`."
+          },
+          {
+            "name": "number",
+            "type": "integer",
+            "in": "path",
+            "required": true,
+            "description": "The Insights Agent run number"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "rating": {
+                  "type": "string",
+                  "enum": [
+                    "useful",
+                    "not_useful"
+                  ],
+                  "description": "Whether the run was useful"
+                },
+                "reason": {
+                  "type": "string",
+                  "enum": [
+                    "wrong_diagnosis",
+                    "fix_wont_work",
+                    "too_risky",
+                    "already_known",
+                    "doesnt_fit",
+                    "other"
+                  ],
+                  "description": "Why the run was not useful"
+                },
+                "note": {
+                  "type": "string",
+                  "description": "A note about the run"
+                }
+              },
+              "required": [
+                "rating"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns your feedback on the run",
+            "schema": {
+              "$ref": "#/definitions/InsightsAgentRunFeedback"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "The run does not accept feedback"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_insights_agent`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_databases` |\n| Database | `read_database` |"
+      }
+    },
     "/organizations/{organization}/databases/{database}/branches/{branch}/insights/agent/schedules": {
       "get": {
         "tags": [
@@ -18413,7 +18587,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "The deploy queue returns the current list of deploy requests in the order they will be deployed.\n"
+        "description": "The deploy queue returns the current list of deploy requests in the order they will be deployed.\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_deploy_request`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_deploy_requests` |\n| Database | `read_deploy_requests` |"
       }
     },
     "/organizations/{organization}/databases/{database}/deploy-requests": {
@@ -21637,12 +21811,7 @@
                 },
                 "role": {
                   "type": "string",
-                  "enum": [
-                    "admin",
-                    "analyst",
-                    "member"
-                  ],
-                  "description": "The role granted when the invitation is accepted. Defaults to member. Service tokens can only invite members; requesting another role returns 422."
+                  "description": "The role granted when the invitation is accepted: a built-in name or a custom role slug. Defaults to member. Service tokens can only invite members; requesting another role returns 422."
                 }
               },
               "required": [
@@ -21960,7 +22129,7 @@
               "type": "string"
             },
             "in": "query",
-            "description": "Filter members by built-in role names or custom role IDs"
+            "description": "Filter members by built-in role names or custom role slugs"
           },
           {
             "name": "page",
@@ -22094,7 +22263,7 @@
               "properties": {
                 "role": {
                   "type": "string",
-                  "description": "The role to assign to the member (e.g., 'admin', 'member'). Note: Cannot update your own role. Roles managed by IdP cannot be updated via API."
+                  "description": "The role to assign: a built-in name (admin, member, analyst) or a custom role slug. Cannot update your own role. Roles managed by IdP cannot be updated via API."
                 }
               },
               "required": [
@@ -23018,6 +23187,10 @@
                 "name": {
                   "type": "string",
                   "description": "The name of the new service token"
+                },
+                "ttl": {
+                  "type": "integer",
+                  "description": "Time to live (in seconds) for the new service token. The token will be invalid when TTL has passed"
                 }
               }
             }
@@ -23050,7 +23223,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "Create a new service token with the same grants as an existing service token. The original token is not changed.\n### Authorization\nA service token   must have at least one of the following access   in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_service_tokens`, `read_service_tokens`\n\n"
+        "description": "Create a new service token with the same grants and IP restrictions as an existing service token. The original token is not changed.\n### Authorization\nA service token   must have at least one of the following access   in order to use this API endpoint:\n\n**Service Token Accesses**\n `write_service_tokens`, `read_service_tokens`\n\n"
       }
     },
     "/organizations/{organization}/sso": {
@@ -32040,6 +32213,52 @@
         "configurations"
       ]
     },
+    "InsightsAgentRunFeedback": {
+      "type": "object",
+      "properties": {
+        "rating": {
+          "type": "string",
+          "enum": [
+            "useful",
+            "not_useful"
+          ],
+          "description": "Whether the run was useful"
+        },
+        "reason": {
+          "type": "string",
+          "enum": [
+            "wrong_diagnosis",
+            "fix_wont_work",
+            "too_risky",
+            "already_known",
+            "doesnt_fit",
+            "other"
+          ],
+          "description": "Why the run was not useful",
+          "x-nullable": true
+        },
+        "note": {
+          "type": "string",
+          "description": "The user's note about the run",
+          "x-nullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "description": "When the feedback was first given"
+        },
+        "updated_at": {
+          "type": "string",
+          "description": "When the feedback was last changed"
+        }
+      },
+      "required": [
+        "rating",
+        "reason",
+        "note",
+        "created_at",
+        "updated_at"
+      ]
+    },
     "PaginatedInsightsAgentRun": {
       "type": "object",
       "properties": {
@@ -32638,6 +32857,58 @@
                     "finished_at"
                   ]
                 },
+                "x-nullable": true
+              },
+              "feedback_requested": {
+                "type": "boolean",
+                "description": "Whether the caller can rate the run",
+                "x-nullable": true
+              },
+              "feedback": {
+                "type": "object",
+                "properties": {
+                  "rating": {
+                    "type": "string",
+                    "enum": [
+                      "useful",
+                      "not_useful"
+                    ],
+                    "description": "Whether the run was useful"
+                  },
+                  "reason": {
+                    "type": "string",
+                    "enum": [
+                      "wrong_diagnosis",
+                      "fix_wont_work",
+                      "too_risky",
+                      "already_known",
+                      "doesnt_fit",
+                      "other"
+                    ],
+                    "description": "Why the run was not useful",
+                    "x-nullable": true
+                  },
+                  "note": {
+                    "type": "string",
+                    "description": "The user's note about the run",
+                    "x-nullable": true
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "description": "When the feedback was first given"
+                  },
+                  "updated_at": {
+                    "type": "string",
+                    "description": "When the feedback was last changed"
+                  }
+                },
+                "required": [
+                  "rating",
+                  "reason",
+                  "note",
+                  "created_at",
+                  "updated_at"
+                ],
                 "x-nullable": true
               },
               "submitted_at": {
@@ -33260,6 +33531,58 @@
               "finished_at"
             ]
           },
+          "x-nullable": true
+        },
+        "feedback_requested": {
+          "type": "boolean",
+          "description": "Whether the caller can rate the run",
+          "x-nullable": true
+        },
+        "feedback": {
+          "type": "object",
+          "properties": {
+            "rating": {
+              "type": "string",
+              "enum": [
+                "useful",
+                "not_useful"
+              ],
+              "description": "Whether the run was useful"
+            },
+            "reason": {
+              "type": "string",
+              "enum": [
+                "wrong_diagnosis",
+                "fix_wont_work",
+                "too_risky",
+                "already_known",
+                "doesnt_fit",
+                "other"
+              ],
+              "description": "Why the run was not useful",
+              "x-nullable": true
+            },
+            "note": {
+              "type": "string",
+              "description": "The user's note about the run",
+              "x-nullable": true
+            },
+            "created_at": {
+              "type": "string",
+              "description": "When the feedback was first given"
+            },
+            "updated_at": {
+              "type": "string",
+              "description": "When the feedback was last changed"
+            }
+          },
+          "required": [
+            "rating",
+            "reason",
+            "note",
+            "created_at",
+            "updated_at"
+          ],
           "x-nullable": true
         },
         "submitted_at": {
@@ -37025,12 +37348,7 @@
               },
               "role": {
                 "type": "string",
-                "enum": [
-                  "admin",
-                  "analyst",
-                  "member"
-                ],
-                "description": "The role granted when the invitation is accepted. Invitations sent by service tokens are always member."
+                "description": "The role granted when the invitation is accepted. A built-in name or a custom role slug. Invitations sent by service tokens are always member."
               },
               "sender": {
                 "type": "object",
@@ -37294,12 +37612,7 @@
         },
         "role": {
           "type": "string",
-          "enum": [
-            "admin",
-            "analyst",
-            "member"
-          ],
-          "description": "The role granted when the invitation is accepted. Invitations sent by service tokens are always member."
+          "description": "The role granted when the invitation is accepted. A built-in name or a custom role slug. Invitations sent by service tokens are always member."
         },
         "sender": {
           "type": "object",
@@ -37691,12 +38004,7 @@
               },
               "role": {
                 "type": "string",
-                "enum": [
-                  "admin",
-                  "analyst",
-                  "member"
-                ],
-                "description": "The role of the user in the organization"
+                "description": "The role of the user in the organization. A built-in name (admin, member, analyst) or a custom role slug."
               },
               "created_at": {
                 "type": "string",
@@ -37841,12 +38149,7 @@
         },
         "role": {
           "type": "string",
-          "enum": [
-            "admin",
-            "analyst",
-            "member"
-          ],
-          "description": "The role of the user in the organization"
+          "description": "The role of the user in the organization. A built-in name (admin, member, analyst) or a custom role slug."
         },
         "created_at": {
           "type": "string",
@@ -49275,6 +49578,10 @@
       "description": "            Resources for managing databases within an organization.\n"
     },
     {
+      "name": "InsightsAgentRunFeedback",
+      "description": "          Resources for rating whether an Insights Agent run was useful.\n"
+    },
+    {
       "name": "InsightsAgentRuns",
       "description": "          Resources for starting, viewing, and cancelling Insights Agent runs.\n"
     },
@@ -49353,6 +49660,10 @@
     {
       "name": "Bouncers",
       "description": "          Resources for managing postgres bouncers.\n"
+    },
+    {
+      "name": "Switchover proxies",
+      "description": "          Resources for a proxy that sits in front of an external Postgres database and a branch,\n          so data can be copied to the branch and traffic switched between the two.\n"
     },
     {
       "name": "Switchovers",
