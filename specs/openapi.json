@@ -551,6 +551,545 @@
         "description": "List available cluster sizes for an organization\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_organization`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| User | `read_organizations` |\n| Organization | `read_organization` |"
       }
     },
+    "/organizations/{organization}/custom-roles": {
+      "get": {
+        "tags": [
+          "Organization custom roles"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "list_organization_custom_roles",
+        "summary": "List custom organization roles",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the organization"
+          },
+          {
+            "name": "page",
+            "type": "integer",
+            "in": "query",
+            "default": 1,
+            "description": "If provided, specifies the page offset of returned results"
+          },
+          {
+            "name": "per_page",
+            "type": "integer",
+            "in": "query",
+            "default": 25,
+            "description": "If provided, specifies the number of returned results"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the custom roles for the organization",
+            "schema": {
+              "$ref": "#/definitions/PaginatedOrganizationCustomRole"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n### Authorization\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\n\n**Service Token Accesses**\n `read_organization`\n\n**OAuth Scopes**\n\n | Resource | Scopes |\n| :------- | :---------- |\n| Organization | `read_members` |"
+      },
+      "post": {
+        "tags": [
+          "Organization custom roles"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "create_organization_custom_role",
+        "summary": "Create a custom organization role",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the organization"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The custom role name"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "An optional description of the custom role"
+                },
+                "permissions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "add_billing_source",
+                      "add_team_member",
+                      "approve_planetscale_admin_access_request",
+                      "cancel_organization_invite",
+                      "create_baa_request",
+                      "create_oauth_application",
+                      "create_production_service_token_grant",
+                      "create_team",
+                      "delete_databases",
+                      "delete_oauth_authorizations",
+                      "delete_oauth_tokens",
+                      "deny_planetscale_admin_access_request",
+                      "destroy_organization",
+                      "destroy_team",
+                      "download_organization_invoice",
+                      "export_auth_attempts",
+                      "invite_organization_member",
+                      "list_baa_requests",
+                      "list_billing_sources",
+                      "list_billing_summaries",
+                      "list_organization_audit_logs",
+                      "list_organization_invitations",
+                      "list_organization_invoices",
+                      "list_planetscale_admin_access_requests",
+                      "manage_all_service_tokens",
+                      "pay_organization_invoice",
+                      "read_oauth_authorizations",
+                      "read_oidc_trusts",
+                      "remove_organization_member",
+                      "remove_team_member",
+                      "revoke_planetscale_admin_access",
+                      "update_billing_plan",
+                      "update_bulk_database_accesses",
+                      "update_integration",
+                      "update_organization",
+                      "update_organization_beta_feature",
+                      "update_organization_member",
+                      "update_sso",
+                      "update_team",
+                      "write_oauth_tokens",
+                      "write_oauth_applications",
+                      "create_databases",
+                      "create_schema_recommendation_requests",
+                      "create_service_token",
+                      "create_service_token_grant",
+                      "destroy_service_token",
+                      "destroy_service_token_grant",
+                      "list_databases",
+                      "list_organization_members",
+                      "list_service_token_grants",
+                      "list_service_tokens",
+                      "list_team_members",
+                      "list_teams",
+                      "list_vercel_projects",
+                      "read_metrics_endpoints",
+                      "read_oauth_applications",
+                      "read_oauth_tokens",
+                      "read_schema_recommendations",
+                      "show_database",
+                      "show_organization",
+                      "show_organization_member",
+                      "show_service_token",
+                      "show_service_token_grant",
+                      "show_team",
+                      "show_team_member",
+                      "update_service_token_grant",
+                      "close_schema_recommendations",
+                      "connect_branch_console",
+                      "create_branch",
+                      "create_branch_keyspace",
+                      "create_branch_password",
+                      "delete_backups",
+                      "deploy_deploy_request",
+                      "destroy_branch",
+                      "destroy_branch_keyspace",
+                      "destroy_branch_password",
+                      "list_database_members",
+                      "list_live_connections",
+                      "list_query_stats",
+                      "list_workflows",
+                      "manage_branch_password_cidrs",
+                      "manage_live_connections",
+                      "read_backups",
+                      "read_backup_policies",
+                      "read_database_webhooks",
+                      "read_maintenance_schedules",
+                      "rename_branch",
+                      "request_deploy",
+                      "restore_backup",
+                      "review_deploy_request",
+                      "show_branch",
+                      "show_database_member",
+                      "update_branch_vschema",
+                      "write_backups",
+                      "connect_production_read_only_branch",
+                      "connect_production_read_only_branch_console",
+                      "create_production_read_only_branch_password",
+                      "destroy_production_read_only_branch_password",
+                      "add_database_member",
+                      "add_vercel_integration",
+                      "approve_deploy_request",
+                      "connect_production_branch",
+                      "connect_production_branch_console",
+                      "create_production_branch_keyspace",
+                      "create_production_branch_password",
+                      "create_read_only_region",
+                      "create_workflow",
+                      "delete_production_branch_backups",
+                      "destroy_database",
+                      "destroy_production_branch",
+                      "destroy_production_branch_keyspace",
+                      "destroy_production_branch_password",
+                      "destroy_workflow",
+                      "import_database",
+                      "manage_branch_topology",
+                      "manage_database_branches",
+                      "manage_database_throttler",
+                      "manage_database_webhooks",
+                      "manage_insights_agent",
+                      "manage_production_branch_password_cidrs",
+                      "manage_production_branch_topology",
+                      "manage_production_live_connections",
+                      "remove_database_member",
+                      "rename_production_branch",
+                      "restore_production_branch_backup",
+                      "update_database",
+                      "update_database_beta_feature",
+                      "update_database_billing",
+                      "update_database_member",
+                      "update_maintenance_schedule",
+                      "update_production_branch_vschema",
+                      "write_backup_policies",
+                      "list_production_live_connections"
+                    ]
+                  },
+                  "description": "The actions granted by the custom role. Must include show_organization. Replaces the full set."
+                }
+              },
+              "required": [
+                "name",
+                "permissions"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the created custom role",
+            "schema": {
+              "$ref": "#/definitions/OrganizationCustomRole"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n"
+      }
+    },
+    "/organizations/{organization}/custom-roles/{id}": {
+      "patch": {
+        "tags": [
+          "Organization custom roles"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "update_organization_custom_role",
+        "summary": "Update a custom organization role",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the organization"
+          },
+          {
+            "name": "id",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The slug of the custom role"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The custom role name"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "The description of the custom role"
+                },
+                "permissions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "add_billing_source",
+                      "add_team_member",
+                      "approve_planetscale_admin_access_request",
+                      "cancel_organization_invite",
+                      "create_baa_request",
+                      "create_oauth_application",
+                      "create_production_service_token_grant",
+                      "create_team",
+                      "delete_databases",
+                      "delete_oauth_authorizations",
+                      "delete_oauth_tokens",
+                      "deny_planetscale_admin_access_request",
+                      "destroy_organization",
+                      "destroy_team",
+                      "download_organization_invoice",
+                      "export_auth_attempts",
+                      "invite_organization_member",
+                      "list_baa_requests",
+                      "list_billing_sources",
+                      "list_billing_summaries",
+                      "list_organization_audit_logs",
+                      "list_organization_invitations",
+                      "list_organization_invoices",
+                      "list_planetscale_admin_access_requests",
+                      "manage_all_service_tokens",
+                      "pay_organization_invoice",
+                      "read_oauth_authorizations",
+                      "read_oidc_trusts",
+                      "remove_organization_member",
+                      "remove_team_member",
+                      "revoke_planetscale_admin_access",
+                      "update_billing_plan",
+                      "update_bulk_database_accesses",
+                      "update_integration",
+                      "update_organization",
+                      "update_organization_beta_feature",
+                      "update_organization_member",
+                      "update_sso",
+                      "update_team",
+                      "write_oauth_tokens",
+                      "write_oauth_applications",
+                      "create_databases",
+                      "create_schema_recommendation_requests",
+                      "create_service_token",
+                      "create_service_token_grant",
+                      "destroy_service_token",
+                      "destroy_service_token_grant",
+                      "list_databases",
+                      "list_organization_members",
+                      "list_service_token_grants",
+                      "list_service_tokens",
+                      "list_team_members",
+                      "list_teams",
+                      "list_vercel_projects",
+                      "read_metrics_endpoints",
+                      "read_oauth_applications",
+                      "read_oauth_tokens",
+                      "read_schema_recommendations",
+                      "show_database",
+                      "show_organization",
+                      "show_organization_member",
+                      "show_service_token",
+                      "show_service_token_grant",
+                      "show_team",
+                      "show_team_member",
+                      "update_service_token_grant",
+                      "close_schema_recommendations",
+                      "connect_branch_console",
+                      "create_branch",
+                      "create_branch_keyspace",
+                      "create_branch_password",
+                      "delete_backups",
+                      "deploy_deploy_request",
+                      "destroy_branch",
+                      "destroy_branch_keyspace",
+                      "destroy_branch_password",
+                      "list_database_members",
+                      "list_live_connections",
+                      "list_query_stats",
+                      "list_workflows",
+                      "manage_branch_password_cidrs",
+                      "manage_live_connections",
+                      "read_backups",
+                      "read_backup_policies",
+                      "read_database_webhooks",
+                      "read_maintenance_schedules",
+                      "rename_branch",
+                      "request_deploy",
+                      "restore_backup",
+                      "review_deploy_request",
+                      "show_branch",
+                      "show_database_member",
+                      "update_branch_vschema",
+                      "write_backups",
+                      "connect_production_read_only_branch",
+                      "connect_production_read_only_branch_console",
+                      "create_production_read_only_branch_password",
+                      "destroy_production_read_only_branch_password",
+                      "add_database_member",
+                      "add_vercel_integration",
+                      "approve_deploy_request",
+                      "connect_production_branch",
+                      "connect_production_branch_console",
+                      "create_production_branch_keyspace",
+                      "create_production_branch_password",
+                      "create_read_only_region",
+                      "create_workflow",
+                      "delete_production_branch_backups",
+                      "destroy_database",
+                      "destroy_production_branch",
+                      "destroy_production_branch_keyspace",
+                      "destroy_production_branch_password",
+                      "destroy_workflow",
+                      "import_database",
+                      "manage_branch_topology",
+                      "manage_database_branches",
+                      "manage_database_throttler",
+                      "manage_database_webhooks",
+                      "manage_insights_agent",
+                      "manage_production_branch_password_cidrs",
+                      "manage_production_branch_topology",
+                      "manage_production_live_connections",
+                      "remove_database_member",
+                      "rename_production_branch",
+                      "restore_production_branch_backup",
+                      "update_database",
+                      "update_database_beta_feature",
+                      "update_database_billing",
+                      "update_database_member",
+                      "update_maintenance_schedule",
+                      "update_production_branch_vschema",
+                      "write_backup_policies",
+                      "list_production_live_connections"
+                    ]
+                  },
+                  "description": "The actions granted by the custom role. Must include show_organization. Replaces the full set when provided."
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated custom role",
+            "schema": {
+              "$ref": "#/definitions/OrganizationCustomRole"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n"
+      },
+      "delete": {
+        "tags": [
+          "Organization custom roles"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "delete_organization_custom_role",
+        "summary": "Delete a custom organization role",
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The name of the organization"
+          },
+          {
+            "name": "id",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The slug of the custom role"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Custom role deleted",
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "description": "Too Many Requests. Reduce the frequency of requests and try again soon."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n"
+      }
+    },
     "/organizations/{organization}/database-subscriptions": {
       "post": {
         "tags": [
@@ -9445,7 +9984,7 @@
             "type": "string",
             "in": "query",
             "required": true,
-            "description": "The keyspace to filter by"
+            "description": "The keyspace to filter by, empty for queries that no keyspace served"
           },
           {
             "name": "from",
@@ -9563,7 +10102,7 @@
             "type": "string",
             "in": "query",
             "required": true,
-            "description": "The keyspace to filter by"
+            "description": "The keyspace to filter by, empty for queries that no keyspace served"
           },
           {
             "name": "from",
@@ -22191,7 +22730,8 @@
             "description": "Unauthorized"
           },
           "403": {
-            "description": "Forbidden"
+            "description": "The caller doesn't hold every permission of the role",
+            "headers": {}
           },
           "404": {
             "description": "Not Found"
@@ -22643,7 +23183,8 @@
             "description": "Unauthorized"
           },
           "403": {
-            "description": "Forbidden"
+            "description": "The caller doesn't hold every permission of the role",
+            "headers": {}
           },
           "404": {
             "description": "Not Found"
@@ -37649,6 +38190,444 @@
         "actor_type"
       ]
     },
+    "PaginatedOrganizationCustomRole": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The response type. Always \"list\" for paginated responses."
+        },
+        "current_page": {
+          "type": "integer",
+          "description": "The current page number"
+        },
+        "per_page": {
+          "type": "integer",
+          "description": "The maximum number of results per page"
+        },
+        "next_page": {
+          "type": "integer",
+          "description": "The next page number, or null when this is the last page",
+          "x-nullable": true
+        },
+        "next_page_url": {
+          "type": "string",
+          "description": "The next page of results, or null when this is the last page",
+          "x-nullable": true
+        },
+        "prev_page": {
+          "type": "integer",
+          "description": "The previous page number, or null when this is the first page",
+          "x-nullable": true
+        },
+        "prev_page_url": {
+          "type": "string",
+          "description": "The previous page of results, or null when this is the first page",
+          "x-nullable": true
+        },
+        "total_count": {
+          "type": "integer",
+          "description": "The total number of matching results"
+        },
+        "total_pages": {
+          "type": "integer",
+          "description": "The total number of pages of matching results"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The ID of the custom role"
+              },
+              "name": {
+                "type": "string",
+                "description": "The name of the custom role"
+              },
+              "slug": {
+                "type": "string",
+                "description": "The unique slug of the custom role in the organization"
+              },
+              "description": {
+                "type": "string",
+                "description": "The description of the custom role",
+                "x-nullable": true
+              },
+              "permissions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "action": {
+                      "type": "string",
+                      "enum": [
+                        "add_billing_source",
+                        "add_team_member",
+                        "approve_planetscale_admin_access_request",
+                        "cancel_organization_invite",
+                        "create_baa_request",
+                        "create_oauth_application",
+                        "create_production_service_token_grant",
+                        "create_team",
+                        "delete_databases",
+                        "delete_oauth_authorizations",
+                        "delete_oauth_tokens",
+                        "deny_planetscale_admin_access_request",
+                        "destroy_organization",
+                        "destroy_team",
+                        "download_organization_invoice",
+                        "export_auth_attempts",
+                        "invite_organization_member",
+                        "list_baa_requests",
+                        "list_billing_sources",
+                        "list_billing_summaries",
+                        "list_organization_audit_logs",
+                        "list_organization_invitations",
+                        "list_organization_invoices",
+                        "list_planetscale_admin_access_requests",
+                        "manage_all_service_tokens",
+                        "pay_organization_invoice",
+                        "read_oauth_authorizations",
+                        "read_oidc_trusts",
+                        "remove_organization_member",
+                        "remove_team_member",
+                        "revoke_planetscale_admin_access",
+                        "update_billing_plan",
+                        "update_bulk_database_accesses",
+                        "update_integration",
+                        "update_organization",
+                        "update_organization_beta_feature",
+                        "update_organization_member",
+                        "update_sso",
+                        "update_team",
+                        "write_oauth_tokens",
+                        "write_oauth_applications",
+                        "create_databases",
+                        "create_schema_recommendation_requests",
+                        "create_service_token",
+                        "create_service_token_grant",
+                        "destroy_service_token",
+                        "destroy_service_token_grant",
+                        "list_databases",
+                        "list_organization_members",
+                        "list_service_token_grants",
+                        "list_service_tokens",
+                        "list_team_members",
+                        "list_teams",
+                        "list_vercel_projects",
+                        "read_metrics_endpoints",
+                        "read_oauth_applications",
+                        "read_oauth_tokens",
+                        "read_schema_recommendations",
+                        "show_database",
+                        "show_organization",
+                        "show_organization_member",
+                        "show_service_token",
+                        "show_service_token_grant",
+                        "show_team",
+                        "show_team_member",
+                        "update_service_token_grant",
+                        "close_schema_recommendations",
+                        "connect_branch_console",
+                        "create_branch",
+                        "create_branch_keyspace",
+                        "create_branch_password",
+                        "delete_backups",
+                        "deploy_deploy_request",
+                        "destroy_branch",
+                        "destroy_branch_keyspace",
+                        "destroy_branch_password",
+                        "list_database_members",
+                        "list_live_connections",
+                        "list_query_stats",
+                        "list_workflows",
+                        "manage_branch_password_cidrs",
+                        "manage_live_connections",
+                        "read_backups",
+                        "read_backup_policies",
+                        "read_database_webhooks",
+                        "read_maintenance_schedules",
+                        "rename_branch",
+                        "request_deploy",
+                        "restore_backup",
+                        "review_deploy_request",
+                        "show_branch",
+                        "show_database_member",
+                        "update_branch_vschema",
+                        "write_backups",
+                        "connect_production_read_only_branch",
+                        "connect_production_read_only_branch_console",
+                        "create_production_read_only_branch_password",
+                        "destroy_production_read_only_branch_password",
+                        "add_database_member",
+                        "add_vercel_integration",
+                        "approve_deploy_request",
+                        "connect_production_branch",
+                        "connect_production_branch_console",
+                        "create_production_branch_keyspace",
+                        "create_production_branch_password",
+                        "create_read_only_region",
+                        "create_workflow",
+                        "delete_production_branch_backups",
+                        "destroy_database",
+                        "destroy_production_branch",
+                        "destroy_production_branch_keyspace",
+                        "destroy_production_branch_password",
+                        "destroy_workflow",
+                        "import_database",
+                        "manage_branch_topology",
+                        "manage_database_branches",
+                        "manage_database_throttler",
+                        "manage_database_webhooks",
+                        "manage_insights_agent",
+                        "manage_production_branch_password_cidrs",
+                        "manage_production_branch_topology",
+                        "manage_production_live_connections",
+                        "remove_database_member",
+                        "rename_production_branch",
+                        "restore_production_branch_backup",
+                        "update_database",
+                        "update_database_beta_feature",
+                        "update_database_billing",
+                        "update_database_member",
+                        "update_maintenance_schedule",
+                        "update_production_branch_vschema",
+                        "write_backup_policies",
+                        "list_production_live_connections"
+                      ],
+                      "description": "The action granted by the custom role"
+                    }
+                  },
+                  "required": [
+                    "action"
+                  ]
+                }
+              },
+              "created_at": {
+                "type": "string",
+                "description": "When the custom role was created"
+              },
+              "updated_at": {
+                "type": "string",
+                "description": "When the custom role was last updated"
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "slug",
+              "description",
+              "permissions",
+              "created_at",
+              "updated_at"
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "current_page",
+        "per_page",
+        "next_page",
+        "next_page_url",
+        "prev_page",
+        "prev_page_url",
+        "total_count",
+        "total_pages",
+        "data"
+      ]
+    },
+    "OrganizationCustomRole": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the custom role"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the custom role"
+        },
+        "slug": {
+          "type": "string",
+          "description": "The unique slug of the custom role in the organization"
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the custom role",
+          "x-nullable": true
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "action": {
+                "type": "string",
+                "enum": [
+                  "add_billing_source",
+                  "add_team_member",
+                  "approve_planetscale_admin_access_request",
+                  "cancel_organization_invite",
+                  "create_baa_request",
+                  "create_oauth_application",
+                  "create_production_service_token_grant",
+                  "create_team",
+                  "delete_databases",
+                  "delete_oauth_authorizations",
+                  "delete_oauth_tokens",
+                  "deny_planetscale_admin_access_request",
+                  "destroy_organization",
+                  "destroy_team",
+                  "download_organization_invoice",
+                  "export_auth_attempts",
+                  "invite_organization_member",
+                  "list_baa_requests",
+                  "list_billing_sources",
+                  "list_billing_summaries",
+                  "list_organization_audit_logs",
+                  "list_organization_invitations",
+                  "list_organization_invoices",
+                  "list_planetscale_admin_access_requests",
+                  "manage_all_service_tokens",
+                  "pay_organization_invoice",
+                  "read_oauth_authorizations",
+                  "read_oidc_trusts",
+                  "remove_organization_member",
+                  "remove_team_member",
+                  "revoke_planetscale_admin_access",
+                  "update_billing_plan",
+                  "update_bulk_database_accesses",
+                  "update_integration",
+                  "update_organization",
+                  "update_organization_beta_feature",
+                  "update_organization_member",
+                  "update_sso",
+                  "update_team",
+                  "write_oauth_tokens",
+                  "write_oauth_applications",
+                  "create_databases",
+                  "create_schema_recommendation_requests",
+                  "create_service_token",
+                  "create_service_token_grant",
+                  "destroy_service_token",
+                  "destroy_service_token_grant",
+                  "list_databases",
+                  "list_organization_members",
+                  "list_service_token_grants",
+                  "list_service_tokens",
+                  "list_team_members",
+                  "list_teams",
+                  "list_vercel_projects",
+                  "read_metrics_endpoints",
+                  "read_oauth_applications",
+                  "read_oauth_tokens",
+                  "read_schema_recommendations",
+                  "show_database",
+                  "show_organization",
+                  "show_organization_member",
+                  "show_service_token",
+                  "show_service_token_grant",
+                  "show_team",
+                  "show_team_member",
+                  "update_service_token_grant",
+                  "close_schema_recommendations",
+                  "connect_branch_console",
+                  "create_branch",
+                  "create_branch_keyspace",
+                  "create_branch_password",
+                  "delete_backups",
+                  "deploy_deploy_request",
+                  "destroy_branch",
+                  "destroy_branch_keyspace",
+                  "destroy_branch_password",
+                  "list_database_members",
+                  "list_live_connections",
+                  "list_query_stats",
+                  "list_workflows",
+                  "manage_branch_password_cidrs",
+                  "manage_live_connections",
+                  "read_backups",
+                  "read_backup_policies",
+                  "read_database_webhooks",
+                  "read_maintenance_schedules",
+                  "rename_branch",
+                  "request_deploy",
+                  "restore_backup",
+                  "review_deploy_request",
+                  "show_branch",
+                  "show_database_member",
+                  "update_branch_vschema",
+                  "write_backups",
+                  "connect_production_read_only_branch",
+                  "connect_production_read_only_branch_console",
+                  "create_production_read_only_branch_password",
+                  "destroy_production_read_only_branch_password",
+                  "add_database_member",
+                  "add_vercel_integration",
+                  "approve_deploy_request",
+                  "connect_production_branch",
+                  "connect_production_branch_console",
+                  "create_production_branch_keyspace",
+                  "create_production_branch_password",
+                  "create_read_only_region",
+                  "create_workflow",
+                  "delete_production_branch_backups",
+                  "destroy_database",
+                  "destroy_production_branch",
+                  "destroy_production_branch_keyspace",
+                  "destroy_production_branch_password",
+                  "destroy_workflow",
+                  "import_database",
+                  "manage_branch_topology",
+                  "manage_database_branches",
+                  "manage_database_throttler",
+                  "manage_database_webhooks",
+                  "manage_insights_agent",
+                  "manage_production_branch_password_cidrs",
+                  "manage_production_branch_topology",
+                  "manage_production_live_connections",
+                  "remove_database_member",
+                  "rename_production_branch",
+                  "restore_production_branch_backup",
+                  "update_database",
+                  "update_database_beta_feature",
+                  "update_database_billing",
+                  "update_database_member",
+                  "update_maintenance_schedule",
+                  "update_production_branch_vschema",
+                  "write_backup_policies",
+                  "list_production_live_connections"
+                ],
+                "description": "The action granted by the custom role"
+              }
+            },
+            "required": [
+              "action"
+            ]
+          }
+        },
+        "created_at": {
+          "type": "string",
+          "description": "When the custom role was created"
+        },
+        "updated_at": {
+          "type": "string",
+          "description": "When the custom role was last updated"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "slug",
+        "description",
+        "permissions",
+        "created_at",
+        "updated_at"
+      ]
+    },
     "PaginatedOrganizationInvitation": {
       "type": "object",
       "properties": {
@@ -50231,8 +51210,12 @@
       "description": "          API endpoints for exchanging OIDC tokens for service tokens.\n"
     },
     {
+      "name": "Organization custom roles",
+      "description": "          Resources for managing custom roles in an organization. Organization members who can list members can list custom roles. Only organization administrators can create, update, and delete them. Service tokens and OAuth applications cannot create, update, or delete custom roles. Every custom role must include the show_organization permission. Custom roles cannot grant custom-role management. A custom role cannot be deleted while an organization member or an active invitation uses it.\n"
+    },
+    {
       "name": "Organization invitations",
-      "description": "          Resources for inviting people to an organization. Service tokens with `write_members` can list, send, and cancel invitations, but can only invite people as members. Only organization administrators can invite people as administrators or analysts.\n"
+      "description": "          Resources for inviting people to an organization. Service tokens with `write_members` can list, send, and cancel invitations, but can only invite people as members. Only organization administrators can invite people as administrators. Members with a custom role can only invite people to a role whose permissions they hold.\n"
     },
     {
       "name": "Organization members",
