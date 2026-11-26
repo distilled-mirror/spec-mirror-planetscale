@@ -12573,6 +12573,87 @@
             "type": "string",
             "in": "query",
             "description": "Filter by search terms"
+          },
+          {
+            "name": "per_page",
+            "type": "integer",
+            "in": "query",
+            "description": "Without `query_ids` or `fingerprint`, retrieve metrics for the top query patterns that the branch insights list returns for the same `per_page`, `sort`, `dir`, `type`, time range, and filters"
+          },
+          {
+            "name": "sort",
+            "type": "string",
+            "enum": [
+              "keyspace",
+              "query",
+              "lastRun",
+              "count",
+              "errorCount",
+              "rowsRead",
+              "rowsAffected",
+              "rowsReturned",
+              "rowsReadPerReturned",
+              "rowsReadPerQuery",
+              "rowsReturnedPerQuery",
+              "rowsAffectedPerQuery",
+              "totalTime",
+              "cpuTime",
+              "ioTime",
+              "sumShardQueries",
+              "maxShardQueries",
+              "avgShardQueries",
+              "avgParallelWorkers",
+              "table",
+              "qualifiedTable",
+              "tableKeyspace",
+              "indexes",
+              "routingIndexes",
+              "p50Latency",
+              "p99Latency",
+              "maxLatency",
+              "percentTime",
+              "percentCpuTime",
+              "percentIoTime",
+              "egressBytes",
+              "egressBytesPerQuery",
+              "maxEgressBytes",
+              "ingressBytes",
+              "ingressBytesPerQuery",
+              "maxIngressBytes",
+              "blocksRead",
+              "blocksHit",
+              "blockCacheHitRatio",
+              "blocksDirtied",
+              "blocksWritten",
+              "trafficControlWarnings",
+              "trafficControlThrottled",
+              "trafficControlChecked",
+              "trafficControlBudgetsUsed"
+            ],
+            "in": "query",
+            "description": "Field to rank query patterns by, with `per_page`"
+          },
+          {
+            "name": "dir",
+            "type": "string",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "in": "query",
+            "description": "Direction to rank query patterns in, with `per_page`"
+          },
+          {
+            "name": "type",
+            "type": "string",
+            "enum": [
+              "SELECT",
+              "INSERT",
+              "UPDATE",
+              "DELETE"
+            ],
+            "in": "query",
+            "description": "Filter ranked query patterns by statement type, with `per_page`"
           }
         ],
         "responses": {
@@ -12584,7 +12665,7 @@
             "headers": {}
           },
           "400": {
-            "description": "Malformed metrics parameter"
+            "description": "Malformed metrics parameter or invalid time range"
           },
           "401": {
             "description": "Unauthorized"
