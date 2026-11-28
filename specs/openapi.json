@@ -41499,6 +41499,10 @@
         "default": {
           "type": "boolean",
           "description": "Whether this is the default minor version for its PostgreSQL major version"
+        },
+        "preview": {
+          "type": "boolean",
+          "description": "Whether this version is newer than the stable Neki update channel's default PostgreSQL version"
         }
       },
       "required": [
@@ -41506,7 +41510,8 @@
         "major_version",
         "minor_version",
         "version",
-        "default"
+        "default",
+        "preview"
       ]
     },
     "PaginatedQuerySummary": {
